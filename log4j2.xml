@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="INFO">
+    <Properties>
+        <Property name="FORMAT_MESSAGE_CONSOLE">
+            [Level:%-6p] %class.%method() | %msg%n
+        </Property>
+
+        <Property name="FORMAT_MESSAGE_ROLLING_FILE">
+            [Level:%-6p] $${date:dd:MM:yyyy HH:mm:ss} | %class.%method() | %msg%n
+        </Property>
+
+        <Property name="DIR_LOG">
+            logs
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout>
+                <Pattern>${FORMAT_MESSAGE_CONSOLE}</Pattern>
+            </PatternLayout>
+        </Console>
+
+        <RollingFile name="RollingFile" filePattern="${DIR_LOG}/%d{yyyy-MM-dd}/log_%d{yyyy-MM-dd_HH-mm}_%i.txt" append="true">
+            <PatternLayout>
+                <Pattern>${FORMAT_MESSAGE_ROLLING_FILE}</Pattern>
+            </PatternLayout>
+
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100 KB"/>
+                <TimeBasedTriggeringPolicy interval="1"/>
+            </Policies>
+            <DirectWriteRolloverStrategy maxFiles="3"/>
+        </RollingFile>
+
+        <Servlet name="Controller">
+            <PatternLayout pattern="%m%n%ex{none}"/>
+        </Servlet>
+    </Appenders>
+
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="Controller"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
