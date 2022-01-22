@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 public class ConfigurationManager {
 	private static final Logger logger = LogManager.getLogger();
 	private static final Properties PROPERTIES = new Properties();
+	private static final String PROPERTIES_NAME = "app.properties";
     private ConfigurationManager() {
     }
     static {
@@ -20,7 +21,7 @@ public class ConfigurationManager {
     	return PROPERTIES.getProperty(key);
     }
     private static void loadProperies() {
-     	try (InputStream inputStream = ConfigurationManager.class.getClassLoader().getResourceAsStream("application.properties")){
+     	try (InputStream inputStream = ConfigurationManager.class.getClassLoader().getResourceAsStream(PROPERTIES_NAME)){
      		PROPERTIES.load(inputStream);
      	} catch (IOException e) {
 			logger.log(Level.FATAL, "Error in loading config", e);
