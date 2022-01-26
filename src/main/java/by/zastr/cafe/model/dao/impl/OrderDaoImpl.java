@@ -25,15 +25,22 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	private static final String SQL_FIND_ALL_DISH_IN_ORDER = "SELECT menu_id FROM order_dishes WHERE order_id=?";
 	private static final String SQL_FIND_ALL_ORDER = "SELECT order_id, user_id, descritpion, comment, date, time,"
 			+ " payment_type, paid FROM orders";
+	private static final String SQL_FIND_ORDER_BY_USER_ID = "SELECT order_id, user_id, descritpion, comment, date, time,"
+			+ "payment_type, paid FROM orders WHERE user_id=?";
 	private static final String SQL_FIND_ORDER_BY_ID = "SELECT order_id, user_id, descritpion, comment, date, time,"
 			+ "payment_type, paid FROM orders WHERE order_id=?";
+	private static final String SQL_FIND_UNPAID_ORDER = "SELECT order_id, user_id, descritpion, comment, date, time,"
+			+ "payment_type, paid FROM orders WHERE paid=?";
+	private static final String SQL_FIND_TODAY_ORDER = "SELECT order_id, user_id, descritpion, comment, date, time,"
+			+ "payment_type, paid FROM orders WHERE date=?";
 	private static final String SQL_CREATE_ORDER = "INSERT INTO orders (order_id, user_id, descritpion, comment, date, time,"
 			+ "payment_type, paid) VALUES (NULL,?,?,?,?,?,?,?)";
 	private static final String SQL_CREATE_ORDER_DISH = "INSERT INTO order_dishes (order_id, menu_id)"
 			+ "VALUES (?,?)";	
-	private static final String SQL_UPDATE_ORDER = "UPDATE users SET user_id=?, descritpion=?, comment=?, date=?, time=?"
+	private static final String SQL_UPDATE_ORDER = "UPDATE orders SET user_id=?, descritpion=?, comment=?, date=?, time=?,"
 			+ "payment_type=?, paid=? WHERE order_id = ?"; 
 	private static final String SQL_DELETE_ORDER = "DELETE FROM orders WHERE order_id = ?";
+	private static final String SQL_DELETE_ORDER_DISHES = "DELETE FROM order_dishes WHERE order_id = ?";
 	private static final String SQL_TOTAL_COST = "SELECT SUM(price) FROM menu WHERE menu_id IN "
 			+ "(SELECT menu_id FROM order_dishes WHERE order_id =?) ";
 	private static final String SQL_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() AS lastid";
@@ -57,7 +64,59 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 		}
 		return orderList;
 	}
-
+	
+	
+	public List<CafeOrder> findUnpaid() throws DaoException {
+		List<CafeOrder> orderList = new ArrayList<>();
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_UNPAID_ORDER)) {
+            statement.setString(1, Boolean.FALSE.toString().toLowerCase());
+            try (ResultSet result = statement.executeQuery()){
+                while (result.next()) {
+                    CafeOrder order = buildOrder(result);
+                    orderList.add(order);
+                }
+            }
+		} catch (SQLException e) {
+			logger.log(Level.ERROR,"\"Find unpaid order\" query has been failed", e);
+            throw new DaoException("\"Find unpaid order\" query has been failed", e);
+		}
+		return orderList;
+	}
+	
+	public List<CafeOrder> findByLogin(String login) throws DaoException {
+		List<CafeOrder> orderList = new ArrayList<>();
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDER_BY_USER_ID)) {
+            statement.setString(1, login);
+            try (ResultSet result = statement.executeQuery()){
+                while (result.next()) {
+                    CafeOrder order = buildOrder(result);
+                    orderList.add(order);
+                }
+            }
+		} catch (SQLException e) {
+			logger.log(Level.ERROR,"\"Find unpaid order\" query has been failed", e);
+            throw new DaoException("\"Find unpaid order\" query has been failed", e);
+		}
+		return orderList;
+	}
+	
+	public List<CafeOrder> findToday() throws DaoException {
+		List<CafeOrder> orderList = new ArrayList<>();
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_TODAY_ORDER)) {
+            statement.setString(1, LocalDate.now().toString());
+            try (ResultSet result = statement.executeQuery()){
+                while (result.next()) {
+                    CafeOrder order = buildOrder(result);
+                    orderList.add(order);
+                }
+            }
+		} catch (SQLException e) {
+			logger.log(Level.ERROR,"\"Find unpaid order\" query has been failed", e);
+            throw new DaoException("\"Find unpaid order\" query has been failed", e);
+		}
+		return orderList;
+	}
+	
 	@Override
 	public Optional<CafeOrder> findById(int id) throws DaoException {
 		Optional<CafeOrder> order = Optional.empty();
@@ -79,7 +138,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	public boolean create(CafeOrder order) throws DaoException {
 		int result;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_CREATE_ORDER)) {
-			statement.setInt(1, order.getUserId());
+			statement.setString(1, order.getUserLogin());
 			statement.setString(2, order.getDescription());
 			statement.setString(3, order.getComment());
 			statement.setString(4, order.getDate().toString());
@@ -97,7 +156,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	public CafeOrder createOrder(CafeOrder order) throws DaoException {
 		int id = 0;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_CREATE_ORDER)) {
-			statement.setInt(1, order.getUserId());
+			statement.setString(1, order.getUserLogin());
 			statement.setString(2, order.getDescription());
 			statement.setString(3, order.getComment());
 			statement.setString(4, order.getDate().toString());
@@ -132,7 +191,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	public boolean update(CafeOrder order) throws DaoException {
 		int result;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_UPDATE_ORDER)) {
-			statement.setInt(1, order.getUserId());
+			statement.setString(1, order.getUserLogin());
 			statement.setString(2, order.getDescription());
 			statement.setString(3, order.getComment());
 			statement.setString(4, order.getDate().toString());
@@ -151,6 +210,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	@Override
 	public boolean delete(CafeOrder order) throws DaoException {
 		int result;
+        try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_ORDER_DISHES)) {
+            statement.setInt(1, order.getId());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.ERROR,"\"Delete order\" query has been failed", e);
+            throw new DaoException("\"Delete order\" query has been failed", e);
+        }
         try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_ORDER)) {
             statement.setInt(1, order.getId());
             result = statement.executeUpdate();
@@ -164,6 +230,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	@Override
 	public boolean delete(int id) throws DaoException {
 		int result;
+        try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_ORDER_DISHES)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            logger.log(Level.ERROR,"\"Delete order\" query has been failed", e);
+            throw new DaoException("\"Delete order\" query has been failed", e);
+        }
         try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_ORDER)) {
             statement.setInt(1, id);
             result = statement.executeUpdate();
@@ -204,7 +277,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
     private CafeOrder buildOrder(ResultSet result) throws SQLException, DaoException {
     	CafeOrder order = new CafeOrder();
     	order.setId(result.getInt(ORDER_ID));
-    	order.setUserId(result.getInt(USER_ID));
+    	order.setUserLogin(result.getString(USER_ID));
     	order.setComment(result.getString(ORDER_COMMENT));
     	order.setPaid(Boolean.parseBoolean(result.getString(ORDER_PAID)));
     	order.setPayment(PaymentType.valueOf(result.getString(ORDER_PAYMENT_TYPE).toUpperCase()));

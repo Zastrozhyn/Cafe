@@ -8,7 +8,7 @@ public class AttributeName {
 	public static final String CLIENT = "client";
 	public static final String USER_LIST = "users";
 	public static final String MESSAGE = "message";
-	public static final String ORDER_LIST = "orderList";
+	public static final String ORDER_LIST = "orders";
 	public static final String DISH = "dish";
 	public static final String TOTAL_COST = "total_cost";
 	

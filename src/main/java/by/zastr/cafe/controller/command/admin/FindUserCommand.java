@@ -1,5 +1,6 @@
 package by.zastr.cafe.controller.command.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.Level;
@@ -7,6 +8,7 @@ import org.apache.logging.log4j.Level;
 import by.zastr.cafe.controller.command.AttributeName;
 import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.PagePath;
+import by.zastr.cafe.controller.command.RequestParameter;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
@@ -14,23 +16,25 @@ import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class ViewUserCommand implements Command {
-
+public class FindUserCommand implements Command{
+	
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
+		Router router = new Router();
+		router.setPagePath(PagePath.USERS);
+		String name = request.getParameter(RequestParameter.NAME);
+		List<User> users = new ArrayList<User>();
 		UserServiceImpl userService = UserServiceImpl.getInstance();
-        Router router = new Router();
-        try {
-        	List<User> userList;
- 			userList = userService.findAll();
- 			request.setAttribute(AttributeName.USER_LIST, userList);
- 			router.setPagePath(PagePath.USERS);
+		try {
+			users.addAll(userService.findByName(name));
+			users.addAll(userService.findByLastName(name));
+ 			request.setAttribute(AttributeName.USER_LIST, users);
 		} catch (ServiceException e) {
-			logger.log(Level.ERROR, "Cannot find all user", e);
-            throw new CommandException("Cannot find all order user", e);
+			logger.log(Level.ERROR, "Error in command Find user", e);
+            throw new CommandException( "Error in command Find user", e);
 		}
-        
+
 		return router;
 	}
-
+	
 }

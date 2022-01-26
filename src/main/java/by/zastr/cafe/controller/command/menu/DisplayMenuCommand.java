@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.PagePath;
+import by.zastr.cafe.controller.command.RequestParameter;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
@@ -22,14 +23,20 @@ public class DisplayMenuCommand implements Command{
 	public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();
         HttpSession session = request.getSession();
+        String type = request.getParameter(RequestParameter.DISH_TYPE);
         try {
         	List<Dish> menu;
- 			menu = dishService.findAll();
+        	if(type.isEmpty()) {
+     			menu = dishService.findAll();
+        	}
+        	else {
+        		menu = dishService.findByType(type);
+        	}
  			session.setAttribute(MENU, menu);
  			router.setPagePath(PagePath.MENU);
 		} catch (ServiceException e) {
-			logger.log(Level.ERROR, "User cannot login:", e);
-            throw new CommandException("User cannot login:", e);
+			logger.log(Level.ERROR, "cannot display menu:", e);
+            throw new CommandException("cannot display menu:", e);
 		}
         
 		return router;

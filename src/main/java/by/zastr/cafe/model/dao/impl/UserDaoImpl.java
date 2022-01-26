@@ -19,16 +19,18 @@ import by.zastr.cafe.model.entity.Account.AccountStatus;
 
 public class UserDaoImpl extends AbstractDao<User>{
 	
-	private static final String SQL_FIND_ALL = "SELECT user_id, name, last_name, phone, email, login,"
-			+ " account_id, id, status, balance, active, role FROM users INNER JOIN accounts ON account_id = accounts.id";
-	private static final String SQL_FIND_BY_ID = "SELECT user_id, name, last_name, phone, email, login,"
-			+ "account_id, id, status, balance, active, role FROM users INNER JOIN accounts ON accounts.id = account_id WHERE user_id=?";
-	private static final String SQL_FIND_BY_LOGIN = "SELECT user_id, name, last_name, phone, email, login,"
-			+ "account_id, role FROM users WHERE login=?";
-	private static final String SQL_FIND_BY_NAME = "SELECT user_id, name, last_name, phone, email, login,"
-			+ "account_id, role FROM users WHERE name = ?";
-	private static final String SQL_FIND_BY_ROLE = "SELECT user_id, name, last_name, phone, email, login,"
-			+ " account_id, role FROM users WHERE role = ?";
+	private static final String SQL_FIND_ALL = "SELECT user_id, name, last_name, phone, email, login, account_id, id, status,"
+			+ " balance, active, role, order_history FROM users INNER JOIN accounts ON account_id = accounts.id";
+	private static final String SQL_FIND_BY_ID = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE user_id=?";
+	private static final String SQL_FIND_BY_LOGIN ="SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE login=?";;
+	private static final String SQL_FIND_BY_NAME = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE name=?";
+	private static final String SQL_FIND_BY_LASTNAME = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE last_name=?";
+	private static final String SQL_FIND_BY_ROLE = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE role=?";
 	private static final String SQL_CREATE_USER = "INSERT INTO users (user_id, name, last_name, phone, email, login, account_id,"
 			+ " role) VALUES (NULL,?,?,?,?,?,?,?)";
 	private static final String SQL_CREATE_USER_WITHOUT_ACCOUNT = "INSERT INTO users (user_id, name, last_name, phone, "
@@ -94,6 +96,23 @@ public class UserDaoImpl extends AbstractDao<User>{
 	public List<User> findByName(String name) throws DaoException {
 		List<User> userList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_NAME)) {
+			statement.setString(1, name);
+            try (ResultSet result = statement.executeQuery()){
+	            while (result.next()) {
+	                User user = buildUser(result);
+	                userList.add(user);
+	            }
+            }
+		} catch (SQLException e) {
+			logger.log(Level.ERROR,"\"Find user\" query has been failed", e);
+            throw new DaoException("\"Find user\" query has been failed", e);
+		}
+		return userList;
+	}
+	
+	public List<User> findByLastName(String name) throws DaoException {
+		List<User> userList = new ArrayList<>();
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_LASTNAME)) {
 			statement.setString(1, name);
             try (ResultSet result = statement.executeQuery()){
 	            while (result.next()) {
@@ -248,6 +267,7 @@ public class UserDaoImpl extends AbstractDao<User>{
        	account.setId(result.getInt(ACCOUNT_ID));
        	account.setBalance(result.getBigDecimal(ACCOUNT_BALANCE));
        	account.setStatus(AccountStatus.valueOf(result.getString(ACCOUNT_STATUS).toUpperCase()));
+       	account.setOrderHistory(result.getBigDecimal(ORDER_HISTORY));
     	user.setRole(User.Role.valueOf(result.getString(USER_ROLE).toUpperCase()));
     	user.setAccount(account);
         return user;

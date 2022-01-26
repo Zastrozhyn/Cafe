@@ -9,7 +9,6 @@ import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.dao.EntityTransaction;
 import by.zastr.cafe.model.dao.impl.AccountDaoImpl;
 import by.zastr.cafe.model.entity.Account;
-import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.service.CafeService;
 
 

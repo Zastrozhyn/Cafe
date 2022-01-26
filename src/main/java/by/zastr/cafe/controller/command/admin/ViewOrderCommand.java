@@ -10,27 +10,25 @@ import by.zastr.cafe.controller.command.PagePath;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
-import by.zastr.cafe.model.entity.User;
-import by.zastr.cafe.model.service.impl.UserServiceImpl;
+import by.zastr.cafe.model.entity.CafeOrder;
+import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
-public class ViewUserCommand implements Command {
-
+public class ViewOrderCommand implements Command {
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
-		UserServiceImpl userService = UserServiceImpl.getInstance();
+		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
         Router router = new Router();
         try {
-        	List<User> userList;
- 			userList = userService.findAll();
- 			request.setAttribute(AttributeName.USER_LIST, userList);
- 			router.setPagePath(PagePath.USERS);
+        	List<CafeOrder> orderList;
+ 			orderList = orderService.findAll();
+ 			request.setAttribute(AttributeName.ORDER_LIST, orderList);
+ 			router.setPagePath(PagePath.ADMIN_ORDERS);
 		} catch (ServiceException e) {
-			logger.log(Level.ERROR, "Cannot find all user", e);
-            throw new CommandException("Cannot find all order user", e);
+			logger.log(Level.ERROR, "Cannot find all order", e);
+            throw new CommandException("Cannot find all order", e);
 		}
         
 		return router;
 	}
-
 }

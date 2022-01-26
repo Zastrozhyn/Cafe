@@ -3,6 +3,9 @@ package by.zastr.cafe.model.entity;
 import java.math.BigDecimal;
 
 public class Account extends CafeEntity{
+	private static final BigDecimal SILVER_AMOUNT = BigDecimal.valueOf(100);
+	private static final BigDecimal GOLD_AMOUNT = BigDecimal.valueOf(500);
+	private static final BigDecimal PLATINUM_AMOUNT = BigDecimal.valueOf(1000);
 	private int id;
 	private AccountStatus status;
 	private BigDecimal balance;
@@ -87,6 +90,15 @@ public class Account extends CafeEntity{
 
 
 	public void setOrderHistory(BigDecimal orderHistory) {
+		if (orderHistory.compareTo(SILVER_AMOUNT) > 0) {
+			this.status = AccountStatus.SILVER;
+		}
+		if (orderHistory.compareTo(GOLD_AMOUNT) > 0) {
+			this.status = AccountStatus.GOLD;
+		}
+		if (orderHistory.compareTo(PLATINUM_AMOUNT) > 0) {
+			this.status = AccountStatus.PLATINUM;
+		}
 		this.orderHistory = orderHistory;
 	}
 

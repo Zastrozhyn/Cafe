@@ -31,7 +31,7 @@ public class ConfirmOrderCommand implements Command{
 		router.setRedirect();
 		HttpSession session = request.getSession();
 		List<Dish> orderList = (List<Dish>) session.getAttribute(AttributeName.ORDER_LIST);
-		int userId = Integer.parseInt(request.getParameter(USER_ID));
+		String userLogin = request.getParameter(USER_ID);
 		LocalDate date = LocalDate.now();
 		LocalTime time = LocalTime.parse(request.getParameter(TIME));
 		String description = request.getParameter(DESCRIPTION);
@@ -39,11 +39,15 @@ public class ConfirmOrderCommand implements Command{
 		BigDecimal totalCost = (BigDecimal) session.getAttribute(AttributeName.TOTAL_COST);
 		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
 		try {
-			String result = orderService.confirmOrder(userId, orderList, description, DEFAULT_COMMENT, date, time, payment, totalCost);
+			String result = orderService.confirmOrder(userLogin, orderList, description, DEFAULT_COMMENT, date, time, payment, totalCost);
 			request.setAttribute(AttributeName.MESSAGE, result);
 			if (!result.equals(UserMessage.CONFIRM_ORDER_SUCCESSFUL)) {
 				router.setPagePath(PagePath.ORDER);
 				router.setForward();
+			}
+			if (result.equals(UserMessage.CONFIRM_ORDER_SUCCESSFUL)) {
+				session.removeAttribute(AttributeName.ORDER_LIST);
+				session.removeAttribute(AttributeName.TOTAL_COST);
 			}
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "cannot confirm order:", e);

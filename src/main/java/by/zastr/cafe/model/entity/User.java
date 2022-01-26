@@ -177,7 +177,7 @@ public class User extends CafeEntity {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("User [userId=");
+		builder.append("Id=");
 		builder.append(userId);
 		builder.append(", name=");
 		builder.append(name);
@@ -191,9 +191,8 @@ public class User extends CafeEntity {
 		builder.append(login);
 		builder.append(", role=");
 		builder.append(role);
-		builder.append(", account=");
+		builder.append(", ");
 		builder.append(account);
-		builder.append("]");
 		return builder.toString();
 	}
 	

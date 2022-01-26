@@ -11,8 +11,8 @@ import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.dao.EntityTransaction;
+import by.zastr.cafe.model.dao.impl.AccountDaoImpl;
 import by.zastr.cafe.model.dao.impl.OrderDaoImpl;
-import by.zastr.cafe.model.dao.impl.UserDaoImpl;
 import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.entity.CafeOrder;
 import by.zastr.cafe.model.entity.Dish;
@@ -49,6 +49,64 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return orderList;
 	}
 	
+	public boolean addComment(String comment, int orderId) throws ServiceException {
+		CafeOrder order = findById(orderId).get();
+		order.setComment(comment);
+		boolean b = false;
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			b = orderDao.update(order);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find all order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return b;
+	}
+	
+	public List<CafeOrder> findUnpaid() throws ServiceException{
+		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			orderList = orderDao.findUnpaid();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find unpaid order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return orderList;
+	}
+	
+	public List<CafeOrder> findByLogin(String login) throws ServiceException{
+		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			orderList = orderDao.findByLogin(login);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find unpaid order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return orderList;
+	}
+	
+	public List<CafeOrder> findToday() throws ServiceException{
+		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			orderList = orderDao.findToday();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find unpaid order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return orderList;
+	}
+	
 	@Override
 	public Optional<CafeOrder> findById(int id) throws ServiceException{
 		Optional<CafeOrder> order = Optional.empty();
@@ -64,7 +122,7 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return order;
 	}
 	
-	public String confirmOrder(int userId, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
+	public String confirmOrder(String userLogin, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
 			String payment, BigDecimal totalCost) throws ServiceException {
 		boolean paid = false;
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
@@ -74,10 +132,14 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		if (!validator.isCorrectTime(time)) {
 			return UserMessage.WRONG_TIME;
 		}
-		
+		UserServiceImpl userService = UserServiceImpl.getInstance();
+		User user = userService.findByLogin(userLogin).get();
+		if (!user.getAccount().isActive()) {
+			return UserMessage.ACCOUNT_IS_BLOCK;
+		}
 		CafeOrder.PaymentType paymentType = CafeOrder.PaymentType.valueOf(payment);
 		if (paymentType.equals(CafeOrder.PaymentType.ACCOUNT)) {
-			boolean b = payByAccount(userId, totalCost);
+			boolean b = payByAccount(userLogin, totalCost);
 			if (!b) {
 				return UserMessage.ACCOUNT_IS_BLOCK;
 			}
@@ -85,7 +147,7 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 				paid = true;
 			}
 		}
-		CafeOrder order = new CafeOrder(userId, orderList, description, date, time, payment, paid, totalCost);
+		CafeOrder order = new CafeOrder(userLogin, orderList, description, date, time, payment, paid, totalCost);
 		try {
             entityTransaction.beginTransaction(orderDao);
 			order = orderDao.createOrder(order);
@@ -113,9 +175,55 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return b;
 	}
 	
-	public boolean payByAccount (int userId, BigDecimal totalCost) throws ServiceException {
+	public boolean paid (int orderId) throws ServiceException {
+		var accountDao = new AccountDaoImpl();
+		CafeOrder order = findById(orderId).get();
+		if(order.isPaid()) {
+			return false;
+		}
+		var userService = UserServiceImpl.getInstance();
+		User user = userService.findByLogin(order.getUserLogin()).get();
+		Account account = user.getAccount();
+		order.setPaid(true);
+		BigDecimal bonus = order.getTotalCost().divide(BigDecimal.TEN);
+		account.setBalance(account.getBalance().add(bonus));
+		account.setOrderHistory(account.getOrderHistory().add(order.getTotalCost()));
+		try {
+			entityTransaction.beginTransaction(orderDao, accountDao);
+			orderDao.update(order);
+			accountDao.update(account);
+		} catch (DaoException e) {
+			try {
+				entityTransaction.rollback();
+			} catch (DaoException e1) {
+				throw new ServiceException("Service exception in method paid order", e);
+			}
+			throw new ServiceException("Service exception in method paid order", e);
+		}
+		finally {
+			entityTransaction.endTransaction();
+		}
+		return true;
+	}
+	
+	
+	public boolean update(CafeOrder order) throws ServiceException {
+		boolean b = false;
+		try {
+			entityTransaction.beginTransaction(orderDao);
+			b = orderDao.update(order);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method update order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return b;
+	}
+	
+	public boolean payByAccount (String userLogin, BigDecimal totalCost) throws ServiceException {
 		UserServiceImpl userService = UserServiceImpl.getInstance();
-		User user = userService.findById(userId).get();
+		User user = userService.findByLogin(userLogin).get();
 		BigDecimal balance = user.getAccount().getBalance();
 		BigDecimal orderHistory = user.getAccount().getOrderHistory();
 		if (!user.getAccount().isActive() || (totalCost.compareTo(balance) > 0)) {
@@ -133,7 +241,7 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		BigDecimal cost = order.getTotalCost();
 		AccountServiceImpl accountService = AccountServiceImpl.getInstance();
 		UserServiceImpl userService = UserServiceImpl.getInstance();
-		User user = userService.findById(order.getUserId()).get();
+		User user = userService.findByLogin(order.getUserLogin()).get();
 		Account account = user.getAccount();
 		BigDecimal orderHistory = account.getOrderHistory();
 		account.setOrderHistory(orderHistory.add(cost));

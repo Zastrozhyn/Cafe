@@ -1,5 +1,12 @@
 package by.zastr.cafe.controller.command.user;
 
+
+import static by.zastr.cafe.controller.command.RequestParameter.*;
+
+import java.util.Optional;
+
+import org.apache.logging.log4j.Level;
+
 import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.PagePath;
 import by.zastr.cafe.controller.command.Router;
@@ -10,15 +17,7 @@ import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-import static by.zastr.cafe.controller.command.RequestParameter.*;
-
-import java.util.Optional;
-
-import org.apache.logging.log4j.Level;
-
-import static by.zastr.cafe.controller.command.AttributeName.*;
-
-public class LoginCommand implements Command{
+public class DeleteUserCommand implements Command{
 
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
@@ -30,18 +29,11 @@ public class LoginCommand implements Command{
 		try {
 			Optional<User> user = userService.login(login, password);
 			if (user.isPresent()) {
-				session.setAttribute(SESSION_USER, user.get());
-				if(user.get().getRole().equals(User.Role.ADMIN)) {
-					session.setAttribute(ADMIN, Boolean.TRUE);
-					session.setAttribute(CLIENT, Boolean.TRUE);
-				}
-				if(user.get().getRole().equals(User.Role.CLIENT)) {
-					session.setAttribute(CLIENT, Boolean.TRUE);
-				}
-				router.setPagePath(PagePath.MAIN_PAGE);
+				userService.delete(user.get().getUserId());
+		        session.invalidate();
 			}
 			else {
-				router.setPagePath(PagePath.LOGIN);
+				router.setPagePath(PagePath.DELETE_USER);
 			}
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "User cannot login:", e);

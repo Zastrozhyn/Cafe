@@ -11,6 +11,7 @@ public final class RequestParameter {
 	public static final String EMAIL = "email";
 	public static final String PHONE = "phone";
 	public static final String CONFIRM_PASSWORD = "confirm_password";
+	public static final String NEW_PASSWORD = "new_password";
 	
     public static final String DISH_TYPE = "type";
     public static final String DESCRIPTION = "description";
@@ -21,5 +22,11 @@ public final class RequestParameter {
     public static final String DATE = "date";
     public static final String TIME = "time";
     public static final String PAYMENT_TYPE = "type";
+    public static final String MONEY = "money";
     
+    public static final String ORDER_ID = "orderId";
+    public static final String COMMENT = "comment";
+
+	private RequestParameter() {
+	}
 }

@@ -26,7 +26,7 @@ import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.model.connection.ConnectionPool;
 
 
-@WebServlet(name = "ControllerServlet", urlPatterns = {"/controller", "/jsp/controller"})
+@WebServlet(name = "ControllerServlet", urlPatterns = {"/controller"})
 public class ControllerServlet extends HttpServlet {
 	public static final String CURRENT_PAGE = "currentPage";
 	protected static final Logger logger = LogManager.getLogger();
@@ -68,10 +68,4 @@ public class ControllerServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + PagePath.ERROR_500_PAGE);
         }
     }
-    
-    @Override
-    public void destroy() {
-    	ConnectionPool.getInstance().destroyPool();
-    }
-
 }

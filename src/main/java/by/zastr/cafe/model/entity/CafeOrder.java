@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CafeOrder extends CafeEntity {
 	private int id;
-	private int userId;
+	private String userLogin;
 	private List<Dish> orderList;
 	private String description;
 	private String comment;
@@ -28,10 +28,10 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	
-	public CafeOrder(int userId, List<Dish> orderList, String description, LocalDate date, LocalTime time,
+	public CafeOrder(String userLogin, List<Dish> orderList, String description, LocalDate date, LocalTime time,
 			String payment, boolean paid, BigDecimal totalCost) {
 		super();
-		this.userId = userId;
+		this.userLogin = userLogin;
 		this.orderList = orderList;
 		this.description = description;
 		this.date = date;
@@ -42,10 +42,10 @@ public class CafeOrder extends CafeEntity {
 	}
 
 
-	public CafeOrder(int userId, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
+	public CafeOrder(String userLogin, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
 			String payment) {
 		super();
-		this.userId = userId;
+		this.userLogin = userLogin;
 		this.orderList = orderList;
 		this.description = description;
 		this.comment = comment;
@@ -54,9 +54,9 @@ public class CafeOrder extends CafeEntity {
 		this.payment = PaymentType.valueOf(payment);
 	}
 	
-	public CafeOrder(int userId, List<Dish> orderList, String description, LocalDate date, LocalTime time) {
+	public CafeOrder(String userLogin, List<Dish> orderList, String description, LocalDate date, LocalTime time) {
 		super();
-		this.userId = userId;
+		this.userLogin = userLogin;
 		this.orderList = orderList;
 		this.description = description;
 		this.date = date;
@@ -80,13 +80,15 @@ public class CafeOrder extends CafeEntity {
 		this.id = id;
 	}
 
-	public int getUserId() {
-		return userId;
+	public String getUserLogin() {
+		return userLogin;
 	}
 
-	public void setUserId(int userId) {
-		this.userId = userId;
+
+	public void setUserLogin(String userLogin) {
+		this.userLogin = userLogin;
 	}
+
 
 	public List<Dish> getOrderList() {
 		List<Dish> copyOrder = List.copyOf(orderList);
@@ -176,7 +178,7 @@ public class CafeOrder extends CafeEntity {
 		result = prime * result + ((payment == null) ? 0 : payment.hashCode());
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		result = prime * result + ((totalCost == null) ? 0 : totalCost.hashCode());
-		result = prime * result + userId;
+		result = prime * result + ((userLogin == null) ? 0 : userLogin.hashCode());
 		return result;
 	}
 
@@ -244,7 +246,11 @@ public class CafeOrder extends CafeEntity {
 		} else if (!totalCost.equals(other.totalCost)) {
 			return false;
 		}
-		if (userId != other.userId) {
+		if (userLogin == null) {
+			if (other.userLogin != null) {
+				return false;
+			}
+		} else if (!userLogin.equals(other.userLogin)) {
 			return false;
 		}
 		return true;
@@ -256,8 +262,8 @@ public class CafeOrder extends CafeEntity {
 		StringBuilder builder = new StringBuilder();
 		builder.append("CafeOrder [id=");
 		builder.append(id);
-		builder.append(", userId=");
-		builder.append(userId);
+		builder.append(", userLogin=");
+		builder.append(userLogin);
 		builder.append(", orderList=");
 		builder.append(orderList);
 		builder.append(", description=");

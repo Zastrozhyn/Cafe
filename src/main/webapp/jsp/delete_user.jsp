@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AUTHORIZATION</title>
+<title>Delete user</title>
 </head>
 <body>
-	<form method="POST" action="<c:url value="/controller"/>">
-		<input type="hidden" name="command" value="login">
+	<form name="delete" method="POST" action="./controller">
+		<input type="hidden" name="command" value="delete_user">
 		login:<input name="login" required>
 		<br/>
 		<br/>
@@ -17,6 +17,6 @@
 		<br/>
 		<p><input type="submit"></p>
 	</form>
-	<a href="${pageContext.request.contextPath}/jsp/registration.jsp">REGISTRATION</a>
+	<a href="${pageContext.request.contextPath}/jsp/profile.jsp">PROFILE</a>
 </body>
 </html>

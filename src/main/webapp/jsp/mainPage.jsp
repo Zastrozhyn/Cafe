@@ -8,24 +8,28 @@
 </head>
 <body>
   	<h2>Hello ${sessionScope.user.name}</h2>
-	<a href="${pageContext.request.contextPath}/jsp/registration.jsp">REGISTRATION</a>
-	<br>
-	<br>
-	<a href="${pageContext.request.contextPath}/jsp/login.jsp">SIGN IN</a>
-	<form name="menu" method="GET" action="./controller">
-		<input type="hidden" name="command" value="menu">
-		<p><input type="submit" value="MENU"></p>
+  	<c:if test="${sessionScope.client}">
+		<form method="GET" action="<c:url value="/controller"/>">
+			<input type="hidden" name="command" value="logout">
+			<p><input type="submit" value="LOGOUT"></p>
 	</form>
-	<form name="logout" method="GET" action="./controller">
-		<input type="hidden" name="command" value="logout">
-		<p><input type="submit" value="LOGOUT"></p>
-	</form>
+	</c:if>
+	<c:if test="${!sessionScope.client}">
+		<a href="${pageContext.request.contextPath}/jsp/registration.jsp">REGISTRATION</a>
+	</c:if>
 	<br>
+	<br>
+	<c:if test="${!sessionScope.client}">
+		<a href="${pageContext.request.contextPath}/jsp/login.jsp">SIGN IN</a>
+	</c:if>
+	<br>
+	<p><a href="${pageContext.request.contextPath}/jsp/menu.jsp">MENU</a></p>
 	<c:if test="${sessionScope.admin}">
-		<a href="${pageContext.request.contextPath}/jsp/administration.jsp">ADMINISTRATION</a>
+		<p><a href="${pageContext.request.contextPath}/jsp/admin/administration.jsp">ADMINISTRATION</a></p>
 	</c:if>
 	<c:if test="${sessionScope.client}">
-	<a href="${pageContext.request.contextPath}/jsp/order.jsp">ORDER</a>
+		<p><a href="${pageContext.request.contextPath}/jsp/order.jsp">ORDER</a></p>
+		<p><a href="${pageContext.request.contextPath}/jsp/profile.jsp">PROFILE</a></p>
 	</c:if>
 	<h3>${message}</h3>
 </body>
