@@ -13,10 +13,15 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import by.zastr.cafe.controller.command.AttributeName;
 
 @WebFilter(urlPatterns = {"/jsp/admin/*"})
 public class AdminAccessFilter implements Filter{
+	private static final Logger logger = LogManager.getLogger();
 
     public AdminAccessFilter() {
     }
@@ -31,7 +36,13 @@ public class AdminAccessFilter implements Filter{
         if (session.getAttribute(AttributeName.ADMIN) == null) {
             response.sendRedirect(request.getContextPath());
         }
-        filterChain.doFilter(request, response);
+        try {
+        	filterChain.doFilter(request, response);
+        	}
+        catch (IllegalStateException e) {
+        	logger.log(Level.INFO,"Illegal URI", e);
+			
+		}
     }
 
     public void destroy() {

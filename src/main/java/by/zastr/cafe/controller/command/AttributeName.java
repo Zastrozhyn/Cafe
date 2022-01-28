@@ -11,6 +11,7 @@ public class AttributeName {
 	public static final String ORDER_LIST = "orders";
 	public static final String DISH = "dish";
 	public static final String TOTAL_COST = "total_cost";
+    public static final String SESSION_LOCALE = "Locale";
 	
     private AttributeName() {
     }

@@ -19,6 +19,7 @@ import by.zastr.cafe.controller.command.admin.ViewUserCommand;
 import by.zastr.cafe.controller.command.menu.DisplayMenuCommand;
 import by.zastr.cafe.controller.command.user.AddCommentCommand;
 import by.zastr.cafe.controller.command.user.AddToOrderCommand;
+import by.zastr.cafe.controller.command.user.ChangeLocaleCommand;
 import by.zastr.cafe.controller.command.user.ChangePasswordCommand;
 import by.zastr.cafe.controller.command.user.ConfirmOrderCommand;
 import by.zastr.cafe.controller.command.user.DeleteFromOrderCommand;
@@ -60,7 +61,8 @@ public enum CommandType {
 	BLOCK_USER(new BlockUserCommand()),
 	FIND_USER(new FindUserCommand()),
 	
-	MENU(new DisplayMenuCommand());
+	MENU(new DisplayMenuCommand()),
+	CHANGE_LOCALE(new ChangeLocaleCommand());
 	
     private final Command command;
     

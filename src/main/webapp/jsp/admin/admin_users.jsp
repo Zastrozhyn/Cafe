@@ -1,21 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${Locale}"/>
+<fmt:setBundle basename="message"/>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Users</title>
+<title><fmt:message key="Users" /></title>
 </head>
 <body>
 	<form method="GET" action="<c:url value="/controller"/>">
 		<input type="hidden" name="command" value="view_user">
-		<p><input type="submit" value="view all users"></p>
+		<p><input type="submit" value="<fmt:message key="Users" />"></p>
 	</form>
 	<form method="GET" action="<c:url value="/controller"/>">
         <input type="hidden" name="command" value="find_user">
 		<input name="name" required>
-		<input type="submit" value="find user">
+		<input type="submit" value="<fmt:message key="Find_user" />">
 		<br>
 	</form>
 	<c:forEach var="elem" items="${users}" varStatus="status">
@@ -25,23 +28,23 @@
 		<form method="GET" action="<c:url value="/controller"/>">
 			<input type="hidden" name="command" value="block_user">
 			<input type="hidden" name="userId" value="${elem.userId}">
-			<p><input type="submit" value="block/unblock"></p>
+			<p><input type="submit" value="<fmt:message key="block/unblock" />"></p>
 		</form>
 		<form method="GET" action="<c:url value="/controller"/>">
 			<input type="hidden" name="command" value="change_role">
 			<input type="hidden" name="userId" value="${elem.userId}">
-			<p><input type="submit" value="admin/client"></p>
+			<p><input type="submit" value="<fmt:message key="admin/client" />"></p>
 		</form>
 		<form method="GET" action="<c:url value="/controller"/>">
 	        <input type="hidden" name="command" value="add_money">
 	        <input type="hidden" name="userId" value="${elem.userId}">
 			<input name="money" required>
-			<input type="submit" value="add money">
+			<input type="submit" value="<fmt:message key="Add_money" />">
 			<br>
 	</form>
 	</c:forEach>
 	<br>
-	<a href="${pageContext.request.contextPath}/jsp/admin/administration.jsp">ADMINISTRATION</a>
+	<a href="${pageContext.request.contextPath}/jsp/admin/administration.jsp"><fmt:message key="Administration" /></a>
 	<h3>${message}</h3>
 </body>
 </html>
