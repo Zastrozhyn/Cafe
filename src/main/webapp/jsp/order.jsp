@@ -11,7 +11,10 @@
 <title><fmt:message key="Order" /></title>
 </head>
 <body>
-	<c:forEach var="elem" items="${orders}" varStatus="status">
+	<p><a href="${pageContext.request.contextPath}/jsp/menu.jsp"><fmt:message key="Menu" /></a></p>
+	<br>
+	<br>
+	<c:forEach var="elem" items="${list_dish}" varStatus="status">
 		<c:out value="${status.count}" />
 		<c:out value="${elem.name}" />
 		<c:out value="${elem.price}" />

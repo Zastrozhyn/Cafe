@@ -12,6 +12,7 @@ import by.zastr.cafe.controller.command.admin.FindOrderCommand;
 import by.zastr.cafe.controller.command.admin.FindUserCommand;
 import by.zastr.cafe.controller.command.admin.GoToEditDishCommand;
 import by.zastr.cafe.controller.command.admin.PaidOrderCommand;
+import by.zastr.cafe.controller.command.admin.ViewDeletedUser;
 import by.zastr.cafe.controller.command.admin.ViewOrderCommand;
 import by.zastr.cafe.controller.command.admin.ViewTodayOrderCommand;
 import by.zastr.cafe.controller.command.admin.ViewUnpaidOrderCommand;
@@ -29,6 +30,7 @@ import by.zastr.cafe.controller.command.user.FindOrderHistoryCommand;
 import by.zastr.cafe.controller.command.user.LoginCommand;
 import by.zastr.cafe.controller.command.user.LogoutCommand;
 import by.zastr.cafe.controller.command.user.RegistrationCommand;
+import by.zastr.cafe.controller.command.user.ViewDishesCommand;
 import by.zastr.cafe.model.entity.User;
 
 
@@ -52,6 +54,7 @@ public enum CommandType {
 	VIEW_USER(new ViewUserCommand()),
 	PAID_ORDER(new PaidOrderCommand()),
 	VIEW_ORDER(new ViewOrderCommand()),
+	VIEW_DISHES(new ViewDishesCommand()),
 	UNPAID_ORDER(new ViewUnpaidOrderCommand()),
 	FIND_ORDER(new FindOrderCommand()),
 	TODAY_ORDER(new ViewTodayOrderCommand()),
@@ -60,6 +63,7 @@ public enum CommandType {
 	CHANGE_ROLE(new ChangeRoleCommand()),
 	BLOCK_USER(new BlockUserCommand()),
 	FIND_USER(new FindUserCommand()),
+	DELETED_USER(new ViewDeletedUser()),
 	
 	MENU(new DisplayMenuCommand()),
 	CHANGE_LOCALE(new ChangeLocaleCommand());

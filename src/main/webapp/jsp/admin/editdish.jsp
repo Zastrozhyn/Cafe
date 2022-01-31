@@ -17,7 +17,7 @@
 		  <input type="hidden" name="dishId" value="${dish.id}"required>
 	      <br/>
 		  <br/>
-		  <fmt:message key="Name" /><input name="name" value="${dish.name}"required pattern="[A-Za-z]{2,25}">
+		  <fmt:message key="Name" /><input name="name" value="${dish.name}"required pattern="[\d\D]{1,255}">
 		  <br/>
 		  <br/>
 		  <fmt:message key="Type" />

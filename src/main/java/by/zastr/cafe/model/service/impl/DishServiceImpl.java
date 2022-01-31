@@ -12,6 +12,7 @@ import by.zastr.cafe.model.dao.EntityTransaction;
 import by.zastr.cafe.model.dao.impl.DishDaoImpl;
 import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.service.CafeService;
+import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
 
@@ -116,19 +117,20 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return b;	
 	}
 
-	public String create(String name, String weight, String price, String description, String type) throws ServiceException {
+	public String create(String name, String weight, String price, String description, String type, String locale) throws ServiceException {
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		if (!validator.isCorrectName(name)) {
-			return UserMessage.WRONG_NAME;
+			return messageManager.getMessage(UserMessage.WRONG_NAME);
 		}
 		if (!validator.isCorrectPrice(price)) {
-			return UserMessage.WRONG_PRICE;
+			return messageManager.getMessage(UserMessage.WRONG_PRICE);
 		}
 		if (!validator.isCorrectDescription(description)) {
-			return UserMessage.WRONG_DESCRIPTION;
+			return messageManager.getMessage(UserMessage.WRONG_DESCRIPTION);
 		}
 		if (!validator.isCorrectWeight(weight)) {
-			return UserMessage.WRONG_WEIGHT;
+			return messageManager.getMessage(UserMessage.WRONG_WEIGHT);
 		}
 		Double priceDouble = Double.parseDouble(price);
 		BigDecimal cost = BigDecimal.valueOf(priceDouble);
@@ -143,22 +145,23 @@ public class DishServiceImpl implements CafeService<Dish> {
 		finally {
 			entityTransaction.end();
 		}
-		return UserMessage.ADD_DISH_SUCCESSFUL;	
+		return messageManager.getMessage(UserMessage.WRONG_NAME);
 	}
 	
-	public String update(int id, String name, String weight, String price, String description, String type) throws ServiceException {
+	public String update(int id, String name, String weight, String price, String description, String type, String locale) throws ServiceException {
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		if (!validator.isCorrectName(name)) {
-			return UserMessage.WRONG_NAME;
+			return messageManager.getMessage(UserMessage.WRONG_NAME);
 		}
 		if (!validator.isCorrectPrice(price)) {
-			return UserMessage.WRONG_PRICE;
+			return messageManager.getMessage(UserMessage.WRONG_PRICE);
 		}
 		if (!validator.isCorrectDescription(description)) {
-			return UserMessage.WRONG_DESCRIPTION;
+			return messageManager.getMessage(UserMessage.WRONG_DESCRIPTION);
 		}
 		if (!validator.isCorrectWeight(weight)) {
-			return UserMessage.WRONG_WEIGHT;
+			return messageManager.getMessage(UserMessage.WRONG_WEIGHT);
 		}
 		Double priceDouble = Double.parseDouble(price);
 		BigDecimal cost = BigDecimal.valueOf(priceDouble);
@@ -174,6 +177,6 @@ public class DishServiceImpl implements CafeService<Dish> {
 		finally {
 			entityTransaction.end();
 		}
-		return UserMessage.ADD_DISH_SUCCESSFUL;	
+		return messageManager.getMessage(UserMessage.SUCCESSFUL);
 	}
 }

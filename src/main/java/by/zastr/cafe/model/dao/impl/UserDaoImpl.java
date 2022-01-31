@@ -19,17 +19,17 @@ import by.zastr.cafe.model.entity.Account.AccountStatus;
 
 public class UserDaoImpl extends AbstractDao<User>{
 	
-	private static final String SQL_FIND_ALL = "SELECT user_id, name, last_name, phone, email, login, account_id, id, status,"
-			+ " balance, active, role, order_history FROM users INNER JOIN accounts ON account_id = accounts.id";
-	private static final String SQL_FIND_BY_ID = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+	private static final String SQL_FIND_ALL = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, status,"
+			+ " balance, active, role, order_history FROM users INNER JOIN accounts ON account_id = accounts.id WHERE archive=?";
+	private static final String SQL_FIND_BY_ID = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, "
 			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE user_id=?";
-	private static final String SQL_FIND_BY_LOGIN ="SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+	private static final String SQL_FIND_BY_LOGIN ="SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, "
 			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE login=?";;
-	private static final String SQL_FIND_BY_NAME = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+	private static final String SQL_FIND_BY_NAME = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, "
 			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE name=?";
-	private static final String SQL_FIND_BY_LASTNAME = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+	private static final String SQL_FIND_BY_LASTNAME = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, "
 			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE last_name=?";
-	private static final String SQL_FIND_BY_ROLE = "SELECT user_id, name, last_name, phone, email, login, account_id, id, "
+	private static final String SQL_FIND_BY_ROLE = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, "
 			+ "status, balance, active, role, order_history FROM users INNER JOIN accounts ON accounts.id = account_id WHERE role=?";
 	private static final String SQL_CREATE_USER = "INSERT INTO users (user_id, name, last_name, phone, email, login, account_id,"
 			+ " role) VALUES (NULL,?,?,?,?,?,?,?)";
@@ -39,7 +39,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 			+ "role=? WHERE user_id=?";
 	private static final String SQL_SET_PASSWORD = "UPDATE users SET  password=? WHERE login=?";
 	private static final String SQL_GET_PASSWORD = "SELECT password FROM users WHERE user_id=?";
-	private static final String SQL_DELETE_USER = "DELETE FROM users WHERE user_id = ?";
+	private static final String SQL_DELETE_USER = "UPDATE users SET archive=? WHERE user_id = ?";
 	
 	public UserDaoImpl() {
 	}
@@ -47,12 +47,15 @@ public class UserDaoImpl extends AbstractDao<User>{
 	@Override
 	public List<User> findAll() throws DaoException {
 		List<User> userList = new ArrayList<>();
-		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL);
-				ResultSet result = statement.executeQuery()) {
-            while (result.next()) {
-                User user = buildUser(result);
-                userList.add(user);
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL)){
+            statement.setString(1, "false");
+            try(ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    User user = buildUser(result);
+                    userList.add(user);
+                }
             }
+
 		} catch (SQLException e) {
 			logger.log(Level.ERROR,"\"Find all clients\" query has been failed", e);
             throw new DaoException("\"Find all clients\" query has been failed", e);
@@ -232,7 +235,8 @@ public class UserDaoImpl extends AbstractDao<User>{
 	public boolean delete(User user) throws DaoException {
 		int result;
         try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER)) {
-            statement.setInt(1, user.getUserId());
+        	statement.setString(1, "true");
+            statement.setInt(2, user.getUserId());
             result = statement.executeUpdate();
         } catch (SQLException e) {
             logger.log(Level.ERROR,"\"Delete user\" query has been failed", e);
@@ -245,13 +249,32 @@ public class UserDaoImpl extends AbstractDao<User>{
 	public boolean delete(int id) throws DaoException {
 		int result;
         try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_USER)) {
-            statement.setInt(1, id);
+        	statement.setString(1, "true");
+            statement.setInt(2, id);
             result = statement.executeUpdate();
         } catch (SQLException e) {
             logger.log(Level.ERROR,"\"Delete user\" query has been failed", e);
             throw new DaoException("\"Delete user\" query has been failed", e);
         }
 		return (result > 0);
+	}
+	
+	public List<User> findAllDeleted() throws DaoException {
+		List<User> userList = new ArrayList<>();
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL)){
+            statement.setString(1, "true");
+            try(ResultSet result = statement.executeQuery()) {
+                while (result.next()) {
+                    User user = buildUser(result);
+                    userList.add(user);
+                }
+            }
+
+		} catch (SQLException e) {
+			logger.log(Level.ERROR,"\"Find all clients\" query has been failed", e);
+            throw new DaoException("\"Find all clients\" query has been failed", e);
+		}
+		return userList;
 	}
 	
     private User buildUser(ResultSet result) throws SQLException {
@@ -262,6 +285,7 @@ public class UserDaoImpl extends AbstractDao<User>{
     	user.setPhone(result.getString(USER_PHONE));
     	user.setEmail(result.getString(USER_EMAIL));
     	user.setLogin(result.getString(USER_LOGIN));
+    	user.setArchive(result.getBoolean(ARCHIVE));
     	Account account = new Account();
        	account.setActive(Boolean.valueOf(result.getString(ACCOUNT_ACTIVE)));
        	account.setId(result.getInt(ACCOUNT_ID));

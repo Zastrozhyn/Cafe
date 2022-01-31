@@ -1,22 +1,24 @@
 package by.zastr.cafe.controller.command;
 
 public final class UserMessage {
-	public static final String WRONG_PASSWORD = "wrong password!";
-	public static final String WRONG_CONFIRM_PASSWORD = "wrong confirm password!";	
-	public static final String WRONG_LOGIN = "wrong login!";
-	public static final String WRONG_EMAIL = "wrong email!";
-	public static final String WRONG_NAME = "wrong name or last name!";
-	public static final String WRONG_DESCRIPTION = "wrong description!";
-	public static final String WRONG_PRICE = "wrong price!";
-	public static final String WRONG_WEIGHT = "wrong weight!";
-	public static final String WRONG_TIME = "wrong time!";
-	public static final String WRONG_PHONE = "wrong phone!";
-	public static final String SUCCESSFUL = "successful!";
-	public static final String REGISTRATION_SUCCESSFUL = "registration successful!";
-	public static final String ADD_DISH_SUCCESSFUL = "add dish successful!";
-	public static final String UPDATE_SUCCESSFUL = "update successful!";
-	public static final String CONFIRM_ORDER_SUCCESSFUL = "confirmed";
-	public static final String ACCOUNT_IS_BLOCK = "account blocked or not enough money";
+	public static final String WRONG_PASSWORD = "WRONG_PASSWORD";
+	public static final String WRONG_PASSWORD_OR_LOGIN = "WRONG_PASSWORD_OR_LOGIN";
+	public static final String WRONG_CONFIRM_PASSWORD = "WRONG_CONFIRM_PASSWORD";	
+	public static final String WRONG_LOGIN = "WRONG_LOGIN";
+	public static final String WRONG_EMAIL = "WRONG_EMAIL";
+	public static final String WRONG_NAME = "WRONG_NAME";
+	public static final String WRONG_DESCRIPTION = "WRONG_DESCRIPTION";
+	public static final String WRONG_PRICE = "WRONG_PRICE";
+	public static final String WRONG_WEIGHT = "WRONG_WEIGHT";
+	public static final String WRONG_TIME = "WRONG_TIME";
+	public static final String WRONG_PHONE = "WRONG_PHONE";
+	public static final String SUCCESSFUL = "SUCCESSFUL";
+	public static final String UNSUCCESSFUL = "UNSUCCESSFUL";
+	public static final String REGISTRATION_SUCCESSFUL = "REGISTRATION_SUCCESSFUL";
+	public static final String ACCOUNT_BLOCK = "ACCOUNT_BLOCK";
+	public static final String ACCOUNT_BLOCK_OR_MONEY = "ACCOUNT_BLOCK_OR_MONEY";
+	public static final String ADDED_TO_ORDER = "ADDED_TO_ORDER";
+	public static final String NOT_UNIQUE_LOGIN = "NOT_UNIQUE_LOGIN";
 	private UserMessage() {
 	}
 }

@@ -18,6 +18,7 @@ import by.zastr.cafe.model.entity.CafeOrder;
 import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.CafeService;
+import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
 public class OrderServiceImpl implements CafeService<CafeOrder> {
@@ -123,25 +124,26 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	public String confirmOrder(String userLogin, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
-			String payment, BigDecimal totalCost) throws ServiceException {
+			String payment, BigDecimal totalCost, String locale) throws ServiceException {
 		boolean paid = false;
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		if (!validator.isCorrectDescription(description)) {
-			return UserMessage.WRONG_DESCRIPTION;
+			return messageManager.getMessage(UserMessage.WRONG_DESCRIPTION);
 		}
 		if (!validator.isCorrectTime(time)) {
-			return UserMessage.WRONG_TIME;
+			return messageManager.getMessage(UserMessage.WRONG_TIME);
 		}
 		UserServiceImpl userService = UserServiceImpl.getInstance();
 		User user = userService.findByLogin(userLogin).get();
 		if (!user.getAccount().isActive()) {
-			return UserMessage.ACCOUNT_IS_BLOCK;
+			return messageManager.getMessage(UserMessage.ACCOUNT_BLOCK);
 		}
 		CafeOrder.PaymentType paymentType = CafeOrder.PaymentType.valueOf(payment);
 		if (paymentType.equals(CafeOrder.PaymentType.ACCOUNT)) {
 			boolean b = payByAccount(userLogin, totalCost);
 			if (!b) {
-				return UserMessage.ACCOUNT_IS_BLOCK;
+				return messageManager.getMessage(UserMessage.ACCOUNT_BLOCK_OR_MONEY);
 			}
 			else {
 				paid = true;
@@ -157,7 +159,7 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		finally {
 			entityTransaction.end();
 		}	
-		return UserMessage.CONFIRM_ORDER_SUCCESSFUL;	
+		return messageManager.getMessage(UserMessage.SUCCESSFUL);	
 	}
 
 	@Override

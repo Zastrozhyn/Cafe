@@ -23,21 +23,21 @@ import by.zastr.cafe.model.entity.CafeOrder.PaymentType;
 
 public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	private static final String SQL_FIND_ALL_DISH_IN_ORDER = "SELECT menu_id FROM order_dishes WHERE order_id=?";
-	private static final String SQL_FIND_ALL_ORDER = "SELECT order_id, user_id, descritpion, comment, date, time,"
+	private static final String SQL_FIND_ALL_ORDER = "SELECT order_id, user_id, description, comment, date, time,"
 			+ " payment_type, paid FROM orders";
-	private static final String SQL_FIND_ORDER_BY_USER_ID = "SELECT order_id, user_id, descritpion, comment, date, time,"
+	private static final String SQL_FIND_ORDER_BY_USER_ID = "SELECT order_id, user_id, description, comment, date, time,"
 			+ "payment_type, paid FROM orders WHERE user_id=?";
-	private static final String SQL_FIND_ORDER_BY_ID = "SELECT order_id, user_id, descritpion, comment, date, time,"
+	private static final String SQL_FIND_ORDER_BY_ID = "SELECT order_id, user_id, description, comment, date, time,"
 			+ "payment_type, paid FROM orders WHERE order_id=?";
-	private static final String SQL_FIND_UNPAID_ORDER = "SELECT order_id, user_id, descritpion, comment, date, time,"
+	private static final String SQL_FIND_UNPAID_ORDER = "SELECT order_id, user_id, description, comment, date, time,"
 			+ "payment_type, paid FROM orders WHERE paid=?";
-	private static final String SQL_FIND_TODAY_ORDER = "SELECT order_id, user_id, descritpion, comment, date, time,"
+	private static final String SQL_FIND_TODAY_ORDER = "SELECT order_id, user_id, description, comment, date, time,"
 			+ "payment_type, paid FROM orders WHERE date=?";
-	private static final String SQL_CREATE_ORDER = "INSERT INTO orders (order_id, user_id, descritpion, comment, date, time,"
+	private static final String SQL_CREATE_ORDER = "INSERT INTO orders (order_id, user_id, description, comment, date, time,"
 			+ "payment_type, paid) VALUES (NULL,?,?,?,?,?,?,?)";
 	private static final String SQL_CREATE_ORDER_DISH = "INSERT INTO order_dishes (order_id, menu_id)"
 			+ "VALUES (?,?)";	
-	private static final String SQL_UPDATE_ORDER = "UPDATE orders SET user_id=?, descritpion=?, comment=?, date=?, time=?,"
+	private static final String SQL_UPDATE_ORDER = "UPDATE orders SET user_id=?, description=?, comment=?, date=?, time=?,"
 			+ "payment_type=?, paid=? WHERE order_id = ?"; 
 	private static final String SQL_DELETE_ORDER = "DELETE FROM orders WHERE order_id = ?";
 	private static final String SQL_DELETE_ORDER_DISHES = "DELETE FROM order_dishes WHERE order_id = ?";
@@ -284,7 +284,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
     	order.setDate(LocalDate.parse(result.getString(ORDER_DATE)));
     	order.setTime(LocalTime.parse(result.getString(ORDER_TIME)));
     	order.setOrderList(getAllDishInOrder(result.getInt(ORDER_ID)));
-    	order.setDescription(ORDER_DESCRIPTION);
+    	order.setDescription(result.getNString(ORDER_DESCRIPTION));
     	order.setTotalCost(totalCost(result.getInt(ORDER_ID)));
         return order;
     }

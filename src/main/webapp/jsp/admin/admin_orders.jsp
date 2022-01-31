@@ -9,6 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title><fmt:message key="Orders" /></title>
+<style>
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      border: 1px solid black;
+    }
+</style>
 </head>
 <body>
     <form method="GET" action="<c:url value="/controller"/>">
@@ -34,20 +43,48 @@
 		<br>
 	</form>
 	<br>
-	<c:forEach var="elem" items="${orders}" varStatus="status">
-		<c:out value="${status.count}" />
-		<c:out value="${elem}" />
-		<form method="GET" action="<c:url value="/controller"/>">
-			<input type="hidden" name="command" value="paid_order">
-			<input type="hidden" name="orderId" value="${elem.id}">
-			<p><input type="submit" value="<fmt:message key="Paid" />"></p>
-		</form>
-		<form method="GET" action="<c:url value="/controller"/>">
-			<input type="hidden" name="command" value="delete_order">
-			<input type="hidden" name="orderId" value="${elem.id}">
-			<p><input type="submit" value="<fmt:message key="Delete_order" />"></p>
-		</form>
-	</c:forEach>
+		<table>
+		<c:forEach var="elem" items="${orders}" varStatus="status">
+			<tr><td><c:out value="${status.count}"/></td>
+			<td><c:out value="${elem.userLogin}"/></td>
+			<td><c:out value="${elem.date}"/></td>
+			<td><c:out value="${elem.time}"/></td>
+			<td><fmt:message key="Comment" />>>><c:out value="${elem.comment}"/></td>
+			<td><fmt:message key="Description" />>>><c:out value="${elem.description}"/></td>
+			<td><fmt:message key="Total" /><c:out value="${elem.totalCost}"/></td>
+			<td><c:out value="${elem.payment}"/></td>
+			<td><fmt:message key="Paid" />=<c:out value="${elem.paid}"/></td>
+			<td>
+			<form method="GET" action="<c:url value="/controller"/>">
+	       		<input type="hidden" name="command" value="view_dishes">
+				<input name="orderId" type="hidden" value="${elem.id}">
+				<input name="admin_page" type="hidden" value="true">
+				<input type="submit" value="<fmt:message key="View_dishes" />">
+			</form>
+			<form method="GET" action="<c:url value="/controller"/>">
+				<input type="hidden" name="command" value="paid_order">
+				<input type="hidden" name="orderId" value="${elem.id}">
+			    <input type="submit" value="<fmt:message key="Paid" />">
+			</form>
+			<form method="GET" action="<c:url value="/controller"/>">
+				<input type="hidden" name="command" value="delete_order">
+				<input type="hidden" name="orderId" value="${elem.id}">
+				<input type="submit" value="<fmt:message key="Delete_order" />">
+			</form>
+			</td>
+			</tr>
+		</c:forEach>
+	</table>
+	<br>
+	<table>
+		<c:forEach var="elem" items="${history_list_orders}" varStatus="status">
+			<tr><td><c:out value="${status.count}"/></td>
+			<td><c:out value="${elem.name}"/></td>
+			<td><c:out value="${elem.description}"/></td>
+			<td><c:out value="${elem.price}"/></td>
+			</tr>
+		</c:forEach>
+	</table>
 	<br>
 	<a href="${pageContext.request.contextPath}/jsp/admin/administration.jsp"><fmt:message key="Administration" /></a>
 	<h3>${message}</h3>

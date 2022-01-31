@@ -19,6 +19,7 @@ import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
+import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -28,9 +29,11 @@ public class ConfirmOrderCommand implements Command{
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
-		router.setRedirect();
 		HttpSession session = request.getSession();
-		List<Dish> orderList = (List<Dish>) session.getAttribute(AttributeName.ORDER_LIST);
+		String locale = (String) session.getAttribute(SESSION_LOCALE);
+		MessageManager messageManager = MessageManager.defineLocale(locale);
+		router.setRedirect();
+		List<Dish> orderList = (List<Dish>) session.getAttribute(AttributeName.LIST_DISH);
 		String userLogin = request.getParameter(USER_ID);
 		LocalDate date = LocalDate.now();
 		LocalTime time = LocalTime.parse(request.getParameter(TIME));
@@ -39,14 +42,14 @@ public class ConfirmOrderCommand implements Command{
 		BigDecimal totalCost = (BigDecimal) session.getAttribute(AttributeName.TOTAL_COST);
 		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
 		try {
-			String result = orderService.confirmOrder(userLogin, orderList, description, DEFAULT_COMMENT, date, time, payment, totalCost);
+			String result = orderService.confirmOrder(userLogin, orderList, description, DEFAULT_COMMENT, date, time, payment, totalCost, locale);
 			request.setAttribute(AttributeName.MESSAGE, result);
-			if (!result.equals(UserMessage.CONFIRM_ORDER_SUCCESSFUL)) {
+			if (!result.equals(messageManager.getMessage(UserMessage.SUCCESSFUL))) {
 				router.setPagePath(PagePath.ORDER);
 				router.setForward();
 			}
-			if (result.equals(UserMessage.CONFIRM_ORDER_SUCCESSFUL)) {
-				session.removeAttribute(AttributeName.ORDER_LIST);
+			if (result.equals(messageManager.getMessage(UserMessage.SUCCESSFUL))) {
+				session.removeAttribute(AttributeName.LIST_DISH);
 				session.removeAttribute(AttributeName.TOTAL_COST);
 			}
 		} catch (ServiceException e) {

@@ -13,7 +13,7 @@
 <body>
 	<form method="POST" action="<c:url value="/controller"/>">
 		<input type="hidden" name="command" value="add_dish">
-		<fmt:message key="Name" /><input name="name" required pattern="[A-Za-z]{2,25}">
+		<fmt:message key="Name" /><input name="name" required pattern="[\d\D]{1,255}">
 		<br/>
 		<br/>
 		<fmt:message key="Type" />
@@ -22,7 +22,7 @@
 		<input type="radio" name="type" value="desert"> <fmt:message key="Desert" /> <br> 
 		<br/>
 		<br/>
-		<fmt:message key="Description" /><input name="description" >
+		<fmt:message key="Description" /><input name="description" pattern="[\d\D]{1,255}">
 		<br/>
 		<br/> 
 		<fmt:message key="Price" /><input name="price" required pattern="^[^-]\d*.?\d+$">

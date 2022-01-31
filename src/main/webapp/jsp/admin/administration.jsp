@@ -17,5 +17,6 @@
 	  <a href="${pageContext.request.contextPath}/jsp/admin/admin_orders.jsp"><fmt:message key="Orders" /></a>
 	  <br>	  
 	  <a href="${pageContext.request.contextPath}/jsp/mainPage.jsp"><fmt:message key="Main_page" /></a>
+	  <h3>${message}</h3>
 </body>
 </html>

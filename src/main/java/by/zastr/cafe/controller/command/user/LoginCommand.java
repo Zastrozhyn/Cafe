@@ -1,12 +1,15 @@
 package by.zastr.cafe.controller.command.user;
 
+import by.zastr.cafe.controller.command.AttributeName;
 import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.PagePath;
 import by.zastr.cafe.controller.command.Router;
+import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
+import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -23,6 +26,8 @@ public class LoginCommand implements Command{
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession();
+		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		Router router = new Router();
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
@@ -42,6 +47,7 @@ public class LoginCommand implements Command{
 			}
 			else {
 				router.setPagePath(PagePath.LOGIN);
+				request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.WRONG_PASSWORD_OR_LOGIN));
 			}
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "User cannot login:", e);

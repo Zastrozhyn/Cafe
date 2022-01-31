@@ -15,6 +15,7 @@ import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.CafeService;
 import by.zastr.cafe.util.InputValidator;
+import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.PasswordEncryptor;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
@@ -39,6 +40,20 @@ public class UserServiceImpl implements CafeService<User> {
 		entityTransaction.beginTransaction(userDao);
 		try {
 			userList = userDao.findAll();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method finding users", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return userList;
+	}
+	
+	public List<User> findAllDeleted() throws ServiceException{
+		List<User> userList = new ArrayList<User>();
+		entityTransaction.beginTransaction(userDao);
+		try {
+			userList = userDao.findAllDeleted();
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding users", e);
 		}
@@ -148,20 +163,18 @@ public class UserServiceImpl implements CafeService<User> {
 		return b;	
 	}
 	
-	public String edit(int userId, String name, String lastName, String phone, String email) throws ServiceException {
+	public String edit(int userId, String name, String lastName, String phone, String email, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		if (!validator.isCorrectName(name)) {
-			return UserMessage.WRONG_NAME;
+			return messageManager.getMessage(UserMessage.WRONG_NAME);
 		}
 		if (!validator.isCorrectName(lastName)) {
-			return UserMessage.WRONG_NAME;
+			return messageManager.getMessage(UserMessage.WRONG_NAME);
 		}
 
 		if (!validator.isCorrectEmail(email)) {
-			return UserMessage.WRONG_EMAIL;
-		}
-		if(!isUniquePhone(phone)) {
-			return UserMessage.WRONG_PHONE;
+			return messageManager.getMessage(UserMessage.WRONG_EMAIL);
 		}
 		 
 		User user = new User();
@@ -180,32 +193,33 @@ public class UserServiceImpl implements CafeService<User> {
 		finally {
 			entityTransaction.end();
 		}
-		return UserMessage.UPDATE_SUCCESSFUL;	
+		return messageManager.getMessage(UserMessage.SUCCESSFUL);	
 	}
 	
 	public String registration(String name, String lastName, String phone, String login, 
-			String password, String confirmPassword, String email) throws ServiceException {
+			String password, String confirmPassword, String email, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		if (!validator.isCorrectName(name)) {
-			return UserMessage.WRONG_NAME;
+			return messageManager.getMessage(UserMessage.WRONG_NAME);
 		}
 		if (!validator.isCorrectName(lastName)) {
-			return UserMessage.WRONG_NAME;
+			return messageManager.getMessage(UserMessage.WRONG_NAME);
 		}
 		if (!validator.isCorrectEmail(email)) {
-			return UserMessage.WRONG_EMAIL;
+			return messageManager.getMessage(UserMessage.WRONG_EMAIL);
 		}
 		if (!validator.isCorrectPassword(password)) {
-			return UserMessage.WRONG_PASSWORD;
+			return messageManager.getMessage(UserMessage.WRONG_PASSWORD);
 		}
 		if (!validator.arePasswordsEqual(password,confirmPassword)) {
-			return UserMessage.WRONG_CONFIRM_PASSWORD;
+			return messageManager.getMessage(UserMessage.WRONG_CONFIRM_PASSWORD);
 		}
 		if(!isUniqueLogin(login)) {
-			return UserMessage.WRONG_LOGIN;
+			return messageManager.getMessage(UserMessage.NOT_UNIQUE_LOGIN);
 		}
 		if(!isUniquePhone(phone)) {
-			return UserMessage.WRONG_PHONE;
+			return messageManager.getMessage(UserMessage.WRONG_PHONE);
 		}
 		 
 		Account account = AccountServiceImpl.getInstance().CreateNewDefaultAccount(); 
@@ -228,7 +242,7 @@ public class UserServiceImpl implements CafeService<User> {
 		finally {
 			entityTransaction.end();
 		}
-		return UserMessage.REGISTRATION_SUCCESSFUL;	
+		return messageManager.getMessage(UserMessage.REGISTRATION_SUCCESSFUL);	
 	}
 	
 	public Optional<User> login (String login, String password) throws ServiceException {
@@ -242,16 +256,17 @@ public class UserServiceImpl implements CafeService<User> {
 		return optionalUser;
 	}
 	
-	public String changePassword (int userId, String login, String password, String newPassword, String confirmPassword) throws ServiceException {
+	public String changePassword (int userId, String login, String password, String newPassword, String confirmPassword, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
+		MessageManager messageManager = MessageManager.defineLocale(locale);
+		if (!BCrypt.checkpw(password,getPassword(userId))) {
+			return messageManager.getMessage(UserMessage.WRONG_PASSWORD);	
+		}
 		if (!validator.isCorrectPassword(newPassword)) {
-			return UserMessage.WRONG_PASSWORD;
+			return messageManager.getMessage(UserMessage.WRONG_PASSWORD);
 		}
 		if (!validator.arePasswordsEqual(newPassword,confirmPassword)) {
-			return UserMessage.WRONG_CONFIRM_PASSWORD;
-		}
-		if (!BCrypt.checkpw(password,getPassword(userId))) {
-			return UserMessage.WRONG_PASSWORD;
+			return messageManager.getMessage(UserMessage.WRONG_CONFIRM_PASSWORD);
 		}
 		try {
 			entityTransaction.beginTransaction(userDao);
@@ -263,7 +278,7 @@ public class UserServiceImpl implements CafeService<User> {
 		finally {
 			entityTransaction.end();
 		}
-		return UserMessage.SUCCESSFUL;
+		return messageManager.getMessage(UserMessage.SUCCESSFUL);
 	}
 	 
     public boolean isUniqueLogin (String login) throws ServiceException {

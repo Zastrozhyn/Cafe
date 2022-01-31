@@ -11,10 +11,12 @@ import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.PagePath;
 import by.zastr.cafe.controller.command.RequestParameter;
 import by.zastr.cafe.controller.command.Router;
+import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.service.impl.DishServiceImpl;
+import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -23,13 +25,15 @@ public class AddToOrderCommand implements Command {
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession();
-		List<Dish> orderList;
+		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
+		MessageManager messageManager = MessageManager.defineLocale(locale);
+		List<Dish> listDish;
 		BigDecimal totalCost = BigDecimal.ZERO;
-		if (session.getAttribute(AttributeName.ORDER_LIST) == null) {
-			orderList = new ArrayList<Dish>();
+		if (session.getAttribute(AttributeName.LIST_DISH) == null) {
+			listDish = new ArrayList<Dish>();
 		}
 		else {
-			orderList = (List<Dish>) session.getAttribute(AttributeName.ORDER_LIST);
+			listDish = (List<Dish>) session.getAttribute(AttributeName.LIST_DISH);
 			totalCost = (BigDecimal) session.getAttribute(AttributeName.TOTAL_COST);
 			
 		}
@@ -39,10 +43,12 @@ public class AddToOrderCommand implements Command {
 		DishServiceImpl dishService = DishServiceImpl.getInstance();
 		try {
 			Dish dish = dishService.findById(dishId).get();
-			orderList.add(dish);
+			listDish.add(dish);
 			totalCost = totalCost.add(dish.getPrice());
-			session.setAttribute(AttributeName.ORDER_LIST, orderList);
+			session.setAttribute(AttributeName.LIST_DISH, listDish);
 			session.setAttribute(AttributeName.TOTAL_COST, totalCost);
+			String message = messageManager.getMessage(UserMessage.ADDED_TO_ORDER) + dish.getName();
+			request.setAttribute(AttributeName.MESSAGE, message);
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "cannot find dish:", e);
             throw new CommandException("cannot find dish:", e);

@@ -25,10 +25,10 @@
 		<fmt:message key="Email" /> <input type="email" name="email" value=""required>
 		<br/>
 		<br/>  
-		<fmt:message key="Login" /> <input name="login" required pattern="[A-Za-z]{3,25}">
+		<fmt:message key="Login" /> <input name="login" required pattern="[\d\D]{1,25}">
 		<br/>
 		<br/>  
-		<fmt:message key="Password" /> <input name="password" type="password" required pattern="[A-Za-z0-9]{5,20}">
+		<fmt:message key="Password" /> <input name="password" type="password" required pattern="[\d\D]{1,25}">
 		<br/>
 		<br/>
 		<fmt:message key="Confirm_password" /> <input name="confirm_password" type="password" value=""required>

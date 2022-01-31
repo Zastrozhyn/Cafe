@@ -16,6 +16,7 @@ public final class PagePath {
     
     public static final String USERS = "/jsp/admin/admin_users.jsp";
     public static final String ADMIN_ORDERS = "/jsp/admin/admin_orders.jsp";
+    public static final String ADMIN_USERS = "/jsp/admin/admin_users.jsp";
     public static final String EDIT_DISH = "/jsp/admin/editdish.jsp";
     public static final String ADMINISTRATION = "/jsp/admin/administration.jsp";   
     public static final String NEW_DISH = "/jsp/admin/newdish.jsp";   

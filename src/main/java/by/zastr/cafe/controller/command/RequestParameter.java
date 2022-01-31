@@ -26,7 +26,9 @@ public final class RequestParameter {
     
     public static final String ORDER_ID = "orderId";
     public static final String COMMENT = "comment";
-    public static final String SESSION_LOCALE = "session_locale";
+    public static final String SESSION_LOCALE = "Locale";
+    public static final String ADMIN_PAGE = "admin_page";
+    
 
 	private RequestParameter() {
 	}

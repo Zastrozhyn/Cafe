@@ -12,13 +12,18 @@ import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
+import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 public class ChangePasswordCommand implements Command{
 
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
+		HttpSession session = request.getSession();
+		String locale = (String) session.getAttribute(SESSION_LOCALE);
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		int userId = Integer.parseInt(request.getParameter(USER_ID));
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
@@ -26,10 +31,10 @@ public class ChangePasswordCommand implements Command{
 		String newPassword = request.getParameter(NEW_PASSWORD);
 		UserServiceImpl userService = UserServiceImpl.getInstance();
 		try {
-			String result = userService.changePassword(userId, login, password, newPassword, confirmPassword);
-			if(!result.equals(UserMessage.SUCCESSFUL)) {
+			String result = userService.changePassword(userId, login, password, newPassword, confirmPassword, locale);
+			request.setAttribute(AttributeName.MESSAGE, result);
+			if(!result.equals(messageManager.getMessage(UserMessage.SUCCESSFUL))) {
 				router.setPagePath(PagePath.CHANGE_PASSWORD);
-				request.setAttribute(AttributeName.MESSAGE, result);
 			}
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "Password cannot be registered:", e);

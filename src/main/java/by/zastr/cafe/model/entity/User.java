@@ -9,6 +9,7 @@ public class User extends CafeEntity {
 	private String login;
 	private Role role;
 	private Account account;
+	private boolean	archive;
 	
 	public enum Role{
 		GUEST,
@@ -95,12 +96,22 @@ public class User extends CafeEntity {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
+	
+
+	public boolean isArchive() {
+		return archive;
+	}
+
+	public void setArchive(boolean archive) {
+		this.archive = archive;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((account == null) ? 0 : account.hashCode());
+		result = prime * result + (archive ? 1231 : 1237);
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
@@ -128,6 +139,9 @@ public class User extends CafeEntity {
 				return false;
 			}
 		} else if (!account.equals(other.account)) {
+			return false;
+		}
+		if (archive != other.archive) {
 			return false;
 		}
 		if (email == null) {
@@ -177,7 +191,7 @@ public class User extends CafeEntity {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Id=");
+		builder.append("User [userId=");
 		builder.append(userId);
 		builder.append(", name=");
 		builder.append(name);
@@ -191,9 +205,11 @@ public class User extends CafeEntity {
 		builder.append(login);
 		builder.append(", role=");
 		builder.append(role);
-		builder.append(", ");
+		builder.append(", account=");
 		builder.append(account);
+		builder.append(", archive=");
+		builder.append(archive);
+		builder.append("]");
 		return builder.toString();
-	}
-	
+	}	
 }

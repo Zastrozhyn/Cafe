@@ -11,7 +11,9 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.service.impl.DishServiceImpl;
+import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 public class AddDishCommand implements Command{
 
@@ -19,6 +21,8 @@ public class AddDishCommand implements Command{
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
 		router.setPagePath(PagePath.NEW_DISH);
+		HttpSession session = request.getSession();
+		String locale = (String) session.getAttribute(SESSION_LOCALE);
 		String name = request.getParameter(NAME);
 		String type = request.getParameter(DISH_TYPE);
 		String description = request.getParameter(DESCRIPTION);
@@ -26,7 +30,7 @@ public class AddDishCommand implements Command{
 		String weight = request.getParameter(DISH_WEIGHT);
 		DishServiceImpl dishService = DishServiceImpl.getInstance();
 		try {
-			String result = dishService.create(name, weight, price, description, type);
+			String result = dishService.create(name, weight, price, description, type, locale);
 			request.setAttribute(AttributeName.MESSAGE, result);
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "Dish cannot be add:", e);

@@ -13,13 +13,14 @@
 <body>
 	<form method="POST" action="<c:url value="/controller"/>">
 		<input type="hidden" name="command" value="login">
-		<fmt:message key="Login" /><input name="login" required pattern="[A-Za-z]{3,25}">
+		<fmt:message key="Login" /><input name="login" required pattern="[\d\D]{1,25}">
 		<br/>
 		<br/>
 		<fmt:message key="Password" /><input name="password" type="password" required pattern="[A-Za-z0-9]{5,20}">
 		<br/>
 		<p><input type="submit"></p>
 	</form>
+	<h3>${message}</h3>
 	<a href="${pageContext.request.contextPath}/jsp/registration.jsp"><fmt:message key="Registration" /></a>
 </body>
 </html>

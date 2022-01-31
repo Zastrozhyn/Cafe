@@ -27,6 +27,7 @@
 		  <br/>
 		  <p><input type="submit"></p>
 	  </form>
+	  <h3>${message}</h3>
 	  <a href="${pageContext.request.contextPath}/jsp/mainPage.jsp"><fmt:message key="Main_page" /></a>
 </body>
 </html>
