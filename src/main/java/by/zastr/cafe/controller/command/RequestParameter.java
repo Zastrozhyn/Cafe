@@ -28,6 +28,14 @@ public final class RequestParameter {
     public static final String COMMENT = "comment";
     public static final String SESSION_LOCALE = "Locale";
     public static final String ADMIN_PAGE = "admin_page";
+    public static final String ARCHIVE = "archive";
+    public static final String BEGIN_LIST = "begin";
+    public static final String END_LIST = "end";
+    public static final String PAGES = "pages";
+    public static final String CURRENT_PAGE = "current_page";
+    public static final String NEXT_PAGE = "next_page";
+    
+    
     
 
 	private RequestParameter() {

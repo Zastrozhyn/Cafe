@@ -25,7 +25,6 @@ public class EditDishCommand implements Command{
 		HttpSession session = request.getSession();
 		String locale = (String) session.getAttribute(SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);
-		router.setPagePath(PagePath.MAIN_PAGE);
 		router.setRedirect();
 		int id = Integer.parseInt(request.getParameter(DISH_ID));
 		String name = request.getParameter(NAME);

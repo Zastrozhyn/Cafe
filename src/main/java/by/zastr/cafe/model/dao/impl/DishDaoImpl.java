@@ -15,19 +15,19 @@ import by.zastr.cafe.model.dao.AbstractDao;
 import by.zastr.cafe.model.entity.Dish;
 
 public class DishDaoImpl extends AbstractDao<Dish>{
-	private static final String SQL_FIND_ALL_DISH = "SELECT menu_id, type, name, description, price, weight FROM menu "
-			+ "ORDER BY type";
-	private static final String SQL_FIND_DISH_BY_ID = "SELECT menu_id, type, name, description, price, weight "
+	private static final String SQL_FIND_ALL_DISH = "SELECT menu_id, type, name, description, price, weight, archive FROM menu "
+			+ "WHERE archive=? ORDER BY type";
+	private static final String SQL_FIND_DISH_BY_ID = "SELECT menu_id, type, name, description, price, weight, archive "
 			+ "FROM menu WHERE menu_id=?";
-	private static final String SQL_FIND_DISH_BY_NAME = "SELECT menu_id, type, name, description, price, weight"
+	private static final String SQL_FIND_DISH_BY_NAME = "SELECT menu_id, type, name, description, price, weight, archive"
 			+ " FROM menu WHERE name = ?";
-	private static final String SQL_FIND_DISH_BY_TYPE = "SELECT menu_id, type, name, description, price, weight"
-			+ " FROM menu WHERE type = ?";
+	private static final String SQL_FIND_DISH_BY_TYPE = "SELECT menu_id, type, name, description, price, weight, archive"
+			+ " FROM menu WHERE type = ? AND archive=?";
 	private static final String SQL_CREATE_DISH = "INSERT INTO menu (menu_id, type, name, description, price, weight)"
 			+ " VALUES (NULL,?,?,?,?,?)";
 	private static final String SQL_UPDATE_DISH = "UPDATE menu SET  type=?, name=?, description=?, price=?, weight=?"
 			+ " WHERE menu_id=?";
-	private static final String SQL_DELETE_DISH = "DELETE FROM menu WHERE menu_id = ?";
+	private static final String SQL_DELETE_DISH = "UPDATE menu SET archive=? WHERE menu_id = ?";
 	
 	public DishDaoImpl() {
 	}
@@ -36,12 +36,14 @@ public class DishDaoImpl extends AbstractDao<Dish>{
 	@Override
 	public List<Dish> findAll() throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
-		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_DISH); 
-				ResultSet result = statement.executeQuery()) {
-            while (result.next()) {
-                Dish dish = buildDish(result);
-                dishList.add(dish);
-            }
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_DISH)){
+			statement.setString(1, "false");
+			try (ResultSet result = statement.executeQuery()){ 
+	            while (result.next()) {
+	                Dish dish = buildDish(result);
+	                dishList.add(dish);
+	            }
+			}
 		} catch (SQLException e) {
 			logger.error("\"Find all dish\" query has been failed", e);
             throw new DaoException("\"Find all dish\" query has been failed", e);
@@ -86,6 +88,7 @@ public class DishDaoImpl extends AbstractDao<Dish>{
 		List<Dish> dishList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_DISH_BY_TYPE)) {
 			statement.setString(1, type);
+			statement.setString(2, "false");
 			try (ResultSet result = statement.executeQuery()){
 	            while (result.next()) {
 	                Dish dish = buildDish(result);
@@ -139,7 +142,8 @@ public class DishDaoImpl extends AbstractDao<Dish>{
 	public boolean delete(Dish dish) throws DaoException {
 		int result;
         try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_DISH)) {
-            statement.setInt(1, dish.getId());
+            statement.setString(1, "true");
+            statement.setInt(2, dish.getId());
             result = statement.executeUpdate();
         } catch (SQLException e) {
             logger.info("\"Delete dish\" query has been failed", e);
@@ -152,7 +156,37 @@ public class DishDaoImpl extends AbstractDao<Dish>{
 	public boolean delete(int id) throws DaoException {
 		int result;
         try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_DISH)) {
-            statement.setInt(1, id);
+            statement.setString(1, "true");
+            statement.setInt(2, id);
+            result = statement.executeUpdate();
+        } catch (SQLException e) {
+            logger.info("\"Delete dish\" query has been failed", e);
+            throw new DaoException("\"Delete dish\" query has been failed", e);
+        }
+		return (result > 0);
+	}
+	public List<Dish> findDeleted() throws DaoException {
+		List<Dish> dishList = new ArrayList<>();
+		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_DISH)){
+			statement.setString(1, "true");
+			try (ResultSet result = statement.executeQuery()){ 
+	            while (result.next()) {
+	                Dish dish = buildDish(result);
+	                dishList.add(dish);
+	            }
+			}
+		} catch (SQLException e) {
+			logger.error("\"Find deleted dish\" query has been failed", e);
+            throw new DaoException("\"Find dweleted dish\" query has been failed", e);
+		}
+		return dishList;
+	}
+	
+	public boolean restore(int id) throws DaoException {
+		int result;
+        try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_DISH)) {
+            statement.setString(1, "false");
+            statement.setInt(2, id);
             result = statement.executeUpdate();
         } catch (SQLException e) {
             logger.info("\"Delete dish\" query has been failed", e);
@@ -169,6 +203,7 @@ public class DishDaoImpl extends AbstractDao<Dish>{
     	dish.setPrice(BigDecimal.valueOf(result.getDouble(DISH_PRICE)));
     	dish.setType(result.getString(DISH_TYPE));
     	dish.setWeight(result.getInt(DISH_WEIGHT));
+    	dish.setArchive(Boolean.parseBoolean(result.getString(ARCHIVE)));
     	return dish;
     }
 }

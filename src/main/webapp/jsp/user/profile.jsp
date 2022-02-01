@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${Locale}"/>
-<fmt:setBundle basename="message"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../includes/imports.jspf" %>
 <!DOCTYPE html>
 <html>
+<header>
+	<c:import url="../includes/header.jsp" />
+</header>
 <head>
 <meta charset="UTF-8">
 <title><fmt:message key="Profile" /></title>
@@ -34,13 +33,13 @@
 	<br>
 	<fmt:message key="Balance" />: ${user.account.balance}
   
-	<form name="edit" method="GET" action="${pageContext.request.contextPath}/jsp/editprofile.jsp">
+	<form name="edit" method="GET" action="${abs}/jsp/user/editprofile.jsp">
 		<p><input type="submit" value="<fmt:message key="Edit_profile" />" ></p>
 	</form>
-	<form name="change_password" method="POST" action="${pageContext.request.contextPath}/jsp/change_password.jsp">
+	<form name="change_password" method="POST" action="${abs}/jsp/user/change_password.jsp">
 		<p><input type="submit" value="<fmt:message key="Change_password" />" ></p>
 	</form>
-	<form name="delete" method="POST" action="${pageContext.request.contextPath}/jsp/delete_user.jsp">
+	<form name="delete" method="POST" action="${abs}/jsp/user/delete_user.jsp">
 		<p><input type="submit" value="<fmt:message key="Delete_user" />" ></p>
 	</form>
 	<form method="GET" action="<c:url value="/controller"/>">
@@ -58,7 +57,7 @@
 			<form method="GET" action="<c:url value="/controller"/>">
 	       		<input type="hidden" name="command" value="add_comment">
 				<input name="orderId" type="hidden" value="${elem.id}">
-				<input name="comment" value="${elem.comment}" size="110" required>
+				<input name="comment" value="${elem.comment}" size="100" required>
 				<input type="submit" value="<fmt:message key="Add_comment" />">
 			</form>
 			</td>
@@ -68,6 +67,13 @@
 				<input name="orderId" type="hidden" value="${elem.id}">
 				<input name="admin_page" type="hidden" value="false">
 				<input type="submit" value="<fmt:message key="View_dishes" />">
+			</form>
+			</td>
+			<td>
+			<form method="GET" action="<c:url value="/controller"/>">
+	       		<input type="hidden" name="command" value="repeat_order">
+				<input name="orderId" type="hidden" value="${elem.id}">
+				<input type="submit" value="<fmt:message key="Repeat" />">
 			</form>
 			</td>
 			</tr>
@@ -84,6 +90,6 @@
 		</c:forEach>
 	</table>
 	<h3>${message}</h3>
- 	<p><a href="${pageContext.request.contextPath}/jsp/mainPage.jsp"><fmt:message key="Main_page" /></a></p>
 </body>
+<c:import url="../includes/footer.jsp" />
 </html>

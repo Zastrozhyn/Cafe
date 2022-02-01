@@ -9,6 +9,7 @@ public class Dish extends CafeEntity{
 	private BigDecimal price;
 	private String description;
 	private DishType type;
+	private boolean archive;
 	
 	public enum DishType {
 		DRINK,
@@ -92,10 +93,19 @@ public class Dish extends CafeEntity{
 		this.type = DishType.valueOf(type.toUpperCase());
 	}
 
+	public boolean isArchive() {
+		return archive;
+	}
+
+	public void setArchive(boolean archive) {
+		this.archive = archive;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + (archive ? 1231 : 1237);
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
@@ -117,6 +127,9 @@ public class Dish extends CafeEntity{
 			return false;
 		}
 		Dish other = (Dish) obj;
+		if (archive != other.archive) {
+			return false;
+		}
 		if (description == null) {
 			if (other.description != null) {
 				return false;
@@ -153,8 +166,11 @@ public class Dish extends CafeEntity{
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
+		builder.append("Dish [id=");
+		builder.append(id);
+		builder.append(", name=");
 		builder.append(name);
-		builder.append(", weihgt=");
+		builder.append(", weight=");
 		builder.append(weight);
 		builder.append(", price=");
 		builder.append(price);
@@ -162,7 +178,9 @@ public class Dish extends CafeEntity{
 		builder.append(description);
 		builder.append(", type=");
 		builder.append(type);
+		builder.append(", archive=");
+		builder.append(archive);
+		builder.append("]");
 		return builder.toString();
 	}
-
 }

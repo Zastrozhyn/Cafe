@@ -7,6 +7,7 @@ import by.zastr.cafe.controller.command.admin.AddMoneyCommand;
 import by.zastr.cafe.controller.command.admin.BlockUserCommand;
 import by.zastr.cafe.controller.command.admin.ChangeRoleCommand;
 import by.zastr.cafe.controller.command.admin.DeleteOrderCommand;
+import by.zastr.cafe.controller.command.admin.DeleteRestoreDishCommand;
 import by.zastr.cafe.controller.command.admin.EditDishCommand;
 import by.zastr.cafe.controller.command.admin.FindOrderCommand;
 import by.zastr.cafe.controller.command.admin.FindUserCommand;
@@ -18,6 +19,7 @@ import by.zastr.cafe.controller.command.admin.ViewTodayOrderCommand;
 import by.zastr.cafe.controller.command.admin.ViewUnpaidOrderCommand;
 import by.zastr.cafe.controller.command.admin.ViewUserCommand;
 import by.zastr.cafe.controller.command.menu.DisplayMenuCommand;
+import by.zastr.cafe.controller.command.menu.PaginationCommand;
 import by.zastr.cafe.controller.command.user.AddCommentCommand;
 import by.zastr.cafe.controller.command.user.AddToOrderCommand;
 import by.zastr.cafe.controller.command.user.ChangeLocaleCommand;
@@ -30,6 +32,7 @@ import by.zastr.cafe.controller.command.user.FindOrderHistoryCommand;
 import by.zastr.cafe.controller.command.user.LoginCommand;
 import by.zastr.cafe.controller.command.user.LogoutCommand;
 import by.zastr.cafe.controller.command.user.RegistrationCommand;
+import by.zastr.cafe.controller.command.user.RepeatOrderCommand;
 import by.zastr.cafe.controller.command.user.ViewDishesCommand;
 import by.zastr.cafe.model.entity.User;
 
@@ -48,6 +51,7 @@ public enum CommandType {
 	CHANGE_PASSWORD(new ChangePasswordCommand()),	
 	FIND_ORDER_HISTORY(new FindOrderHistoryCommand()),
 	ADD_COMMENT(new AddCommentCommand()),
+	REPEAT_ORDER(new RepeatOrderCommand()),
 	
 	ADD_DISH(new AddDishCommand()),
 	ADD_MONEY(new AddMoneyCommand()),
@@ -64,8 +68,10 @@ public enum CommandType {
 	BLOCK_USER(new BlockUserCommand()),
 	FIND_USER(new FindUserCommand()),
 	DELETED_USER(new ViewDeletedUser()),
+	DELETE_DISH(new DeleteRestoreDishCommand()),
 	
 	MENU(new DisplayMenuCommand()),
+	PAGINATION(new PaginationCommand()),
 	CHANGE_LOCALE(new ChangeLocaleCommand());
 	
     private final Command command;

@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${Locale}"/>
-<fmt:setBundle basename="message"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../includes/imports.jspf" %>
 <!DOCTYPE html>
 <html>
+<header>
+	<c:import url="../includes/header.jsp" />
+</header>
 <head>
 <meta charset="UTF-8">
 <title><fmt:message key="Orders" /></title>
@@ -86,7 +85,6 @@
 		</c:forEach>
 	</table>
 	<br>
-	<a href="${pageContext.request.contextPath}/jsp/admin/administration.jsp"><fmt:message key="Administration" /></a>
 	<h3>${message}</h3>
 </body>
 </html>

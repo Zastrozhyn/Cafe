@@ -88,6 +88,20 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return userList;
 	}
 	
+	public List<Dish> findDeleted() throws ServiceException{
+		List<Dish> userList = new ArrayList<Dish>();
+		try {
+			entityTransaction.beginTransaction(dishDao);
+			userList = dishDao.findDeleted();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method finding dish", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return userList;
+	}
+	
 	@Override
 	public boolean delete(int id) throws ServiceException {
 		boolean b = false;
@@ -96,6 +110,20 @@ public class DishServiceImpl implements CafeService<Dish> {
 			b = dishDao.delete(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method delete dish", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return b;	
+	}
+	
+	public boolean restore(int id) throws ServiceException {
+		boolean b = false;
+		try {
+			entityTransaction.beginTransaction(dishDao);
+			b = dishDao.restore(id);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method restore dish", e);
 		}
 		finally {
 			entityTransaction.end();
@@ -120,9 +148,6 @@ public class DishServiceImpl implements CafeService<Dish> {
 	public String create(String name, String weight, String price, String description, String type, String locale) throws ServiceException {
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);
-		if (!validator.isCorrectName(name)) {
-			return messageManager.getMessage(UserMessage.WRONG_NAME);
-		}
 		if (!validator.isCorrectPrice(price)) {
 			return messageManager.getMessage(UserMessage.WRONG_PRICE);
 		}
@@ -145,7 +170,7 @@ public class DishServiceImpl implements CafeService<Dish> {
 		finally {
 			entityTransaction.end();
 		}
-		return messageManager.getMessage(UserMessage.WRONG_NAME);
+		return messageManager.getMessage(UserMessage.SUCCESSFUL);
 	}
 	
 	public String update(int id, String name, String weight, String price, String description, String type, String locale) throws ServiceException {

@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${Locale}"/>
-<fmt:setBundle basename="message"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../includes/imports.jspf" %>
 <!DOCTYPE html>
 <html>
+<header>
+	<c:import url="../includes/header.jsp" />
+</header>
 <head>
 <meta charset="UTF-8">
 <title><fmt:message key="Registration" /></title>
@@ -35,6 +34,6 @@
 		<p><input type="submit"></p>
 	</form>
 	<h3>${registration_result}</h3>
-	<a href="${pageContext.request.contextPath}/jsp/mainPage.jsp"><fmt:message key="Main_page" /></a>
 </body>
+<c:import url="../includes/footer.jsp" />
 </html>

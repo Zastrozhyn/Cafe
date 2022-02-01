@@ -1,17 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${Locale}"/>
-<fmt:setBundle basename="message"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../includes/imports.jspf" %>
 <!DOCTYPE html>
 <html>
+<header>
+	<c:import url="../includes/header.jsp" />
+</header>
 <head>
 <meta charset="UTF-8">
 <title><fmt:message key="Order" /></title>
 </head>
 <body>
-	<p><a href="${pageContext.request.contextPath}/jsp/menu.jsp"><fmt:message key="Menu" /></a></p>
+	<p><a href="${abs}/jsp/menu.jsp"><fmt:message key="Menu" /></a></p>
 	<br>
 	<br>
 	<c:forEach var="elem" items="${list_dish}" varStatus="status">
@@ -33,7 +32,7 @@
 		<input type="hidden" name="userId" value="${sessionScope.user.login}">
 		<br/>
 		<br/>
-		<fmt:message key="Description" /><input name="description" required>
+		<fmt:message key="Description" /><input name="description" size="40"  required>
 		<br/>
 		<br/>
 		<fmt:message key="Payment_type" />
@@ -48,7 +47,7 @@
 		<br/>  
 		<p><input type="submit"></p>
 	</form>
-	<a href="${pageContext.request.contextPath}/jsp/mainPage.jsp"><fmt:message key="Main_page" /></a>
 	<h3>${message}</h3>
 </body>
+<c:import url="../includes/footer.jsp" />
 </html>

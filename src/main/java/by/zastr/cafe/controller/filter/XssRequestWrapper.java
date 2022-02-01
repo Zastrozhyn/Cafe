@@ -30,11 +30,6 @@ public class XssRequestWrapper extends HttpServletRequestWrapper{
         return value == null ? null : this.stripXss(value);
     }
 
-    public String getHeader(String name) {
-        String value = super.getHeader(name);
-        return this.stripXss(value);
-    }
-
     private String stripXss(String value) {
         return value.replaceAll("[<>]", "");
     }

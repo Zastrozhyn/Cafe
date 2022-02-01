@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmt:setLocale value="${Locale}"/>
-<fmt:setBundle basename="message"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../includes/imports.jspf" %>
 <!DOCTYPE html>
 <html>
+<header>
+	<c:import url="../includes/header.jsp" />
+</header>
+<link rel="stylesheet" href="${abs}/jsp/css/style.css">
 <head>
 <meta charset="UTF-8">
 <title><fmt:message key="Menu" /></title>
@@ -40,17 +40,21 @@
 		<input type="hidden" name="type" value="drink">
 		<p><input type="submit" value="<fmt:message key="DRINK_MENU" />"></p>
 	</form>
-	<br>
-	<br>
+	<c:if test="${admin}">
+		<form method="GET" action="<c:url value="/controller"/>">
+			<input type="hidden" name="command" value="menu">
+			<input type="hidden" name="type" value="deleted">
+			<p><input type="submit" value="<fmt:message key="Deleted" />"></p>
+		</form>
+	</c:if>
 	<table>
 		<caption><fmt:message key="Menu" /></caption>
-		<tr><th></th><th><fmt:message key="Name"/></th>
+		<tr><th><fmt:message key="Name"/></th>
 		<th><fmt:message key="Description"/></th>
 		<th><fmt:message key="Weight"/></th>
 		<th><fmt:message key="Price"/></th>
 		</tr>
-		<c:forEach var="elem" items="${menu}" varStatus="status">
-		    <tr><td><c:out value="${status.count}"/></td>
+		<c:forEach var="elem" items="${menu}" varStatus="status" begin="${begin}" end="${end}">
 		    <td><c:out value="${elem.name}"/></td>
 		    <td><c:out value="${elem.description}"/></td>
 		    <td><c:out value="${elem.weight}"/></td>
@@ -73,11 +77,23 @@
 		     </td></tr>
 		</c:forEach>
 	</table>
-		<c:if test="${sessionScope.client}">
-		<p><a href="${pageContext.request.contextPath}/jsp/order.jsp"><fmt:message key="Order" /></a></p>
-	</c:if>
+	<fmt:message key="Page" /> ${pages}
 	<br>
-	<a href="${pageContext.request.contextPath}/jsp/mainPage.jsp"><fmt:message key="Main_page" /></a>
+	<fmt:message key="Current_page" /> ${current_page}
+	<c:if test="${pages>1 and current_page < pages}">
+		<form  method="GET" action="<c:url value="/controller"/>">
+			<input type="hidden" name="command" value="pagination">
+			<input type="hidden" name="next_page" value="1">	
+			<input type="submit" value="next" >
+		</form>
+	</c:if>
+	<c:if test="${pages>1 and current_page > 1}">
+		<form  method="GET" action="<c:url value="/controller"/>">
+			<input type="hidden" name="command" value="pagination">
+			<input type="hidden" name="next_page" value="-1">	
+			<input type="submit" value="back" > 
+	</c:if>
 	<h3>${message}</h3>
 </body>
+<c:import url="../includes/footer.jsp" />
 </html>

@@ -20,7 +20,18 @@ public class User extends CafeEntity {
 	public User() {
 		super();
 	}
-
+	
+	/**
+	 * 
+	 * @param userId
+	 * @param name
+	 * @param lastName
+	 * @param phone
+	 * @param email
+	 * @param login
+	 * @param role
+	 * @param account
+	 */
 	public User(int userId, String name, String lastName, String phone, String email, String login, Role role, Account account) {
 		super();
 		this.userId = userId;
@@ -32,63 +43,123 @@ public class User extends CafeEntity {
 		this.role = role;
 		this.account = account;
 	}
-
+	
+	/**
+	 * 
+	 * @return userId
+	 */
 	public int getUserId() {
 		return userId;
 	}
-
+	
+	/**
+	 * 
+	 * @param userId
+	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 
+	/**
+	 * 
+	 * @param lastName
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPhone() {
 		return phone;
 	}
 
+	/**
+	 * 
+	 * @param phone
+	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getEmail() {
 		return email;
 	}
 
+	/**
+	 * 
+	 * @param email
+	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * 
+	 * @param login
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Role getRole() {
 		return role;
 	}
 
+	/**
+	 * 
+	 * @param role
+	 */
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Account getAccount() {
 		return account;
 	}

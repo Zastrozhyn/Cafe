@@ -5,6 +5,6 @@
     <title>index</title>
 </head>
 <body>
-    <jsp:forward page="/jsp/mainPage.jsp"/>
+    <jsp:forward page="/jsp/user/mainPage.jsp"/>
 </body>
 </html>
