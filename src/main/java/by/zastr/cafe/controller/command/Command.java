@@ -7,18 +7,21 @@ import by.zastr.cafe.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * interface Command
- * @author A.Zastrozhyn
+ * interface Command.
  *
+ * @author A.Zastrozhyn
  */
 public interface Command {
+	
+	/** The logger. */
 	Logger logger = LogManager.getLogger();
 	
 	/**
-	 * 
-	 * @param request
+	 * Execute.
+	 *
+	 * @param request the request
 	 * @return Router
-	 * @throws CommandException
+	 * @throws CommandException the command exception
 	 */
     Router execute(HttpServletRequest request) throws CommandException;
 

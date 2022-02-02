@@ -1,3 +1,4 @@
+
 package by.zastr.cafe.model.connection;
 
 import java.sql.DriverManager;
@@ -10,9 +11,9 @@ import org.apache.logging.log4j.Logger;
 import by.zastr.cafe.util.ConfigurationManager;
 
 /**
- * class ConnectionBuilder
- * @author A.Zastrozhyn
+ * class ConnectionBuilder.
  *
+ * @author A.Zastrozhyn
  */
 public class ConnectionBuilder {
 	private static final Logger logger = LogManager.getLogger();
@@ -32,6 +33,12 @@ public class ConnectionBuilder {
 	private ConnectionBuilder() {
 	}
 	
+	/**
+	 * Builds the proxy connection.
+	 *
+	 * @return the proxy connection
+	 * @throws SQLException the SQL exception
+	 */
 	static ProxyConnection buildProxyConnection() throws SQLException {
 		String url = ConfigurationManager.getProperty(DB_URL);
 		String user = ConfigurationManager.getProperty(DB_USER);

@@ -1,9 +1,9 @@
 package by.zastr.cafe.util;
 
 /**
- * class LocaleValidator
- * @author A.Zastrozhyn
+ * class LocaleValidator.
  *
+ * @author A.Zastrozhyn
  */
 public class LocaleValidator {
     private static final String ENGLISH_LOCALE = "en_US";
@@ -13,8 +13,9 @@ public class LocaleValidator {
     }
 
     /**
-     * 
-     * @param locale
+     * Checks if is locale exist.
+     *
+     * @param locale the locale
      * @return boolean is Locale Exist
      */
     public static boolean isLocaleExist(String locale) {

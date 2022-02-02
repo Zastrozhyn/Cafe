@@ -5,9 +5,9 @@ import java.time.LocalTime;
 import by.zastr.cafe.util.InputValidator;
 
 /**
- * class InputValidator
- * @author A.Zastrozhyn
+ * class InputValidator.
  *
+ * @author A.Zastrozhyn
  */
 public final class InputValidatorImpl implements InputValidator {
     private static InputValidatorImpl instance = new InputValidatorImpl();
@@ -24,7 +24,8 @@ public final class InputValidatorImpl implements InputValidator {
 	}
   
     /**
-     * 
+     * Gets the single instance of InputValidatorImpl.
+     *
      * @return InputValidator
      */
     public static InputValidatorImpl getInstance(){
@@ -33,9 +34,10 @@ public final class InputValidatorImpl implements InputValidator {
 
 
     /**
-     * 
+     * Checks if is correct email.
+     *
+     * @param email the email
      * @return boolean is Correct Email
-     * @param email
      */
 	@Override
 	public boolean isCorrectEmail(String email) {
@@ -43,9 +45,10 @@ public final class InputValidatorImpl implements InputValidator {
     }
     
     /**
-     * 
+     * Checks if is correct password.
+     *
+     * @param password the password
      * @return boolean is Correct Password
-     * @param password
      */
     @Override
 	public boolean isCorrectPassword(String password) {
@@ -53,10 +56,11 @@ public final class InputValidatorImpl implements InputValidator {
     }
     
     /**
-     * 
+     * Are passwords equal.
+     *
+     * @param firstPassword the first password
+     * @param secondPassword the second password
      * @return boolean are Passwords Equal
-     * @param first Password
-     * @param second Password
      */
     @Override
 	public boolean arePasswordsEqual(String firstPassword, String secondPassword) {
@@ -64,9 +68,10 @@ public final class InputValidatorImpl implements InputValidator {
     }
     
     /**
-     * 
+     * Checks if is correct name.
+     *
+     * @param userName the user name
      * @return boolean is Correct Name
-     * @param userName
      */
     @Override
 	public boolean isCorrectName(String userName) {
@@ -74,36 +79,40 @@ public final class InputValidatorImpl implements InputValidator {
     }
     
     /**
-     * 
+     * Checks if is correct price.
+     *
+     * @param price the price
      * @return boolean is Correct Price
-     * @param price
      */
     public boolean isCorrectPrice(String price) {
 		return price.matches(CHECK_PRICE);
     }
 	
     /**
-     * 
+     * Checks if is correct description.
+     *
+     * @param description the description
      * @return  boolean is Correct Description
-     * @param description
      */
 	public boolean isCorrectDescription(String description) {
         return description.length() <= MAX_LENGTH_DESCRIPTION;
     }
 	
     /**
-     * 
+     * Checks if is correct weight.
+     *
+     * @param weight the weight
      * @return boolean is Correct Weight
-     * @param weight
      */
 	public boolean isCorrectWeight(String weight) {
 		return weight.matches(CHECK_WEIGHT);
     }
 	
     /**
-     * 
+     * Checks if is correct time.
+     *
+     * @param time the time
      * @return boolean is Correct Time
-     * @param time
      */
 	public boolean isCorrectTime(LocalTime time) {
 		return time.isAfter(LocalTime.now()) && time.isAfter(OPEN_TIME) && time.isBefore(CLOSE_TIME);

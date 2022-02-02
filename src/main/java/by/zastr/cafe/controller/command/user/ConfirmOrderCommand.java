@@ -24,13 +24,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * class ConfirmOrderCommand
- * @author A.Zastrozhyn
+ * class ConfirmOrderCommand.
  *
+ * @author A.Zastrozhyn
  */
 public class ConfirmOrderCommand implements Command{
 	private static final String DEFAULT_COMMENT = "";
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();

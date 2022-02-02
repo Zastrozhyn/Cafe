@@ -7,31 +7,36 @@ import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.CafeEntity;
 
 /**
- * interface CafeService
+ * interface CafeService.
+ *
  * @author A.Zastrozhyn
- * @param <T extends CafeEntity>
+ * @param <T> the generic type
  */
 public interface CafeService<T extends CafeEntity> {
 
 	/**
-	 * 
+	 * Find all.
+	 *
 	 * @return List<T>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	List<T> findAll() throws ServiceException;
 
 	/**
-	 * 
-	 * @param id
-	 * @return Optional<T> 
-	 * @throws ServiceException
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return Optional<T>
+	 * @throws ServiceException the service exception
 	 */
 	Optional<T> findById(int id) throws ServiceException;
 
 	/**
-	 * 
-	 * @param id
-	 * @throws ServiceException
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	boolean delete(int id) throws ServiceException;
 

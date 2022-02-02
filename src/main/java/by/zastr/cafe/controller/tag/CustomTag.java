@@ -7,14 +7,20 @@ import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.tagext.TagSupport;
 
 /**
- * class CustomTag
- * @author A.Zastrozhyn
+ * class CustomTag.
  *
+ * @author A.Zastrozhyn
  */
 @SuppressWarnings("serial")
 public class CustomTag extends TagSupport{
 	private static final String AUTHOR = "made by A.Zastrozhyn";
 	
+	/**
+	 * Do start tag.
+	 *
+	 * @return the int
+	 * @throws JspException the jsp exception
+	 */
 	@Override
     public int doStartTag() throws JspException {
         JspWriter out = pageContext.getOut();

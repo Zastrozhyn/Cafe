@@ -20,9 +20,9 @@ import by.zastr.cafe.util.PasswordEncryptor;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
 /**
- * class UserServiceImpl
- * @author A.Zastrozhyn
+ * class UserServiceImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class UserServiceImpl implements CafeService<User> {
 	private static UserServiceImpl instance = new UserServiceImpl();;
@@ -36,13 +36,20 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 
 	/**
-	 * 
+	 * Gets the single instance of UserServiceImpl.
+	 *
 	 * @return UserServiceImpl
 	 */
 	public static UserServiceImpl getInstance() {
         return instance;
 	}
 	
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public List<User> findAll() throws ServiceException{
 		List<User> userList = new ArrayList<User>();
@@ -58,6 +65,13 @@ public class UserServiceImpl implements CafeService<User> {
 		return userList;
 	}
 
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public Optional<User> findById(int id) throws ServiceException{
 		Optional<User> user = Optional.empty();
@@ -73,6 +87,13 @@ public class UserServiceImpl implements CafeService<User> {
 		return user;
 	}
 	
+	/**
+	 * Delete User.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public boolean delete(int id) throws ServiceException {
 		boolean b = false;
@@ -89,9 +110,10 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
+	 * Find all deleted.
+	 *
 	 * @return List<User>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public List<User> findAllDeleted() throws ServiceException{
 		List<User> userList = new ArrayList<User>();
@@ -108,10 +130,11 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
-	 * @param login
+	 * Find by login.
+	 *
+	 * @param login the login
 	 * @return Optional<User>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public Optional<User> findByLogin(String login) throws ServiceException{
 		Optional<User> user = Optional.empty();
@@ -128,10 +151,11 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
-	 * @param name
+	 * Find by name.
+	 *
+	 * @param name the name
 	 * @return List<User>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public List<User> findByName(String name) throws ServiceException{
 		List<User> userList = new ArrayList<User>();
@@ -148,10 +172,11 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
-	 * @param name
+	 * Find by last name.
+	 *
+	 * @param name the name
 	 * @return List<User>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public List<User> findByLastName(String name) throws ServiceException{
 		List<User> userList = new ArrayList<User>();
@@ -168,10 +193,11 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
-	 * @param role
+	 * Find by role.
+	 *
+	 * @param role the role
 	 * @return List<User>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public List<User> findByRole(String role) throws ServiceException{
 		List<User> userList = new ArrayList<User>();
@@ -188,9 +214,11 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
-	 * @param user
-	 * @throws ServiceException
+	 * Update User.
+	 *
+	 * @param user the user
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean update(User user) throws ServiceException {
 		boolean b = false;
@@ -207,6 +235,18 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	
+	/**
+	 * Edits User.
+	 *
+	 * @param userId the user id
+	 * @param name the name
+	 * @param lastName the last name
+	 * @param phone the phone
+	 * @param email the email
+	 * @param locale the locale
+	 * @return the string
+	 * @throws ServiceException the service exception
+	 */
 	public String edit( int userId, String name, String lastName, String phone, String email, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);
@@ -239,6 +279,20 @@ public class UserServiceImpl implements CafeService<User> {
 		return messageManager.getMessage(UserMessage.SUCCESSFUL);	
 	}
 	
+	/**
+	 * Registration.
+	 *
+	 * @param name the name
+	 * @param lastName the last name
+	 * @param phone the phone
+	 * @param login the login
+	 * @param password the password
+	 * @param confirmPassword the confirm password
+	 * @param email the email
+	 * @param locale the locale
+	 * @return the string
+	 * @throws ServiceException the service exception
+	 */
 	public String registration(String name, String lastName, String phone, String login, 
 			String password, String confirmPassword, String email, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
@@ -289,11 +343,12 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
-	 * @param login
-	 * @param password
-	 * @return Optional<User> 
-	 * @throws ServiceException
+	 * Login.
+	 *
+	 * @param login the login
+	 * @param password the password
+	 * @return Optional<User>
+	 * @throws ServiceException the service exception
 	 */
 	public Optional<User> login (String login, String password) throws ServiceException {
 		Optional<User> optionalUser = Optional.empty();
@@ -307,15 +362,16 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	
 	/**
-	 * 
-	 * @param userId
-	 * @param login
-	 * @param password
-	 * @param newPassword
-	 * @param confirmPassword
-	 * @param locale
+	 * Change password.
+	 *
+	 * @param userId the user id
+	 * @param login the login
+	 * @param password the password
+	 * @param newPassword the new password
+	 * @param confirmPassword the confirm password
+	 * @param locale the locale
 	 * @return String result
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public String changePassword (int userId, String login, String password, String newPassword, String confirmPassword, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
@@ -343,10 +399,11 @@ public class UserServiceImpl implements CafeService<User> {
 	}
 	 
 	/**
-	 * 
-	 * @param login
+	 * Checks if is unique login.
+	 *
+	 * @param login the login
 	 * @return boolean is Unique Login
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
     public boolean isUniqueLogin (String login) throws ServiceException {
     	boolean b = true;
@@ -360,10 +417,11 @@ public class UserServiceImpl implements CafeService<User> {
     }
     
     /**
-     * 
-     * @param phone
+     * Checks if is unique phone.
+     *
+     * @param phone the phone
      * @return boolean is Unique Phone
-     * @throws ServiceException
+     * @throws ServiceException the service exception
      */
     public boolean isUniquePhone (String phone) throws ServiceException {
     	boolean b = true;

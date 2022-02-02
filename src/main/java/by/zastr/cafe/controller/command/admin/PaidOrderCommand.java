@@ -17,12 +17,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * class PaidOrderCommand
+ * class PaidOrderCommand.
+ *
  * @author A.Zastrozhyn
  * set order paid
  */
 public class PaidOrderCommand implements Command{
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession();

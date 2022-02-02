@@ -4,17 +4,29 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Class Message Manager
- * @author A.Zastrozhyn
+ * Class Message Manager.
  *
+ * @author A.Zastrozhyn
  */
 public class MessageManager {
 	private static final String MESSAGE_PATH = "message";
+    
+    /** The Constant RUSSIAN_LOCALE. */
     public static final String RUSSIAN_LOCALE = "ru_RU";
+    
+    /** The Constant ENGLISH_LOCALE. */
     public static final String ENGLISH_LOCALE = "en_US";
+    
+    /** The Constant ENGLISH_LANGUAGE. */
     public static final String ENGLISH_LANGUAGE = "en";
+    
+    /** The Constant US. */
     public static final String US = "US";
+    
+    /** The Constant RUSSIAN_LANGUAGE. */
     public static final String RUSSIAN_LANGUAGE = "ru";
+    
+    /** The Constant RUSSIA. */
     public static final String RUSSIA = "RU";
     
     private final ResourceBundle resourceBundle;

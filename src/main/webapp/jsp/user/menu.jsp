@@ -55,6 +55,7 @@
 		<th><fmt:message key="Price"/></th>
 		</tr>
 		<c:forEach var="elem" items="${menu}" varStatus="status" begin="${begin}" end="${end}">
+			<tr>
 		    <td><c:out value="${elem.name}"/></td>
 		    <td><c:out value="${elem.description}"/></td>
 		    <td><c:out value="${elem.weight}"/></td>
@@ -92,6 +93,7 @@
 			<input type="hidden" name="command" value="pagination">
 			<input type="hidden" name="next_page" value="-1">	
 			<input type="submit" value="back" > 
+		</form>	
 	</c:if>
 	<h3>${message}</h3>
 </body>

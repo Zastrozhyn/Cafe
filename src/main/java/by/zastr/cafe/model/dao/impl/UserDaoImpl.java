@@ -19,9 +19,9 @@ import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.entity.Account.AccountStatus;
 
 /**
- * class UserDaoImpl
- * @author A.Zastrozhyn
+ * class UserDaoImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 	private static final String SQL_FIND_ALL = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, status,"
@@ -46,9 +46,18 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 	private static final String SQL_GET_PASSWORD = "SELECT password FROM users WHERE user_id=?";
 	private static final String SQL_DELETE_USER = "UPDATE users SET archive=? WHERE user_id = ?";
 	
+	/**
+	 * Instantiates a new user dao impl.
+	 */
 	public UserDaoImpl() {
 	}
 	
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<User> findAll() throws DaoException {
 		List<User> userList = new ArrayList<>();
@@ -68,6 +77,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return userList;
 	}
 
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public Optional<User> findById(int id) throws DaoException {
 		Optional<User> user = Optional.empty();
@@ -85,6 +101,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return user;
 	}
 	
+	/**
+	 * Find by login.
+	 *
+	 * @param login the login
+	 * @return the optional
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public Optional<User> findByLogin(String login) throws DaoException {
 		Optional<User> user = Optional.empty();
@@ -102,6 +125,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return user;
 	}
 	
+	/**
+	 * Find by name.
+	 *
+	 * @param name the name
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<User> findByName(String name) throws DaoException {
 		List<User> userList = new ArrayList<>();
@@ -120,6 +150,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return userList;
 	}
 	
+	/**
+	 * Find by last name.
+	 *
+	 * @param name the name
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<User> findByLastName(String name) throws DaoException {
 		List<User> userList = new ArrayList<>();
@@ -138,6 +175,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return userList;
 	}
 	
+	/**
+	 * Find by role.
+	 *
+	 * @param name the name
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<User> findByRole(String name) throws DaoException {
 		List<User> userList = new ArrayList<>();
@@ -156,6 +200,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return userList;
 	}
 
+	/**
+	 * Creates the User.
+	 *
+	 * @param user the user
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean create(User user) throws DaoException {
 		int result;
@@ -174,6 +225,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Creates the User.
+	 *
+	 * @param user the user
+	 * @param accountId the account id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean create(User user, int accountId) throws DaoException {
 		int result;
@@ -193,6 +252,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return (result > 0);
 	}
 
+	/**
+	 * Update User.
+	 *
+	 * @param user the user
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean update(User user) throws DaoException {
 		int result;
@@ -212,6 +278,14 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Sets the password.
+	 *
+	 * @param password the password
+	 * @param login the login
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean setPassword(String password, String login) throws DaoException {
 		int result;
@@ -226,6 +300,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Gets the password.
+	 *
+	 * @param id the id
+	 * @return the password
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public String getPassword(int id) throws DaoException {
 		String password = "";
@@ -243,6 +324,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return password;
 	}
 
+	/**
+	 * Delete User.
+	 *
+	 * @param user the user
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(User user) throws DaoException {
 		int result;
@@ -257,6 +345,13 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return (result > 0);
 	}
 
+	/**
+	 * Delete User.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		int result;
@@ -271,6 +366,12 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Find all deleted.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<User> findAllDeleted() throws DaoException {
 		List<User> userList = new ArrayList<>();

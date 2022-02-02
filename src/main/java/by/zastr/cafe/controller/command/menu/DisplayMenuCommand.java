@@ -17,16 +17,29 @@ import jakarta.servlet.http.HttpSession;
 import static by.zastr.cafe.controller.command.AttributeName.*;
 
 /**
- * class DisplayMenuCommand
- * @author A.Zastrozhyn
+ * class DisplayMenuCommand.
  *
+ * @author A.Zastrozhyn
  */
 public class DisplayMenuCommand implements Command{
 	private static final String DELETED_TYPE = "deleted";
+	
+	/** The Constant DEFAULT_BEGIN. */
 	public static final int DEFAULT_BEGIN = 1;
+	
+	/** The Constant DEFAULT_END. */
 	public static final int DEFAULT_END = 7;
+	
+	/** The Constant DEFAULT_CURRENT_PAGE. */
 	public static final int DEFAULT_CURRENT_PAGE = 1;
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();

@@ -1,9 +1,9 @@
 package by.zastr.cafe.model.entity;
 
 /**
- * The Class User
- * @author A.Zastrozhyn
+ * The Class User.
  *
+ * @author A.Zastrozhyn
  */
 public class User extends CafeEntity {
 	private int userId;
@@ -18,30 +18,40 @@ public class User extends CafeEntity {
 	
 
 	/**
-	 * User Role
-	 * @author A.Zastrozhyn
+	 * User Role.
 	 *
+	 * @author A.Zastrozhyn
 	 */
 	public enum Role{
+		
+		/** The guest. */
 		GUEST,
+		
+		/** The client. */
 		CLIENT,
+		
+		/** The admin. */
 		ADMIN;
 	}
 
+	/**
+	 * Instantiates a new user.
+	 */
 	public User() {
 		super();
 	}
 	
 	/**
-	 * 
-	 * @param userId
-	 * @param name
-	 * @param lastName
-	 * @param phone
-	 * @param email
-	 * @param login
-	 * @param role
-	 * @param account
+	 * Instantiates a new user.
+	 *
+	 * @param userId the user id
+	 * @param name the name
+	 * @param lastName the last name
+	 * @param phone the phone
+	 * @param email the email
+	 * @param login the login
+	 * @param role the role
+	 * @param account the account
 	 */
 	public User(int userId, String name, String lastName, String phone, String email, String login, Role role, Account account) {
 		super();
@@ -56,7 +66,8 @@ public class User extends CafeEntity {
 	}
 	
 	/**
-	 * 
+	 * Gets the user id.
+	 *
 	 * @return userId
 	 */
 	public int getUserId() {
@@ -64,15 +75,17 @@ public class User extends CafeEntity {
 	}
 	
 	/**
-	 * 
-	 * @param userId
+	 * Sets the user id.
+	 *
+	 * @param userId the new user id
 	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
 	/**
-	 * 
+	 * Gets the name.
+	 *
 	 * @return User name
 	 */
 	public String getName() {
@@ -80,15 +93,17 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param name
+	 * Sets the name.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * 
+	 * Gets the last name.
+	 *
 	 * @return Last name
 	 */
 	public String getLastName() {
@@ -96,15 +111,17 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param lastName
+	 * Sets the last name.
+	 *
+	 * @param lastName the new last name
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
 	/**
-	 * 
+	 * Gets the phone.
+	 *
 	 * @return phone
 	 */
 	public String getPhone() {
@@ -112,15 +129,17 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param phone
+	 * Sets the phone.
+	 *
+	 * @param phone the new phone
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
 	/**
-	 * 
+	 * Gets the email.
+	 *
 	 * @return email
 	 */
 	public String getEmail() {
@@ -128,15 +147,17 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param email
+	 * Sets the email.
+	 *
+	 * @param email the new email
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	/**
-	 * 
+	 * Gets the login.
+	 *
 	 * @return login
 	 */
 	public String getLogin() {
@@ -144,15 +165,17 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param login
+	 * Sets the login.
+	 *
+	 * @param login the new login
 	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
 	/**
-	 * 
+	 * Gets the role.
+	 *
 	 * @return role
 	 */
 	public Role getRole() {
@@ -160,15 +183,17 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param role
+	 * Sets the role.
+	 *
+	 * @param role the new role
 	 */
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
 	/**
-	 * 
+	 * Gets the account.
+	 *
 	 * @return account
 	 */
 	public Account getAccount() {
@@ -176,15 +201,17 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param account
+	 * Sets the account.
+	 *
+	 * @param account the new account
 	 */
 	public void setAccount(Account account) {
 		this.account = account;
 	}
 	
 	/**
-	 * 
+	 * Checks if is archive.
+	 *
 	 * @return is archive User
 	 */
 	public boolean isArchive() {
@@ -192,13 +219,19 @@ public class User extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param archive
+	 * Sets the archive.
+	 *
+	 * @param archive the new archive
 	 */
 	public void setArchive(boolean archive) {
 		this.archive = archive;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -215,6 +248,12 @@ public class User extends CafeEntity {
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -281,6 +320,11 @@ public class User extends CafeEntity {
 		return true;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -3,9 +3,9 @@ package by.zastr.cafe.model.entity;
 import java.math.BigDecimal;
 
 /**
- * Class Dish
- * @author A.Zastrozhyn
+ * Class Dish.
  *
+ * @author A.Zastrozhyn
  */
 public class Dish extends CafeEntity{
 	private int id;
@@ -17,28 +17,38 @@ public class Dish extends CafeEntity{
 	private boolean archive;
 	
 	/**
-	 * Dish type
-	 * @author A.Zastrozhyn
+	 * Dish type.
 	 *
+	 * @author A.Zastrozhyn
 	 */
 	public enum DishType {
+		
+		/** The drink. */
 		DRINK,
+		
+		/** The desert. */
 		DESERT,
+		
+		/** The snack. */
 		SNACK;
 	}
 
+	/**
+	 * Instantiates a new dish.
+	 */
 	public Dish() {
 		super();
 	}
 
 	/**
-	 * Instantiates a new Dish
-	 * @param id
-	 * @param name
-	 * @param weihgt
-	 * @param price
-	 * @param descritpion
-	 * @param type
+	 * Instantiates a new Dish.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param weihgt the weihgt
+	 * @param price the price
+	 * @param descritpion the descritpion
+	 * @param type the type
 	 */
 	public Dish(int id, String name, int weihgt, BigDecimal price, String descritpion, DishType type) {
 		super();
@@ -52,12 +62,13 @@ public class Dish extends CafeEntity{
 
 
 	/**
-	 * Instantiates a new Dish
-	 * @param name
-	 * @param weihgt
-	 * @param price
-	 * @param description
-	 * @param type
+	 * Instantiates a new Dish.
+	 *
+	 * @param name the name
+	 * @param weihgt the weihgt
+	 * @param price the price
+	 * @param description the description
+	 * @param type the type
 	 */
 	public Dish(String name, int weihgt, BigDecimal price, String description, String type) {
 		super();
@@ -69,7 +80,8 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
+	 * Gets the id.
+	 *
 	 * @return id
 	 */
 	public int getId() {
@@ -77,15 +89,17 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param id
+	 * Sets the id.
+	 *
+	 * @param id the new id
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	/**
-	 * 
+	 * Gets the name.
+	 *
 	 * @return name
 	 */
 	public String getName() {
@@ -93,15 +107,17 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param name
+	 * Sets the name.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * 
+	 * Gets the weight.
+	 *
 	 * @return weight
 	 */
 	public int getWeight() {
@@ -109,15 +125,17 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param weight
+	 * Sets the weight.
+	 *
+	 * @param weight the new weight
 	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
 	/**
-	 * 
+	 * Gets the price.
+	 *
 	 * @return price
 	 */
 	public BigDecimal getPrice() {
@@ -125,15 +143,17 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param price
+	 * Sets the price.
+	 *
+	 * @param price the new price
 	 */
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
 	/**
-	 * 
+	 * Gets the description.
+	 *
 	 * @return Description
 	 */
 	public String getDescription() {
@@ -141,15 +161,17 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param descritpion
+	 * Sets the description.
+	 *
+	 * @param descritpion the new description
 	 */
 	public void setDescription(String descritpion) {
 		this.description = descritpion;
 	}
 
 	/**
-	 * 
+	 * Gets the type.
+	 *
 	 * @return Dish Type
 	 */
 	public DishType getType() {
@@ -157,23 +179,26 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param type
+	 * Sets the type.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(DishType type) {
 		this.type = type;
 	}
 	
 	/**
-	 * 
-	 * @param type
+	 * Sets the type.
+	 *
+	 * @param type the new type
 	 */
 	public void setType(String type) {
 		this.type = DishType.valueOf(type.toUpperCase());
 	}
 
 	/**
-	 * 
+	 * Checks if is archive.
+	 *
 	 * @return is Archive
 	 */
 	public boolean isArchive() {
@@ -181,13 +206,19 @@ public class Dish extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param archive
+	 * Sets the archive.
+	 *
+	 * @param archive the new archive
 	 */
 	public void setArchive(boolean archive) {
 		this.archive = archive;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -202,6 +233,12 @@ public class Dish extends CafeEntity{
 		return result;
 	}
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -250,6 +287,11 @@ public class Dish extends CafeEntity{
 		return true;
 	}
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

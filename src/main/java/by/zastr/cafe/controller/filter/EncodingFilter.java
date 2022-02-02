@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package by.zastr.cafe.controller.filter;
 
 import java.io.IOException;
@@ -20,11 +23,24 @@ value = "UTF-8", description = "Encoding param")})
 public class EncodingFilter implements Filter {
 	private String code;
 
+	/**
+	 *
+	 * @param filterConfig the filter config
+	 */
 	@Override
 	public void init(FilterConfig filterConfig) {
 			code = filterConfig.getInitParameter("encoding");
 	}
 
+	/**
+	 * Do filter.
+	 *
+	 * @param servletRequest the servlet request
+	 * @param servletResponse the servlet response
+	 * @param filterChain the filter chain
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 * @throws ServletException the servlet exception
+	 */
 	@Override
 	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
 			throws IOException, ServletException {
@@ -36,6 +52,9 @@ public class EncodingFilter implements Filter {
 		filterChain.doFilter(servletRequest, servletResponse);
 	}
 
+	/**
+	 * Destroy.
+	 */
 	@Override
 	public void destroy() {
 		code = null;

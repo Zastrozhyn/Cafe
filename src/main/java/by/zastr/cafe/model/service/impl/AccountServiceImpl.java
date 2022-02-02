@@ -12,9 +12,9 @@ import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.service.CafeService;
 
 /**
- * class AccountServiceImpl
- * @author A.Zastrozhyn
+ * class AccountServiceImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class AccountServiceImpl implements CafeService<Account> {
 	private static AccountServiceImpl instance = new AccountServiceImpl();;
@@ -25,10 +25,22 @@ public class AccountServiceImpl implements CafeService<Account> {
 		entityTransaction = new EntityTransaction();
 	}
 
+	/**
+	 * Gets the single instance of AccountServiceImpl.
+	 *
+	 * @return single instance of AccountServiceImpl
+	 */
 	public static AccountServiceImpl getInstance() {
         return instance;
 	}
 	
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public Optional<Account> findById(int id) throws ServiceException{
 		Optional<Account> account = Optional.empty();
@@ -44,6 +56,12 @@ public class AccountServiceImpl implements CafeService<Account> {
 		return account;
 	}
 
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public List<Account> findAll() throws ServiceException {
 		List<Account> accountList = new ArrayList<Account>();
@@ -59,6 +77,13 @@ public class AccountServiceImpl implements CafeService<Account> {
 		return accountList;
 	}
 
+	/**
+	 * Delete account.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public boolean delete(int id) throws ServiceException {
 		boolean b = false;
@@ -75,9 +100,10 @@ public class AccountServiceImpl implements CafeService<Account> {
 	}
 		
 	/**
-	 * 
+	 * Creates the new default account.
+	 *
 	 * @return default Account
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public Account CreateNewDefaultAccount() throws ServiceException {
 		Account account = new Account();
@@ -94,9 +120,11 @@ public class AccountServiceImpl implements CafeService<Account> {
 	}
 	
 	/**
-	 * 
-	 * @param account
-	 * @throws ServiceException
+	 * Update account.
+	 *
+	 * @param account the account
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean update(Account account) throws ServiceException {
 		boolean b = false;

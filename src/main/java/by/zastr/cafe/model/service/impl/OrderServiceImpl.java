@@ -22,9 +22,9 @@ import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
 /**
- * class OrderServiceImpl
- * @author A.Zastrozhyn
+ * class OrderServiceImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class OrderServiceImpl implements CafeService<CafeOrder> {
 	private static OrderServiceImpl instance = new OrderServiceImpl();;
@@ -37,13 +37,20 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * Gets the single instance of OrderServiceImpl.
+	 *
+	 * @return single instance of OrderServiceImpl
 	 */
 	public static OrderServiceImpl getInstance() {
         return instance;
 	}
 	
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public List<CafeOrder> findAll() throws ServiceException{
 		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
@@ -59,6 +66,13 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return orderList;
 	}
 	
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public Optional<CafeOrder> findById(int id) throws ServiceException{
 		Optional<CafeOrder> order = Optional.empty();
@@ -74,6 +88,13 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return order;
 	}
 	
+	/**
+	 * Delete CafeOrder.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public boolean delete(int id) throws ServiceException {
 		boolean b = false;
@@ -90,10 +111,12 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
-	 * @param comment
-	 * @param orderId
-	 * @throws ServiceException
+	 * Adds the comment.
+	 *
+	 * @param comment the comment
+	 * @param orderId the order id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean addComment(String comment, int orderId) throws ServiceException {
 		CafeOrder order = findById(orderId).get();
@@ -112,9 +135,10 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
+	 * Find unpaid.
+	 *
 	 * @return List<CafeOrder>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public List<CafeOrder> findUnpaid() throws ServiceException{
 		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
@@ -131,10 +155,11 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
-	 * @param login
+	 * Find by login.
+	 *
+	 * @param login the login
 	 * @return List<CafeOrder>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public List<CafeOrder> findByLogin(String login) throws ServiceException{
 		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
@@ -151,9 +176,10 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
+	 * Find today.
+	 *
 	 * @return List<CafeOrder>
-	 * @throws ServiceException
+	 * @throws ServiceException the service exception
 	 */
 	public List<CafeOrder> findToday() throws ServiceException{
 		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
@@ -169,6 +195,21 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return orderList;
 	}
 	
+	/**
+	 * Confirm order.
+	 *
+	 * @param userLogin the user login
+	 * @param orderList the order list
+	 * @param description the description
+	 * @param comment the comment
+	 * @param date the date
+	 * @param time the time
+	 * @param payment the payment
+	 * @param totalCost the total cost
+	 * @param locale the locale
+	 * @return the string
+	 * @throws ServiceException the service exception
+	 */
 	public String confirmOrder(String userLogin, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
 			String payment, BigDecimal totalCost, String locale) throws ServiceException {
 		boolean paid = false;
@@ -209,9 +250,11 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
-	 * @param orderId
-	 * @throws ServiceException
+	 * Paid.
+	 *
+	 * @param orderId the order id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean paid (int orderId) throws ServiceException {
 		var accountDao = new AccountDaoImpl();
@@ -245,9 +288,11 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
-	 * @param order
-	 * @throws ServiceException
+	 * Update CafeOrder.
+	 *
+	 * @param order the order
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean update(CafeOrder order) throws ServiceException {
 		boolean b = false;
@@ -264,10 +309,12 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
-	 * @param userLogin
-	 * @param totalCost
-	 * @throws ServiceException
+	 * Pay by account.
+	 *
+	 * @param userLogin the user login
+	 * @param totalCost the total cost
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean payByAccount (String userLogin, BigDecimal totalCost) throws ServiceException {
 		UserServiceImpl userService = UserServiceImpl.getInstance();
@@ -285,9 +332,10 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 	}
 	
 	/**
-	 * 
-	 * @param orderId
-	 * @throws ServiceException
+	 * Sets the paid.
+	 *
+	 * @param orderId the new paid
+	 * @throws ServiceException the service exception
 	 */
 	public void setPaid (int orderId) throws ServiceException {
 		CafeOrder order = findById(orderId).get();

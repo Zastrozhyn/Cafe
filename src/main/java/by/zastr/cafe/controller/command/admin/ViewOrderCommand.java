@@ -15,11 +15,19 @@ import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * class ViewOrderCommand
- * @author A.Zastrozhyn
+ * class ViewOrderCommand.
  *
+ * @author A.Zastrozhyn
  */
 public class ViewOrderCommand implements Command {
+	
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		OrderServiceImpl orderService = OrderServiceImpl.getInstance();

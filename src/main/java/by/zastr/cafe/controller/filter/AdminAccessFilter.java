@@ -26,12 +26,29 @@ import by.zastr.cafe.controller.command.AttributeName;
 public class AdminAccessFilter implements Filter{
 	private static final Logger logger = LogManager.getLogger();
 
+    /**
+     * Instantiates a new admin access filter.
+     */
     public AdminAccessFilter() {
     }
 
+    /**
+     *
+     * @param config the config
+     * @throws ServletException the servlet exception
+     */
     public void init(FilterConfig config) throws ServletException {
     }
 
+    /**
+     * Do filter.
+     *
+     * @param servletRequest the servlet request
+     * @param servletResponse the servlet response
+     * @param filterChain the filter chain
+     * @throws IOException Signals that an I/O exception has occurred.
+     * @throws ServletException the servlet exception
+     */
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
         HttpServletResponse response = (HttpServletResponse)servletResponse;
@@ -48,6 +65,9 @@ public class AdminAccessFilter implements Filter{
 		}
     }
 
+    /**
+     * Destroy.
+     */
     public void destroy() {
     }
 

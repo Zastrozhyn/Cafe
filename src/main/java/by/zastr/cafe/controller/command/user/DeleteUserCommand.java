@@ -21,12 +21,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * class DeleteUserCommand
- * @author A.Zastrozhyn
+ * class DeleteUserCommand.
  *
+ * @author A.Zastrozhyn
  */
 public class DeleteUserCommand implements Command{
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession();

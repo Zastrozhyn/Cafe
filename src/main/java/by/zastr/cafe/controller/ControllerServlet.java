@@ -24,22 +24,44 @@ import by.zastr.cafe.controller.command.RequestParameter;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 
+
 /**
- * class ControllerServlet
+ * class ControllerServlet.
+ *
  * @author A.Zastrozhyn
  * Overrides doPost and doGet methods by calling
  * the own method processRequest(request, response).
  */
 @WebServlet(name = "ControllerServlet", urlPatterns = {"/controller"})
 public class ControllerServlet extends HttpServlet {
+	
+	/** The Constant CURRENT_PAGE. */
 	public static final String CURRENT_PAGE = "currentPage";
+	
+	/** The Constant logger. */
 	protected static final Logger logger = LogManager.getLogger();
 
+	/**
+	 * Do get.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
 	}
 	
+	/**
+	 * Do post.
+	 *
+	 * @param request the request
+	 * @param response the response
+	 * @throws ServletException the servlet exception
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		processRequest(request, response);  

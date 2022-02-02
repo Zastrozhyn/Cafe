@@ -9,9 +9,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * class ConfigurationManager
- * @author A.Zastrozhyn
+ * class ConfigurationManager.
  *
+ * @author A.Zastrozhyn
  */
 public class ConfigurationManager {
 	private static final Logger logger = LogManager.getLogger();
@@ -26,8 +26,9 @@ public class ConfigurationManager {
     }
     
     /**
-     * 
-     * @param key
+     * Gets the property.
+     *
+     * @param key the key
      * @return Property
      */
     public static String getProperty(String key) {

@@ -16,9 +16,9 @@ import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
 /**
- * class DishServiceImpl
- * @author A.Zastrozhyn
+ * class DishServiceImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class DishServiceImpl implements CafeService<Dish> {
 	private static DishServiceImpl instance = new DishServiceImpl();
@@ -31,13 +31,20 @@ public class DishServiceImpl implements CafeService<Dish> {
 	}
 	
 	/**
-	 * 
+	 * Gets the single instance of DishServiceImpl.
+	 *
 	 * @return DishServiceImpl
 	 */
 	public static DishServiceImpl  getInstance() {
         return instance;
 	}
 	
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public List<Dish> findAll() throws ServiceException{
 		List<Dish> dishList = new ArrayList<Dish>();
@@ -53,6 +60,13 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return dishList;
 	}
 	
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public Optional<Dish> findById(int id) throws ServiceException{
 		Optional<Dish> dish = Optional.empty();
@@ -68,6 +82,13 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return dish;
 	}
 	
+	/**
+	 * Delete Dish.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
+	 */
 	@Override
 	public boolean delete(int id) throws ServiceException {
 		boolean b = false;
@@ -84,10 +105,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 	}
 	
 	/**
-	 * 
-	 * @param name
-	 * @return List<Dish> 
-	 * @throws ServiceException
+	 * Find by name.
+	 *
+	 * @param name the name
+	 * @return List<Dish>
+	 * @throws ServiceException the service exception
 	 */
 	public List<Dish> findByName(String name) throws ServiceException{
 		List<Dish> userList = new ArrayList<Dish>();
@@ -104,10 +126,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 	}
 	
 	/**
-	 * 
-	 * @param type
-	 * @return List<Dish> 
-	 * @throws ServiceException
+	 * Find by type.
+	 *
+	 * @param type the type
+	 * @return List<Dish>
+	 * @throws ServiceException the service exception
 	 */
 	public List<Dish> findByType(String type) throws ServiceException{
 		List<Dish> userList = new ArrayList<Dish>();
@@ -124,9 +147,10 @@ public class DishServiceImpl implements CafeService<Dish> {
 	}
 	
 	/**
-	 * 
-	 * @return List<Dish> 
-	 * @throws ServiceException
+	 * Find deleted.
+	 *
+	 * @return List<Dish>
+	 * @throws ServiceException the service exception
 	 */
 	public List<Dish> findDeleted() throws ServiceException{
 		List<Dish> userList = new ArrayList<Dish>();
@@ -143,10 +167,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 	}
 	
 	/**
-	 * restore from archive
-	 * @param id
-	 * @return
-	 * @throws ServiceException
+	 * restore from archive.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean restore(int id) throws ServiceException {
 		boolean b = false;
@@ -163,9 +188,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 	}
 	
 	/**
-	 * 
-	 * @param dish
-	 * @throws ServiceException
+	 * Update Dish.
+	 *
+	 * @param dish the dish
+	 * @return true, if successful
+	 * @throws ServiceException the service exception
 	 */
 	public boolean update(Dish dish) throws ServiceException {
 		boolean b = false;
@@ -181,6 +208,18 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return b;	
 	}
 
+	/**
+	 * Creates the.
+	 *
+	 * @param name the name
+	 * @param weight the weight
+	 * @param price the price
+	 * @param description the description
+	 * @param type the type
+	 * @param locale the locale
+	 * @return the string
+	 * @throws ServiceException the service exception
+	 */
 	public String create(String name, String weight, String price, String description, String type, String locale) throws ServiceException {
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);
@@ -209,6 +248,19 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return messageManager.getMessage(UserMessage.SUCCESSFUL);
 	}
 	
+	/**
+	 * Update Dish.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param weight the weight
+	 * @param price the price
+	 * @param description the description
+	 * @param type the type
+	 * @param locale the locale
+	 * @return the string
+	 * @throws ServiceException the service exception
+	 */
 	public String update(int id, String name, String weight, String price, String description, String type, String locale) throws ServiceException {
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);

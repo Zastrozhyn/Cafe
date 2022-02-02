@@ -14,12 +14,19 @@ import by.zastr.cafe.model.service.impl.DishServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * class GoToEditDishCommand
- * @author A.Zastrozhyn
+ * class GoToEditDishCommand.
  *
+ * @author A.Zastrozhyn
  */
 public class GoToEditDishCommand implements Command {
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();

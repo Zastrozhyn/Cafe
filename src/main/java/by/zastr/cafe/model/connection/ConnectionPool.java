@@ -13,9 +13,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
- * class ConnectionPool
- * @author A.Zastrozhyn
+ * class ConnectionPool.
  *
+ * @author A.Zastrozhyn
  */
 public class ConnectionPool {
 	private static final Logger logger = LogManager.getLogger();
@@ -46,7 +46,8 @@ public class ConnectionPool {
     }
 
     /**
-     * 
+     * Gets the single instance of ConnectionPool.
+     *
      * @return ConnectionPool
      */
     public static ConnectionPool getInstance(){
@@ -65,7 +66,8 @@ public class ConnectionPool {
     }
 
     /**
-     * 
+     * Take connection.
+     *
      * @return Connection
      */
     public Connection takeConnection(){
@@ -81,8 +83,10 @@ public class ConnectionPool {
     }
 
     /**
-     * 
-     * @param connection
+     * Release connection.
+     *
+     * @param connection the connection
+     * @return true, if successful
      */
     public boolean releaseConnection(Connection connection){
         boolean result = false;
@@ -101,7 +105,7 @@ public class ConnectionPool {
     }
 
     /**
-     * destroy Pool
+     * destroy Pool.
      */
     public void destroyPool() {
         logger.log(Level.INFO, "Destroying pool is started");

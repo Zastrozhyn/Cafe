@@ -4,12 +4,19 @@ import by.zastr.cafe.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 
 /**
- * class Default Command
- * @author A.Zastrozhyn
+ * class Default Command.
  *
+ * @author A.Zastrozhyn
  */
 public class DefaultCommand implements Command{
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
         Router router = new Router();

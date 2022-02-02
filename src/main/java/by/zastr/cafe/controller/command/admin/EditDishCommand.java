@@ -17,12 +17,19 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * class EditDishCommand
- * @author A.Zastrozhyn
+ * class EditDishCommand.
  *
+ * @author A.Zastrozhyn
  */
 public class EditDishCommand implements Command{
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();

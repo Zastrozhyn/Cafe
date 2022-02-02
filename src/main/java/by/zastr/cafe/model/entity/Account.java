@@ -3,9 +3,9 @@ package by.zastr.cafe.model.entity;
 import java.math.BigDecimal;
 
 /**
- * Class account
- * @author A.Zastrozhyn
+ * Class account.
  *
+ * @author A.Zastrozhyn
  */
 public class Account extends CafeEntity{
 	private static final BigDecimal SILVER_AMOUNT = BigDecimal.valueOf(100);
@@ -18,14 +18,22 @@ public class Account extends CafeEntity{
 	private boolean active;
 	
 	/**
-	 * AccountStatus
-	 * @author A.Zastrozhyn
+	 * AccountStatus.
 	 *
+	 * @author A.Zastrozhyn
 	 */
 	public enum AccountStatus {
+		
+		/** The common. */
 		COMMON(0),
+		
+		/** The silver. */
 		SILVER(5),
+		
+		/** The gold. */
 		GOLD(10),
+		
+		/** The platinum. */
 		PLATINUM(20);
 		private int discount;
 
@@ -33,21 +41,30 @@ public class Account extends CafeEntity{
 			this.discount = discount;
 		}
 
+		/**
+		 * Gets the discount.
+		 *
+		 * @return the discount
+		 */
 		public int getDiscount() {
 			return discount;
 		}		
 	}
 
+	/**
+	 * Instantiates a new account.
+	 */
 	public Account() {
 		super();
 	}
 
 	/**
-	 * Instantiates a new Account
-	 * @param id
-	 * @param status
-	 * @param money
-	 * @param active
+	 * Instantiates a new Account.
+	 *
+	 * @param id the id
+	 * @param status the status
+	 * @param money the money
+	 * @param active the active
 	 */
 	public Account(int id, AccountStatus status, BigDecimal money, boolean active) {
 		super();
@@ -58,10 +75,11 @@ public class Account extends CafeEntity{
 	}
 
 	/**
-	 * Instantiates a new Account
-	 * @param status
-	 * @param money
-	 * @param active
+	 * Instantiates a new Account.
+	 *
+	 * @param status the status
+	 * @param money the money
+	 * @param active the active
 	 */
 	public Account(AccountStatus status, BigDecimal money, boolean active) {
 		super();
@@ -71,7 +89,8 @@ public class Account extends CafeEntity{
 	}
 
 	/**
-	 * 
+	 * Gets the id.
+	 *
 	 * @return id
 	 */
 	public int getId() {
@@ -79,15 +98,17 @@ public class Account extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param id
+	 * Sets the id.
+	 *
+	 * @param id the new id
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	/**
-	 * 
+	 * Gets the status.
+	 *
 	 * @return status
 	 */
 	public AccountStatus getStatus() {
@@ -95,15 +116,17 @@ public class Account extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param status
+	 * Sets the status.
+	 *
+	 * @param status the new status
 	 */
 	public void setStatus(AccountStatus status) {
 		this.status = status;
 	}
 
 	/**
-	 * 
+	 * Gets the balance.
+	 *
 	 * @return balance
 	 */
 	public BigDecimal getBalance() {
@@ -111,15 +134,17 @@ public class Account extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param balance
+	 * Sets the balance.
+	 *
+	 * @param balance the new balance
 	 */
 	public void setBalance(BigDecimal balance) {
 		this.balance = balance;
 	}
 
 	/**
-	 * 
+	 * Checks if is active.
+	 *
 	 * @return isActive
 	 */
 	public boolean isActive() {
@@ -127,15 +152,17 @@ public class Account extends CafeEntity{
 	}
 
 	/**
-	 * 
-	 * @param active
+	 * Sets the active.
+	 *
+	 * @param active the new active
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
 	/**
-	 * 
+	 * Gets the order history.
+	 *
 	 * @return orderHistory
 	 */
 	public BigDecimal getOrderHistory() {
@@ -143,8 +170,9 @@ public class Account extends CafeEntity{
 	}
 
 	/**
-	 * set AccountStatus
-	 * @param orderHistory
+	 * set AccountStatus.
+	 *
+	 * @param orderHistory the new order history
 	 */
 	public void setOrderHistory(BigDecimal orderHistory) {
 		if (orderHistory.compareTo(SILVER_AMOUNT) > 0) {
@@ -159,6 +187,11 @@ public class Account extends CafeEntity{
 		this.orderHistory = orderHistory;
 	}
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -172,6 +205,12 @@ public class Account extends CafeEntity{
 	}
 
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -211,6 +250,11 @@ public class Account extends CafeEntity{
 	}
 
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

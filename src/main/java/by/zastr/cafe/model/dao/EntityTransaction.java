@@ -10,21 +10,25 @@ import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.model.connection.ConnectionPool;
 
 /**
- * 
- * @author A.Zastrozhyn
+ * The Class EntityTransaction.
  *
+ * @author A.Zastrozhyn
  */
 public class EntityTransaction {
 	private static final Logger logger = LogManager.getLogger();
 	private Connection connection;
 	
+    /**
+     * Instantiates a new entity transaction.
+     */
     public EntityTransaction() {
     }
     
     /**
-     * 
-     * @param daos
-     * @throws DaoException
+     * Begin transaction.
+     *
+     * @param daos the daos
+     * @throws DaoException the dao exception
      */
 	public void beginTransaction(AbstractDao... daos) throws DaoException {
         if (connection == null) {
@@ -48,8 +52,9 @@ public class EntityTransaction {
     }
     
 	/**
-	 * 
-	 * @param dao
+	 * Begin transaction.
+	 *
+	 * @param dao the dao
 	 */
     public void beginTransaction(AbstractDao dao){
         if (connection == null) {
@@ -65,7 +70,7 @@ public class EntityTransaction {
     }
     
     /**
-     * end transaction
+     * end transaction.
      */
     public void end(){
         ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -74,7 +79,7 @@ public class EntityTransaction {
     }
    
     /**
-     * end transaction
+     * end transaction.
      */
     public void endTransaction(){
         try {
@@ -88,6 +93,11 @@ public class EntityTransaction {
         connection = null;
     }
     
+    /**
+     * Commit.
+     *
+     * @throws DaoException the dao exception
+     */
     public void commit() throws DaoException {
         try {
             connection.commit();
@@ -97,6 +107,11 @@ public class EntityTransaction {
         }
     }
 
+    /**
+     * Rollback.
+     *
+     * @throws DaoException the dao exception
+     */
     public void rollback() throws DaoException {
         try {
             connection.rollback();

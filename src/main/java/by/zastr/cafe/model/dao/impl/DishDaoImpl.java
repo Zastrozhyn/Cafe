@@ -16,9 +16,9 @@ import by.zastr.cafe.model.dao.DishDao;
 import by.zastr.cafe.model.entity.Dish;
 
 /**
- * class DishDaoImpl
- * @author A.Zastrozhyn
+ * class DishDaoImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 	private static final String SQL_FIND_ALL_DISH = "SELECT menu_id, type, name, description, price, weight, archive FROM menu "
@@ -35,10 +35,19 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 			+ " WHERE menu_id=?";
 	private static final String SQL_DELETE_DISH = "UPDATE menu SET archive=? WHERE menu_id = ?";
 	
+	/**
+	 * Instantiates a new dish dao impl.
+	 */
 	public DishDaoImpl() {
 	}
 	
 
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<Dish> findAll() throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
@@ -57,6 +66,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		return dishList;
 	}
 
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public Optional<Dish> findById(int id) throws DaoException {
 		Optional<Dish> dish = Optional.empty();
@@ -74,6 +90,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		return dish;
 	}
 	
+	/**
+	 * Find by name.
+	 *
+	 * @param name the name
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<Dish> findByName(String name) throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
@@ -91,6 +114,14 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		}
 		return dishList;
 	}
+	
+	/**
+	 * Find by type.
+	 *
+	 * @param type the type
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<Dish> findByType(String type) throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
@@ -111,6 +142,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 	}
 	
 
+	/**
+	 * Creates the Dish.
+	 *
+	 * @param dish the dish
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean create(Dish dish) throws DaoException {
 		int result;
@@ -128,6 +166,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		return (result > 0);
 	}
 
+	/**
+	 * Update Dish.
+	 *
+	 * @param dish the dish
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean update(Dish dish) throws DaoException {
 		int result;
@@ -146,6 +191,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Delete Dish.
+	 *
+	 * @param dish the dish
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(Dish dish) throws DaoException {
 		int result;
@@ -160,6 +212,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		return (result > 0);
 	}
 
+	/**
+	 * Delete Dish.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		int result;
@@ -173,6 +232,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
         }
 		return (result > 0);
 	}
+	
+	/**
+	 * Find deleted.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<Dish> findDeleted() throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
@@ -191,6 +257,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		return dishList;
 	}
 	
+	/**
+	 * Restore Dish.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean restore(int id) throws DaoException {
 		int result;
@@ -205,6 +278,13 @@ public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 		return (result > 0);
 	}
 	
+     /**
+      * Builds the dish.
+      *
+      * @param result the result
+      * @return the dish
+      * @throws SQLException the SQL exception
+      */
      static Dish buildDish(ResultSet result) throws SQLException {
     	Dish dish = new Dish();
     	dish.setId(result.getInt(DISH_ID));

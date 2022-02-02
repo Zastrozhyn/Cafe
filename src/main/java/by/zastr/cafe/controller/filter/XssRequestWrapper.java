@@ -8,10 +8,21 @@ import jakarta.servlet.http.HttpServletRequestWrapper;
  */
 public class XssRequestWrapper extends HttpServletRequestWrapper{
 
+	/**
+	 * Instantiates a new xss request wrapper.
+	 *
+	 * @param request the request
+	 */
 	public XssRequestWrapper(HttpServletRequest request) {
 		super(request);
 	}
 	
+	/**
+	 * Gets the parameter values.
+	 *
+	 * @param parameter the parameter
+	 * @return the parameter values
+	 */
 	public String[] getParameterValues(String parameter) {
         String[] values = super.getParameterValues(parameter);
         if (values == null) {
@@ -28,6 +39,12 @@ public class XssRequestWrapper extends HttpServletRequestWrapper{
         }
     }
 
+    /**
+     * Gets the parameter.
+     *
+     * @param parameter the parameter
+     * @return the parameter
+     */
     public String getParameter(String parameter) {
         String value = super.getParameter(parameter);
         return value == null ? null : this.stripXss(value);

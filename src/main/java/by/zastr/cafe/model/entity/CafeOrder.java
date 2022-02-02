@@ -6,9 +6,9 @@ import java.time.LocalTime;
 import java.util.List;
 
 /**
- * Class CafeOrder
- * @author A.Zastrozhyn
+ * Class CafeOrder.
  *
+ * @author A.Zastrozhyn
  */
 public class CafeOrder extends CafeEntity {
 	private int id;
@@ -23,30 +23,40 @@ public class CafeOrder extends CafeEntity {
 	private BigDecimal totalCost;
 	
 	/**
-	 * PaymentType
-	 * @author A.Zastrozhyn
+	 * PaymentType.
 	 *
+	 * @author A.Zastrozhyn
 	 */
 	public enum PaymentType {
+		
+		/** The cash. */
 		CASH,
+		
+		/** The account. */
 		ACCOUNT,
+		
+		/** The credit card. */
 		CREDIT_CARD;
 	}
 
+	/**
+	 * Instantiates a new cafe order.
+	 */
 	public CafeOrder() {
 		super();
 	}
 
 	/**
-	 * Instantiates a new Cafe order
-	 * @param userLogin
-	 * @param orderList
-	 * @param description
-	 * @param date
-	 * @param time
-	 * @param payment
-	 * @param paid
-	 * @param totalCost
+	 * Instantiates a new Cafe order.
+	 *
+	 * @param userLogin the user login
+	 * @param orderList the order list
+	 * @param description the description
+	 * @param date the date
+	 * @param time the time
+	 * @param payment the payment
+	 * @param paid the paid
+	 * @param totalCost the total cost
 	 */
 	public CafeOrder(String userLogin, List<Dish> orderList, String description, LocalDate date, LocalTime time,
 			String payment, boolean paid, BigDecimal totalCost) {
@@ -63,14 +73,15 @@ public class CafeOrder extends CafeEntity {
 
 
 	/**
-	 * Instantiates a new Cafe order
-	 * @param userLogin
-	 * @param orderList
-	 * @param description
-	 * @param comment
-	 * @param date
-	 * @param time
-	 * @param payment
+	 * Instantiates a new Cafe order.
+	 *
+	 * @param userLogin the user login
+	 * @param orderList the order list
+	 * @param description the description
+	 * @param comment the comment
+	 * @param date the date
+	 * @param time the time
+	 * @param payment the payment
 	 */
 	public CafeOrder(String userLogin, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
 			String payment) {
@@ -85,12 +96,13 @@ public class CafeOrder extends CafeEntity {
 	}
 	
 	/**
-	 * Instantiates a new Cafe order
-	 * @param userLogin
-	 * @param orderList
-	 * @param description
-	 * @param date
-	 * @param time
+	 * Instantiates a new Cafe order.
+	 *
+	 * @param userLogin the user login
+	 * @param orderList the order list
+	 * @param description the description
+	 * @param date the date
+	 * @param time the time
 	 */
 	public CafeOrder(String userLogin, List<Dish> orderList, String description, LocalDate date, LocalTime time) {
 		super();
@@ -102,23 +114,26 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param Dish dish
+	 * Adds the dish.
+	 *
+	 * @param dish the dish
 	 */
 	public void addDish (Dish dish) {
 		orderList.add(dish);
 	}
 
 	/**
-	 * 
-	 * @param dish
+	 * Removes the dish.
+	 *
+	 * @param dish the dish
 	 */
 	public void removeDish (Dish dish) {
 		orderList.remove(dish);
 	}
 
 	/**
-	 * 
+	 * Gets the id.
+	 *
 	 * @return id
 	 */
 	public int getId() {
@@ -126,15 +141,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param id
+	 * Sets the id.
+	 *
+	 * @param id the new id
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	/**
-	 * 
+	 * Gets the user login.
+	 *
 	 * @return userLogin
 	 */
 	public String getUserLogin() {
@@ -142,15 +159,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param userLogin
+	 * Sets the user login.
+	 *
+	 * @param userLogin the new user login
 	 */
 	public void setUserLogin(String userLogin) {
 		this.userLogin = userLogin;
 	}
 
 	/**
-	 * 
+	 * Gets the order list.
+	 *
 	 * @return orderList
 	 */
 	public List<Dish> getOrderList() {
@@ -159,15 +178,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param orderList
+	 * Sets the order list.
+	 *
+	 * @param orderList the new order list
 	 */
 	public void setOrderList(List<Dish> orderList) {
 		this.orderList = orderList;
 	}
 
 	/**
-	 * 
+	 * Gets the comment.
+	 *
 	 * @return comment
 	 */
 	public String getComment() {
@@ -175,15 +196,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param comment
+	 * Sets the comment.
+	 *
+	 * @param comment the new comment
 	 */
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
 
 	/**
-	 * 
+	 * Gets the payment.
+	 *
 	 * @return PaymentType
 	 */
 	public PaymentType getPayment() {
@@ -191,15 +214,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param payment
+	 * Sets the payment.
+	 *
+	 * @param payment the new payment
 	 */
 	public void setPayment(PaymentType payment) {
 		this.payment = payment;
 	}
 
 	/**
-	 * 
+	 * Checks if is paid.
+	 *
 	 * @return paid
 	 */
 	public boolean isPaid() {
@@ -207,15 +232,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param completed
+	 * Sets the paid.
+	 *
+	 * @param completed the new paid
 	 */
 	public void setPaid(boolean completed) {
 		this.paid = completed;
 	}
 
 	/**
-	 * 
+	 * Gets the description.
+	 *
 	 * @return description
 	 */
 	public String getDescription() {
@@ -223,15 +250,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param description
+	 * Sets the description.
+	 *
+	 * @param description the new description
 	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
 	/**
-	 * 
+	 * Gets the date.
+	 *
 	 * @return date
 	 */
 	public LocalDate getDate() {
@@ -239,15 +268,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param date
+	 * Sets the date.
+	 *
+	 * @param date the new date
 	 */
 	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
 	/**
-	 * 
+	 * Gets the time.
+	 *
 	 * @return time
 	 */
 	public LocalTime getTime() {
@@ -255,15 +286,17 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param time
+	 * Sets the time.
+	 *
+	 * @param time the new time
 	 */
 	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
 	/**
-	 * 
+	 * Gets the total cost.
+	 *
 	 * @return totalCost
 	 */
 	public BigDecimal getTotalCost() {
@@ -271,14 +304,20 @@ public class CafeOrder extends CafeEntity {
 	}
 
 	/**
-	 * 
-	 * @param totalCost
+	 * Sets the total cost.
+	 *
+	 * @param totalCost the new total cost
 	 */
 	public void setTotalCost(BigDecimal totalCost) {
 		this.totalCost = totalCost;
 	}
 
 
+	/**
+	 * Hash code.
+	 *
+	 * @return the int
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -297,6 +336,12 @@ public class CafeOrder extends CafeEntity {
 	}
 
 
+	/**
+	 * Equals.
+	 *
+	 * @param obj the obj
+	 * @return true, if successful
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -371,6 +416,11 @@ public class CafeOrder extends CafeEntity {
 	}
 
 
+	/**
+	 * To string.
+	 *
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

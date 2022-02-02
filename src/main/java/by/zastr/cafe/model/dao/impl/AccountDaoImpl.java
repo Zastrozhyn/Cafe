@@ -18,9 +18,9 @@ import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.entity.Account.AccountStatus;
 
 /**
- * class AccountDaoImpl
- * @author A.Zastrozhyn
+ * class AccountDaoImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 	private static final String SQL_FIND_ALL_ACCOUNT = "SELECT id, status, balance, active, order_history FROM accounts";
@@ -35,6 +35,12 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 	private static final String SQL_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() AS lastid";
 	private static final int MONEY = 0;
 	
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<Account> findAll() throws DaoException {
 		List<Account> accountList = new ArrayList<>();
@@ -51,6 +57,13 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 		return accountList;
 	}
 
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public Optional<Account> findById(int id) throws DaoException {
 		Optional<Account> account = Optional.empty();
@@ -68,6 +81,13 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 		return account;
 	}
 
+	/**
+	 * Creates the account.
+	 *
+	 * @param account the account
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean create(Account account) throws DaoException {
 		int result;
@@ -83,6 +103,13 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 		return result > 0;
 	}
 
+	/**
+	 * Update account.
+	 *
+	 * @param account the account
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean update(Account account) throws DaoException {
 		int result;
@@ -100,6 +127,13 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 		return result > 0;
 	}
 
+	/**
+	 * Delete account.
+	 *
+	 * @param account the account
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(Account account) throws DaoException {
 		int result;
@@ -113,6 +147,13 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 		return result > 0;
 	}
 
+	/**
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		int result;
@@ -126,6 +167,13 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Find by active.
+	 *
+	 * @param active the active
+	 * @return the optional
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public Optional<Account> findByActive(boolean active) throws DaoException {
 		Optional<Account> account = Optional.empty();
@@ -143,6 +191,12 @@ public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 		return account;
 	}
 	
+	/**
+	 * Creates the new default account.
+	 *
+	 * @return the account
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public Account createNewDefaultAccount() throws DaoException {
 		int id = 0;

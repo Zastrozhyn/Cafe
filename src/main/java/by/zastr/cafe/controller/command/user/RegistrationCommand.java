@@ -19,13 +19,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * class RegistrationCommand
- * @author A.Zastrozhyn
+ * class RegistrationCommand.
  *
+ * @author A.Zastrozhyn
  */
 public class RegistrationCommand implements Command {
 	 private static final UserServiceImpl userService = UserServiceImpl.getInstance();
 
+	/**
+	 * Execute.
+	 *
+	 * @param request the request
+	 * @return the router
+	 * @throws CommandException the command exception
+	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();

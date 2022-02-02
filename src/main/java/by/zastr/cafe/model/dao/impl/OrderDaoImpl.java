@@ -23,9 +23,9 @@ import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.entity.CafeOrder.PaymentType;
 
 /**
- * class OrderDaoImpl
- * @author A.Zastrozhyn
+ * class OrderDaoImpl.
  *
+ * @author A.Zastrozhyn
  */
 public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 	private static final String SQL_FIND_ALL_DISH_IN_ORDER = "SELECT menu_id FROM order_dishes WHERE order_id=?";
@@ -51,10 +51,19 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 			+ "(SELECT menu_id FROM order_dishes WHERE order_id =?) ";
 	private static final String SQL_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() AS lastid";
 	
+	/**
+	 * Instantiates a new order dao impl.
+	 */
 	public OrderDaoImpl() {
 	}
 
 
+	/**
+	 * Find all.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<CafeOrder> findAll() throws DaoException {
 		List<CafeOrder> orderList = new ArrayList<>();
@@ -72,6 +81,12 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 	}
 	
 	
+	/**
+	 * Find unpaid.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<CafeOrder> findUnpaid() throws DaoException {
 		List<CafeOrder> orderList = new ArrayList<>();
@@ -90,6 +105,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return orderList;
 	}
 	
+	/**
+	 * Find by login.
+	 *
+	 * @param login the login
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<CafeOrder> findByLogin(String login) throws DaoException {
 		List<CafeOrder> orderList = new ArrayList<>();
@@ -108,6 +130,12 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return orderList;
 	}
 	
+	/**
+	 * Find today.
+	 *
+	 * @return the list
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public List<CafeOrder> findToday() throws DaoException {
 		List<CafeOrder> orderList = new ArrayList<>();
@@ -126,6 +154,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return orderList;
 	}
 	
+	/**
+	 * Find by id.
+	 *
+	 * @param id the id
+	 * @return the optional
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public Optional<CafeOrder> findById(int id) throws DaoException {
 		Optional<CafeOrder> order = Optional.empty();
@@ -143,6 +178,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return order;
 	}
 
+	/**
+	 * Creates the CafeOrder.
+	 *
+	 * @param order the order
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean create(CafeOrder order) throws DaoException {
 		int result;
@@ -162,6 +204,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Creates the order CafeOrder.
+	 *
+	 * @param order the order
+	 * @return the cafe order
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public CafeOrder createOrder(CafeOrder order) throws DaoException {
 		int id = 0;
@@ -197,6 +246,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return order;
 	}
 
+	/**
+	 * Update CafeOrder.
+	 *
+	 * @param order the order
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean update(CafeOrder order) throws DaoException {
 		int result;
@@ -217,6 +273,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return (result > 0);
 	}
 
+	/**
+	 * Delete CafeOrder.
+	 *
+	 * @param order the order
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(CafeOrder order) throws DaoException {
 		int result;
@@ -237,6 +300,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return (result > 0);
 	}
 
+	/**
+	 * Delete CafeOrder.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean delete(int id) throws DaoException {
 		int result;
@@ -257,6 +327,13 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		return (result > 0);
 	}
 	
+	/**
+	 * Total cost.
+	 *
+	 * @param orderId the order id
+	 * @return the big decimal
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public BigDecimal totalCost(int orderId) throws DaoException{
 		BigDecimal totalPrice = BigDecimal.valueOf(0);
@@ -273,6 +350,15 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 		}
 		return totalPrice;
 	}
+	
+	/**
+	 * Creates the order dish.
+	 *
+	 * @param orderId the order id
+	 * @param dishId the dish id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
+	 */
 	@Override
 	public boolean createOrderDish(int orderId, int dishId) throws DaoException {
 		int result;

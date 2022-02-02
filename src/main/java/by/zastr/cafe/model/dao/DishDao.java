@@ -7,85 +7,97 @@ import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.model.entity.Dish;
 
 /**
- * interface DishDao
- * @author A.Zastrozhyn
+ * interface DishDao.
  *
+ * @author A.Zastrozhyn
  */
 public interface DishDao {
 
 	/**
-	 * 
+	 * Find all.
+	 *
 	 * @return List<Dish>
-	 * @throws DaoException
+	 * @throws DaoException the dao exception
 	 */
 	List<Dish> findAll() throws DaoException;
 
 	/**
-	 * 
-	 * @param id
+	 * Find by id.
+	 *
+	 * @param id the id
 	 * @return Optional<Dish>
-	 * @throws DaoException
+	 * @throws DaoException the dao exception
 	 */
 	Optional<Dish> findById(int id) throws DaoException;
 
 	/**
-	 * 
-	 * @param name
+	 * Find by name.
+	 *
+	 * @param name the name
 	 * @return List<Dish>
-	 * @throws DaoException
+	 * @throws DaoException the dao exception
 	 */
 	List<Dish> findByName(String name) throws DaoException;
 
 	/**
-	 * 
-	 * @param type
+	 * Find by type.
+	 *
+	 * @param type the type
 	 * @return List<Dish>
-	 * @throws DaoException
+	 * @throws DaoException the dao exception
 	 */
 	List<Dish> findByType(String type) throws DaoException;
 
 	/**
-	 * 
-	 * @param dish
-	 * @throws DaoException
+	 * Creates the.
+	 *
+	 * @param dish the dish
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
 	 */
 	boolean create(Dish dish) throws DaoException;
 
 	/**
-	 * 
-	 * @param dish
-	 * @throws DaoException
+	 * Update.
+	 *
+	 * @param dish the dish
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
 	 */
 	boolean update(Dish dish) throws DaoException;
 
 	/**
-	 * 
-	 * @param dish
-	 * @return
-	 * @throws DaoException
+	 * Delete.
+	 *
+	 * @param dish the dish
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
 	 */
 	boolean delete(Dish dish) throws DaoException;
 
 	/**
-	 * 
-	 * @param id
-	 * @return
-	 * @throws DaoException
+	 * Delete.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
 	 */
 	boolean delete(int id) throws DaoException;
 
 	/**
-	 * 
+	 * Find deleted.
+	 *
 	 * @return List<Dish>
-	 * @throws DaoException
+	 * @throws DaoException the dao exception
 	 */
 	List<Dish> findDeleted() throws DaoException;
 
 	/**
-	 * 
-	 * @param id
-	 * @return
-	 * @throws DaoException
+	 * Restore.
+	 *
+	 * @param id the id
+	 * @return true, if successful
+	 * @throws DaoException the dao exception
 	 */
 	boolean restore(int id) throws DaoException;
 
