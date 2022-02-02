@@ -8,8 +8,12 @@ import org.apache.logging.log4j.Logger;
 
 import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.model.connection.ConnectionPool;
-import by.zastr.cafe.model.entity.CafeEntity;
 
+/**
+ * 
+ * @author A.Zastrozhyn
+ *
+ */
 public class EntityTransaction {
 	private static final Logger logger = LogManager.getLogger();
 	private Connection connection;
@@ -17,7 +21,11 @@ public class EntityTransaction {
     public EntityTransaction() {
     }
     
-
+    /**
+     * 
+     * @param daos
+     * @throws DaoException
+     */
 	public void beginTransaction(AbstractDao... daos) throws DaoException {
         if (connection == null) {
         	ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -39,6 +47,10 @@ public class EntityTransaction {
         }
     }
     
+	/**
+	 * 
+	 * @param dao
+	 */
     public void beginTransaction(AbstractDao dao){
         if (connection == null) {
         	ConnectionPool connectionPool = ConnectionPool.getInstance();
@@ -52,12 +64,18 @@ public class EntityTransaction {
         	}
     }
     
+    /**
+     * end transaction
+     */
     public void end(){
         ConnectionPool connectionPool = ConnectionPool.getInstance();
         connectionPool.releaseConnection(connection);
         connection = null;
     }
-    
+   
+    /**
+     * end transaction
+     */
     public void endTransaction(){
         try {
             connection.commit();

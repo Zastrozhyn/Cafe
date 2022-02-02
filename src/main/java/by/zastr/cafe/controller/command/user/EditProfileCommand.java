@@ -17,7 +17,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
+/**
+ * class EditProfileCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class EditProfileCommand implements Command{
 
 	@Override

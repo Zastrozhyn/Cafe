@@ -15,6 +15,11 @@ import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class RepeatOrderCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class RepeatOrderCommand implements Command{
 
 	@Override

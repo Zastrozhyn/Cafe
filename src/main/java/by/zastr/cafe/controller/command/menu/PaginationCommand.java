@@ -13,6 +13,11 @@ import by.zastr.cafe.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class PaginationCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class PaginationCommand implements Command{
 
 	@Override

@@ -16,6 +16,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class ChangePasswordCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class ChangePasswordCommand implements Command{
 
 	@Override

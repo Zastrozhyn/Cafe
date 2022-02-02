@@ -14,6 +14,11 @@ import by.zastr.cafe.model.entity.CafeOrder;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class ViewOrderCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class ViewOrderCommand implements Command {
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {

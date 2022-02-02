@@ -11,6 +11,9 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebInitParam;
 
+/**
+ * The type Encoding filter.
+ */
 @WebFilter(filterName = "encodingFilter", urlPatterns = {"/*"}, initParams = {@WebInitParam(name = "encoding", 
 value = "UTF-8", description = "Encoding param")})
 

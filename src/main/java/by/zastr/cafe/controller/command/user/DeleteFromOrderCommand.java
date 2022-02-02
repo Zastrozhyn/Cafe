@@ -17,6 +17,11 @@ import by.zastr.cafe.model.service.impl.DishServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class DeleteFromOrderCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class DeleteFromOrderCommand implements Command{
 
 	@Override

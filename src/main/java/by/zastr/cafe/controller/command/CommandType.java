@@ -36,7 +36,9 @@ import by.zastr.cafe.controller.command.user.RepeatOrderCommand;
 import by.zastr.cafe.controller.command.user.ViewDishesCommand;
 import by.zastr.cafe.model.entity.User;
 
-
+/**
+ * The enum Command type.
+ */
 public enum CommandType {	
 	
     REGISTRATION(new RegistrationCommand()),

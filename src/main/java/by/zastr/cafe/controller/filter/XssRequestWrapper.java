@@ -3,6 +3,9 @@ package by.zastr.cafe.controller.filter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 
+/**
+ * The type Request wrapper.
+ */
 public class XssRequestWrapper extends HttpServletRequestWrapper{
 
 	public XssRequestWrapper(HttpServletRequest request) {

@@ -20,6 +20,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class DeleteUserCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class DeleteUserCommand implements Command{
 
 	@Override

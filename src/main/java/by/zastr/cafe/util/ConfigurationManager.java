@@ -8,18 +8,32 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * class ConfigurationManager
+ * @author A.Zastrozhyn
+ *
+ */
 public class ConfigurationManager {
 	private static final Logger logger = LogManager.getLogger();
 	private static final Properties PROPERTIES = new Properties();
 	private static final String PROPERTIES_NAME = "application.properties";
+	
     private ConfigurationManager() {
     }
+    
     static {
     	loadProperies();
     }
+    
+    /**
+     * 
+     * @param key
+     * @return Property
+     */
     public static String getProperty(String key) {
     	return PROPERTIES.getProperty(key);
     }
+
     private static void loadProperies() {
      	try (InputStream inputStream = ConfigurationManager.class.getClassLoader().getResourceAsStream(PROPERTIES_NAME)){
      		PROPERTIES.load(inputStream);

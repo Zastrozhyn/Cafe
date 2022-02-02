@@ -1,5 +1,10 @@
 package by.zastr.cafe.controller.command;
 
+/**
+ * class User Message
+ * @author A.Zastrozhyn
+ *
+ */
 public final class UserMessage {
 	public static final String WRONG_PASSWORD = "WRONG_PASSWORD";
 	public static final String WRONG_PASSWORD_OR_LOGIN = "WRONG_PASSWORD_OR_LOGIN";

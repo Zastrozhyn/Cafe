@@ -21,6 +21,11 @@ import by.zastr.cafe.model.service.CafeService;
 import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
+/**
+ * class OrderServiceImpl
+ * @author A.Zastrozhyn
+ *
+ */
 public class OrderServiceImpl implements CafeService<CafeOrder> {
 	private static OrderServiceImpl instance = new OrderServiceImpl();;
 	private OrderDaoImpl orderDao;
@@ -31,6 +36,10 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		entityTransaction = new EntityTransaction();
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public static OrderServiceImpl getInstance() {
         return instance;
 	}
@@ -43,64 +52,6 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 			orderList = orderDao.findAll();
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method find all order", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return orderList;
-	}
-	
-	public boolean addComment(String comment, int orderId) throws ServiceException {
-		CafeOrder order = findById(orderId).get();
-		order.setComment(comment);
-		boolean b = false;
-		entityTransaction.beginTransaction(orderDao);
-		try {
-			b = orderDao.update(order);
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method find all order", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return b;
-	}
-	
-	public List<CafeOrder> findUnpaid() throws ServiceException{
-		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
-		entityTransaction.beginTransaction(orderDao);
-		try {
-			orderList = orderDao.findUnpaid();
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method find unpaid order", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return orderList;
-	}
-	
-	public List<CafeOrder> findByLogin(String login) throws ServiceException{
-		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
-		entityTransaction.beginTransaction(orderDao);
-		try {
-			orderList = orderDao.findByLogin(login);
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method find unpaid order", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return orderList;
-	}
-	
-	public List<CafeOrder> findToday() throws ServiceException{
-		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
-		entityTransaction.beginTransaction(orderDao);
-		try {
-			orderList = orderDao.findToday();
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method find unpaid order", e);
 		}
 		finally {
 			entityTransaction.end();
@@ -121,6 +72,101 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 			entityTransaction.end();
 		}
 		return order;
+	}
+	
+	@Override
+	public boolean delete(int id) throws ServiceException {
+		boolean b = false;
+		try {
+			entityTransaction.beginTransaction(orderDao);
+			b = orderDao.delete(id);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method delete order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return b;
+	}
+	
+	/**
+	 * 
+	 * @param comment
+	 * @param orderId
+	 * @throws ServiceException
+	 */
+	public boolean addComment(String comment, int orderId) throws ServiceException {
+		CafeOrder order = findById(orderId).get();
+		order.setComment(comment);
+		boolean b = false;
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			b = orderDao.update(order);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find all order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return b;
+	}
+	
+	/**
+	 * 
+	 * @return List<CafeOrder>
+	 * @throws ServiceException
+	 */
+	public List<CafeOrder> findUnpaid() throws ServiceException{
+		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			orderList = orderDao.findUnpaid();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find unpaid order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return orderList;
+	}
+	
+	/**
+	 * 
+	 * @param login
+	 * @return List<CafeOrder>
+	 * @throws ServiceException
+	 */
+	public List<CafeOrder> findByLogin(String login) throws ServiceException{
+		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			orderList = orderDao.findByLogin(login);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find unpaid order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return orderList;
+	}
+	
+	/**
+	 * 
+	 * @return List<CafeOrder>
+	 * @throws ServiceException
+	 */
+	public List<CafeOrder> findToday() throws ServiceException{
+		List<CafeOrder> orderList = new ArrayList<CafeOrder>();
+		entityTransaction.beginTransaction(orderDao);
+		try {
+			orderList = orderDao.findToday();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method find unpaid order", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return orderList;
 	}
 	
 	public String confirmOrder(String userLogin, List<Dish> orderList, String description, String comment, LocalDate date, LocalTime time,
@@ -161,22 +207,12 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		}	
 		return messageManager.getMessage(UserMessage.SUCCESSFUL);	
 	}
-
-	@Override
-	public boolean delete(int id) throws ServiceException {
-		boolean b = false;
-		try {
-			entityTransaction.beginTransaction(orderDao);
-			b = orderDao.delete(id);
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method delete order", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return b;
-	}
 	
+	/**
+	 * 
+	 * @param orderId
+	 * @throws ServiceException
+	 */
 	public boolean paid (int orderId) throws ServiceException {
 		var accountDao = new AccountDaoImpl();
 		CafeOrder order = findById(orderId).get();
@@ -208,7 +244,11 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return true;
 	}
 	
-	
+	/**
+	 * 
+	 * @param order
+	 * @throws ServiceException
+	 */
 	public boolean update(CafeOrder order) throws ServiceException {
 		boolean b = false;
 		try {
@@ -223,6 +263,12 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return b;
 	}
 	
+	/**
+	 * 
+	 * @param userLogin
+	 * @param totalCost
+	 * @throws ServiceException
+	 */
 	public boolean payByAccount (String userLogin, BigDecimal totalCost) throws ServiceException {
 		UserServiceImpl userService = UserServiceImpl.getInstance();
 		User user = userService.findByLogin(userLogin).get();
@@ -238,6 +284,11 @@ public class OrderServiceImpl implements CafeService<CafeOrder> {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * @param orderId
+	 * @throws ServiceException
+	 */
 	public void setPaid (int orderId) throws ServiceException {
 		CafeOrder order = findById(orderId).get();
 		BigDecimal cost = order.getTotalCost();

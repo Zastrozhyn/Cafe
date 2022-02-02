@@ -15,7 +15,11 @@ import by.zastr.cafe.model.service.CafeService;
 import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
-
+/**
+ * class DishServiceImpl
+ * @author A.Zastrozhyn
+ *
+ */
 public class DishServiceImpl implements CafeService<Dish> {
 	private static DishServiceImpl instance = new DishServiceImpl();
 	private DishDaoImpl dishDao;
@@ -26,6 +30,10 @@ public class DishServiceImpl implements CafeService<Dish> {
 		entityTransaction = new EntityTransaction();
 	}
 	
+	/**
+	 * 
+	 * @return DishServiceImpl
+	 */
 	public static DishServiceImpl  getInstance() {
         return instance;
 	}
@@ -60,48 +68,6 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return dish;
 	}
 	
-	public List<Dish> findByName(String name) throws ServiceException{
-		List<Dish> userList = new ArrayList<Dish>();
-		try {
-			entityTransaction.beginTransaction(dishDao);;
-			userList = dishDao.findByName(name);
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method finding dish", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return userList;
-	}
-	
-	public List<Dish> findByType(String type) throws ServiceException{
-		List<Dish> userList = new ArrayList<Dish>();
-		try {
-			entityTransaction.beginTransaction(dishDao);
-			userList = dishDao.findByType(type);
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method finding dish", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return userList;
-	}
-	
-	public List<Dish> findDeleted() throws ServiceException{
-		List<Dish> userList = new ArrayList<Dish>();
-		try {
-			entityTransaction.beginTransaction(dishDao);
-			userList = dishDao.findDeleted();
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method finding dish", e);
-		}
-		finally {
-			entityTransaction.end();
-		}
-		return userList;
-	}
-	
 	@Override
 	public boolean delete(int id) throws ServiceException {
 		boolean b = false;
@@ -117,6 +83,71 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return b;	
 	}
 	
+	/**
+	 * 
+	 * @param name
+	 * @return List<Dish> 
+	 * @throws ServiceException
+	 */
+	public List<Dish> findByName(String name) throws ServiceException{
+		List<Dish> userList = new ArrayList<Dish>();
+		try {
+			entityTransaction.beginTransaction(dishDao);;
+			userList = dishDao.findByName(name);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method finding dish", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return userList;
+	}
+	
+	/**
+	 * 
+	 * @param type
+	 * @return List<Dish> 
+	 * @throws ServiceException
+	 */
+	public List<Dish> findByType(String type) throws ServiceException{
+		List<Dish> userList = new ArrayList<Dish>();
+		try {
+			entityTransaction.beginTransaction(dishDao);
+			userList = dishDao.findByType(type);
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method finding dish", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return userList;
+	}
+	
+	/**
+	 * 
+	 * @return List<Dish> 
+	 * @throws ServiceException
+	 */
+	public List<Dish> findDeleted() throws ServiceException{
+		List<Dish> userList = new ArrayList<Dish>();
+		try {
+			entityTransaction.beginTransaction(dishDao);
+			userList = dishDao.findDeleted();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method finding dish", e);
+		}
+		finally {
+			entityTransaction.end();
+		}
+		return userList;
+	}
+	
+	/**
+	 * restore from archive
+	 * @param id
+	 * @return
+	 * @throws ServiceException
+	 */
 	public boolean restore(int id) throws ServiceException {
 		boolean b = false;
 		try {
@@ -131,6 +162,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 		return b;	
 	}
 	
+	/**
+	 * 
+	 * @param dish
+	 * @throws ServiceException
+	 */
 	public boolean update(Dish dish) throws ServiceException {
 		boolean b = false;
 		try {

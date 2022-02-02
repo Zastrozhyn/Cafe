@@ -11,6 +11,11 @@ import by.zastr.cafe.util.LocaleValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class ChangeLocaleCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class ChangeLocaleCommand implements Command{
 
 	@Override

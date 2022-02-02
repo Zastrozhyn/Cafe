@@ -16,6 +16,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import static by.zastr.cafe.controller.command.AttributeName.*;
 
+/**
+ * class DisplayMenuCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class DisplayMenuCommand implements Command{
 	private static final String DELETED_TYPE = "deleted";
 	public static final int DEFAULT_BEGIN = 1;

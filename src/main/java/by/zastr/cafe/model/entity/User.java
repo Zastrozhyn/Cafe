@@ -1,5 +1,10 @@
 package by.zastr.cafe.model.entity;
 
+/**
+ * The Class User
+ * @author A.Zastrozhyn
+ *
+ */
 public class User extends CafeEntity {
 	private int userId;
 	private String name;
@@ -11,6 +16,12 @@ public class User extends CafeEntity {
 	private Account account;
 	private boolean	archive;
 	
+
+	/**
+	 * User Role
+	 * @author A.Zastrozhyn
+	 *
+	 */
 	public enum Role{
 		GUEST,
 		CLIENT,
@@ -62,7 +73,7 @@ public class User extends CafeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return User name
 	 */
 	public String getName() {
 		return name;
@@ -78,7 +89,7 @@ public class User extends CafeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return Last name
 	 */
 	public String getLastName() {
 		return lastName;
@@ -94,7 +105,7 @@ public class User extends CafeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return phone
 	 */
 	public String getPhone() {
 		return phone;
@@ -110,7 +121,7 @@ public class User extends CafeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return email
 	 */
 	public String getEmail() {
 		return email;
@@ -126,7 +137,7 @@ public class User extends CafeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return login
 	 */
 	public String getLogin() {
 		return login;
@@ -142,7 +153,7 @@ public class User extends CafeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return role
 	 */
 	public Role getRole() {
 		return role;
@@ -158,21 +169,32 @@ public class User extends CafeEntity {
 
 	/**
 	 * 
-	 * @return
+	 * @return account
 	 */
 	public Account getAccount() {
 		return account;
 	}
 
+	/**
+	 * 
+	 * @param account
+	 */
 	public void setAccount(Account account) {
 		this.account = account;
 	}
 	
-
+	/**
+	 * 
+	 * @return is archive User
+	 */
 	public boolean isArchive() {
 		return archive;
 	}
 
+	/**
+	 * 
+	 * @param archive
+	 */
 	public void setArchive(boolean archive) {
 		this.archive = archive;
 	}

@@ -18,6 +18,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class BlockUserCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class BlockUserCommand implements Command{
 
 	@Override

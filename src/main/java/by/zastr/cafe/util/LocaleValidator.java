@@ -1,5 +1,10 @@
 package by.zastr.cafe.util;
 
+/**
+ * class LocaleValidator
+ * @author A.Zastrozhyn
+ *
+ */
 public class LocaleValidator {
     private static final String ENGLISH_LOCALE = "en_US";
     private static final String RUSSIAN_LOCALE = "ru_RU";
@@ -7,6 +12,11 @@ public class LocaleValidator {
     private LocaleValidator() {
     }
 
+    /**
+     * 
+     * @param locale
+     * @return boolean is Locale Exist
+     */
     public static boolean isLocaleExist(String locale) {
         return locale != null && locale.matches(ENGLISH_LOCALE + "|" + RUSSIAN_LOCALE);
     }

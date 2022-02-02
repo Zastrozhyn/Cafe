@@ -16,7 +16,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
+/**
+ * class PaidOrderCommand
+ * @author A.Zastrozhyn
+ * set order paid
+ */
 public class PaidOrderCommand implements Command{
 
 	@Override

@@ -21,6 +21,11 @@ import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class AddMoneyCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class AddMoneyCommand implements Command{
 
 	@Override

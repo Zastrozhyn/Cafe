@@ -14,6 +14,11 @@ import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class ViewUserCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class ViewUserCommand implements Command {
 
 	@Override

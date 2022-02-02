@@ -9,6 +9,11 @@ import org.apache.logging.log4j.Logger;
 
 import by.zastr.cafe.util.ConfigurationManager;
 
+/**
+ * class ConnectionBuilder
+ * @author A.Zastrozhyn
+ *
+ */
 public class ConnectionBuilder {
 	private static final Logger logger = LogManager.getLogger();
 	private static final String DB_URL = "db.url";
@@ -24,7 +29,9 @@ public class ConnectionBuilder {
 		}
 	}
 	
-	private ConnectionBuilder() {}
+	private ConnectionBuilder() {
+	}
+	
 	static ProxyConnection buildProxyConnection() throws SQLException {
 		String url = ConfigurationManager.getProperty(DB_URL);
 		String user = ConfigurationManager.getProperty(DB_USER);

@@ -18,6 +18,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class RegistrationCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class RegistrationCommand implements Command {
 	 private static final UserServiceImpl userService = UserServiceImpl.getInstance();
 
@@ -49,5 +54,4 @@ public class RegistrationCommand implements Command {
 		}
 		return router;
 	}
-
 }

@@ -3,8 +3,12 @@ package by.zastr.cafe.util;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+/**
+ * Class Message Manager
+ * @author A.Zastrozhyn
+ *
+ */
 public class MessageManager {
-	
 	private static final String MESSAGE_PATH = "message";
     public static final String RUSSIAN_LOCALE = "ru_RU";
     public static final String ENGLISH_LOCALE = "en_US";

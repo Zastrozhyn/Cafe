@@ -23,6 +23,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class ConfirmOrderCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class ConfirmOrderCommand implements Command{
 	private static final String DEFAULT_COMMENT = "";
 

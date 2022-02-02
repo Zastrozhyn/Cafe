@@ -20,6 +20,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class AddToOrderCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class AddToOrderCommand implements Command {
 
 	@Override

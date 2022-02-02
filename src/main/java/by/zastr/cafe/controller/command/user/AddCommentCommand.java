@@ -14,6 +14,11 @@ import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class AddCommentCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class AddCommentCommand implements Command{
 
 	@Override

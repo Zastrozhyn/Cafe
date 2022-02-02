@@ -19,6 +19,9 @@ import org.apache.logging.log4j.Logger;
 
 import by.zastr.cafe.controller.command.AttributeName;
 
+/**
+ * The type Admin Access filter.
+ */
 @WebFilter(urlPatterns = {"/jsp/admin/*"})
 public class AdminAccessFilter implements Filter{
 	private static final Logger logger = LogManager.getLogger();

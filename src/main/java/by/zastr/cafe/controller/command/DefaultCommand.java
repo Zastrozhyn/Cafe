@@ -3,6 +3,11 @@ package by.zastr.cafe.controller.command;
 import by.zastr.cafe.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class Default Command
+ * @author A.Zastrozhyn
+ *
+ */
 public class DefaultCommand implements Command{
 
 	@Override

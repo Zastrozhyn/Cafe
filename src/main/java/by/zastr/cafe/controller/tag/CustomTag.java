@@ -6,6 +6,11 @@ import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.JspWriter;
 import jakarta.servlet.jsp.tagext.TagSupport;
 
+/**
+ * class CustomTag
+ * @author A.Zastrozhyn
+ *
+ */
 @SuppressWarnings("serial")
 public class CustomTag extends TagSupport{
 	private static final String AUTHOR = "made by A.Zastrozhyn";

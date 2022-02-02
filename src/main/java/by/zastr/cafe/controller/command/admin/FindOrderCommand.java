@@ -18,6 +18,11 @@ import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class FindOrderCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class FindOrderCommand implements Command{
 
 	@Override

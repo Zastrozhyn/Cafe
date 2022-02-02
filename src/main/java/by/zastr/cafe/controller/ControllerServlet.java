@@ -23,9 +23,13 @@ import by.zastr.cafe.controller.command.PagePath;
 import by.zastr.cafe.controller.command.RequestParameter;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
-import by.zastr.cafe.model.connection.ConnectionPool;
 
-
+/**
+ * class ControllerServlet
+ * @author A.Zastrozhyn
+ * Overrides doPost and doGet methods by calling
+ * the own method processRequest(request, response).
+ */
 @WebServlet(name = "ControllerServlet", urlPatterns = {"/controller"})
 public class ControllerServlet extends HttpServlet {
 	public static final String CURRENT_PAGE = "currentPage";

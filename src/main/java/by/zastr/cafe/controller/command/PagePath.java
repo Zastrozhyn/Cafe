@@ -1,5 +1,10 @@
 package by.zastr.cafe.controller.command;
 
+/**
+ * The page paths.
+ * @author A.Zastrozhyn
+ *
+ */
 public final class PagePath {
 	public static final String INDEX = "/jsp/index.jsp";
     public static final String ERROR_404_PAGE = "/jsp/error/error404.jsp";

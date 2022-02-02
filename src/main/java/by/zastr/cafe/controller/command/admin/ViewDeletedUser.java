@@ -14,6 +14,11 @@ import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class ViewDeletedUser
+ * @author A.Zastrozhyn
+ *
+ */
 public class ViewDeletedUser implements Command{
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {

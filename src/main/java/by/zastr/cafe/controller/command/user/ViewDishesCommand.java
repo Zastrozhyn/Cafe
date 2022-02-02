@@ -15,6 +15,11 @@ import by.zastr.cafe.model.entity.CafeOrder;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class ViewDishesCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class ViewDishesCommand implements Command{
 
 	@Override

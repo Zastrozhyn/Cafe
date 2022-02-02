@@ -17,11 +17,17 @@ import org.apache.logging.log4j.Level;
 import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.model.connection.ConnectionPool;
 import by.zastr.cafe.model.dao.AbstractDao;
+import by.zastr.cafe.model.dao.OrderDao;
 import by.zastr.cafe.model.entity.CafeOrder;
 import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.entity.CafeOrder.PaymentType;
 
-public class OrderDaoImpl extends AbstractDao<CafeOrder>{
+/**
+ * class OrderDaoImpl
+ * @author A.Zastrozhyn
+ *
+ */
+public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 	private static final String SQL_FIND_ALL_DISH_IN_ORDER = "SELECT menu_id FROM order_dishes WHERE order_id=?";
 	private static final String SQL_FIND_ALL_ORDER = "SELECT order_id, user_id, description, comment, date, time,"
 			+ " payment_type, paid FROM orders";
@@ -66,6 +72,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 	}
 	
 	
+	@Override
 	public List<CafeOrder> findUnpaid() throws DaoException {
 		List<CafeOrder> orderList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_UNPAID_ORDER)) {
@@ -83,6 +90,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 		return orderList;
 	}
 	
+	@Override
 	public List<CafeOrder> findByLogin(String login) throws DaoException {
 		List<CafeOrder> orderList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ORDER_BY_USER_ID)) {
@@ -100,6 +108,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 		return orderList;
 	}
 	
+	@Override
 	public List<CafeOrder> findToday() throws DaoException {
 		List<CafeOrder> orderList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_TODAY_ORDER)) {
@@ -153,6 +162,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 		return (result > 0);
 	}
 	
+	@Override
 	public CafeOrder createOrder(CafeOrder order) throws DaoException {
 		int id = 0;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_CREATE_ORDER)) {
@@ -247,6 +257,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 		return (result > 0);
 	}
 	
+	@Override
 	public BigDecimal totalCost(int orderId) throws DaoException{
 		BigDecimal totalPrice = BigDecimal.valueOf(0);
 		try (PreparedStatement statement = connection.prepareStatement(SQL_TOTAL_COST)) {
@@ -262,6 +273,7 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder>{
 		}
 		return totalPrice;
 	}
+	@Override
 	public boolean createOrderDish(int orderId, int dishId) throws DaoException {
 		int result;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_CREATE_ORDER_DISH)) {

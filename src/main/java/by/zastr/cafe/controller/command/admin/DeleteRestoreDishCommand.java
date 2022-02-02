@@ -16,6 +16,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class DeleteRestoreDishCommand
+ * @author A.Zastrozhyn
+ * Delete or restore Dish
+ */
 public class DeleteRestoreDishCommand implements Command{
 
 	@Override

@@ -2,6 +2,11 @@ package by.zastr.cafe.model.entity;
 
 import java.math.BigDecimal;
 
+/**
+ * Class Dish
+ * @author A.Zastrozhyn
+ *
+ */
 public class Dish extends CafeEntity{
 	private int id;
 	private String name;
@@ -11,6 +16,11 @@ public class Dish extends CafeEntity{
 	private DishType type;
 	private boolean archive;
 	
+	/**
+	 * Dish type
+	 * @author A.Zastrozhyn
+	 *
+	 */
 	public enum DishType {
 		DRINK,
 		DESERT,
@@ -21,6 +31,15 @@ public class Dish extends CafeEntity{
 		super();
 	}
 
+	/**
+	 * Instantiates a new Dish
+	 * @param id
+	 * @param name
+	 * @param weihgt
+	 * @param price
+	 * @param descritpion
+	 * @param type
+	 */
 	public Dish(int id, String name, int weihgt, BigDecimal price, String descritpion, DishType type) {
 		super();
 		this.id = id;
@@ -32,6 +51,14 @@ public class Dish extends CafeEntity{
 	}
 
 
+	/**
+	 * Instantiates a new Dish
+	 * @param name
+	 * @param weihgt
+	 * @param price
+	 * @param description
+	 * @param type
+	 */
 	public Dish(String name, int weihgt, BigDecimal price, String description, String type) {
 		super();
 		this.name = name;
@@ -41,62 +68,122 @@ public class Dish extends CafeEntity{
 		this.type = DishType.valueOf(type.toUpperCase());
 	}
 
+	/**
+	 * 
+	 * @return id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * 
+	 * @return name
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * 
+	 * @param name
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * 
+	 * @return weight
+	 */
 	public int getWeight() {
 		return weight;
 	}
 
+	/**
+	 * 
+	 * @param weight
+	 */
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
+	/**
+	 * 
+	 * @return price
+	 */
 	public BigDecimal getPrice() {
 		return price;
 	}
 
+	/**
+	 * 
+	 * @param price
+	 */
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
+	/**
+	 * 
+	 * @return Description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * 
+	 * @param descritpion
+	 */
 	public void setDescription(String descritpion) {
 		this.description = descritpion;
 	}
 
+	/**
+	 * 
+	 * @return Dish Type
+	 */
 	public DishType getType() {
 		return type;
 	}
 
+	/**
+	 * 
+	 * @param type
+	 */
 	public void setType(DishType type) {
 		this.type = type;
 	}
 	
+	/**
+	 * 
+	 * @param type
+	 */
 	public void setType(String type) {
 		this.type = DishType.valueOf(type.toUpperCase());
 	}
 
+	/**
+	 * 
+	 * @return is Archive
+	 */
 	public boolean isArchive() {
 		return archive;
 	}
 
+	/**
+	 * 
+	 * @param archive
+	 */
 	public void setArchive(boolean archive) {
 		this.archive = archive;
 	}

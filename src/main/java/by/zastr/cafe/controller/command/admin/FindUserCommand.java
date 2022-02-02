@@ -16,6 +16,11 @@ import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class FindUserCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class FindUserCommand implements Command{
 	
 	@Override

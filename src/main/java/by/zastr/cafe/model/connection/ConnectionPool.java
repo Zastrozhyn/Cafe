@@ -12,6 +12,11 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+/**
+ * class ConnectionPool
+ * @author A.Zastrozhyn
+ *
+ */
 public class ConnectionPool {
 	private static final Logger logger = LogManager.getLogger();
     private static final int POOL_SIZE = 4;
@@ -40,6 +45,10 @@ public class ConnectionPool {
         logger.info("Connection pool created successfully, size = {}", POOL_SIZE);
     }
 
+    /**
+     * 
+     * @return ConnectionPool
+     */
     public static ConnectionPool getInstance(){
         if (!instanceCheck.get()){
             try {
@@ -55,6 +64,10 @@ public class ConnectionPool {
         return instance;
     }
 
+    /**
+     * 
+     * @return Connection
+     */
     public Connection takeConnection(){
         ProxyConnection connection = null;
         try {
@@ -67,6 +80,10 @@ public class ConnectionPool {
         return connection;
     }
 
+    /**
+     * 
+     * @param connection
+     */
     public boolean releaseConnection(Connection connection){
         boolean result = false;
         if (connection instanceof ProxyConnection proxyConnection){
@@ -83,6 +100,9 @@ public class ConnectionPool {
         return result;
     }
 
+    /**
+     * destroy Pool
+     */
     public void destroyPool() {
         logger.log(Level.INFO, "Destroying pool is started");
         for (int i = 0; i < POOL_SIZE; i++) {

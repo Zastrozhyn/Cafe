@@ -11,6 +11,9 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * The type Xss filter.
+ */
 @WebFilter(filterName = "XssFilter", urlPatterns = {"/*"})
 public class XssFilter implements Filter{
 	 public XssFilter() {

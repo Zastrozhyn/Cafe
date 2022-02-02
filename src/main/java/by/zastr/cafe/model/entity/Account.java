@@ -2,6 +2,11 @@ package by.zastr.cafe.model.entity;
 
 import java.math.BigDecimal;
 
+/**
+ * Class account
+ * @author A.Zastrozhyn
+ *
+ */
 public class Account extends CafeEntity{
 	private static final BigDecimal SILVER_AMOUNT = BigDecimal.valueOf(100);
 	private static final BigDecimal GOLD_AMOUNT = BigDecimal.valueOf(500);
@@ -12,6 +17,11 @@ public class Account extends CafeEntity{
 	private BigDecimal orderHistory;
 	private boolean active;
 	
+	/**
+	 * AccountStatus
+	 * @author A.Zastrozhyn
+	 *
+	 */
 	public enum AccountStatus {
 		COMMON(0),
 		SILVER(5),
@@ -32,7 +42,13 @@ public class Account extends CafeEntity{
 		super();
 	}
 
-	
+	/**
+	 * Instantiates a new Account
+	 * @param id
+	 * @param status
+	 * @param money
+	 * @param active
+	 */
 	public Account(int id, AccountStatus status, BigDecimal money, boolean active) {
 		super();
 		this.id = id;
@@ -41,8 +57,12 @@ public class Account extends CafeEntity{
 		this.active = active;
 	}
 
-
-
+	/**
+	 * Instantiates a new Account
+	 * @param status
+	 * @param money
+	 * @param active
+	 */
 	public Account(AccountStatus status, BigDecimal money, boolean active) {
 		super();
 		this.status = status;
@@ -50,45 +70,82 @@ public class Account extends CafeEntity{
 		this.active = active;
 	}
 
-
+	/**
+	 * 
+	 * @return id
+	 */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * 
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * 
+	 * @return status
+	 */
 	public AccountStatus getStatus() {
 		return status;
 	}
 
+	/**
+	 * 
+	 * @param status
+	 */
 	public void setStatus(AccountStatus status) {
 		this.status = status;
 	}
 
+	/**
+	 * 
+	 * @return balance
+	 */
 	public BigDecimal getBalance() {
 		return balance;
 	}
 
-	public void setBalance(BigDecimal money) {
-		this.balance = money;
+	/**
+	 * 
+	 * @param balance
+	 */
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 
-
+	/**
+	 * 
+	 * @return isActive
+	 */
 	public boolean isActive() {
 		return active;
 	}
 
+	/**
+	 * 
+	 * @param active
+	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
+
+	/**
+	 * 
+	 * @return orderHistory
+	 */
 	public BigDecimal getOrderHistory() {
 		return orderHistory;
 	}
 
-
+	/**
+	 * set AccountStatus
+	 * @param orderHistory
+	 */
 	public void setOrderHistory(BigDecimal orderHistory) {
 		if (orderHistory.compareTo(SILVER_AMOUNT) > 0) {
 			this.status = AccountStatus.SILVER;
@@ -101,7 +158,6 @@ public class Account extends CafeEntity{
 		}
 		this.orderHistory = orderHistory;
 	}
-
 
 	@Override
 	public int hashCode() {

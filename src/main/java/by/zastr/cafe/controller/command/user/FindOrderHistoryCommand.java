@@ -19,6 +19,11 @@ import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class FindOrderHistoryCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class FindOrderHistoryCommand implements Command{
 
 	@Override

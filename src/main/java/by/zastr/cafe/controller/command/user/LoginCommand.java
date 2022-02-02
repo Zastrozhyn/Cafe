@@ -21,6 +21,11 @@ import org.apache.logging.log4j.Level;
 
 import static by.zastr.cafe.controller.command.AttributeName.*;
 
+/**
+ * class LoginCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class LoginCommand implements Command{
 
 	@Override

@@ -1,5 +1,10 @@
 package by.zastr.cafe.controller.command;
 
+/**
+ * @author A.Zastrozhyn
+ *
+ * The names of session and request attributes.
+ */
 public class AttributeName {
 	public static final String SESSION_USER = "user";
 	public static final String REGISTRATION_RESULT = "registration_result";

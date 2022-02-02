@@ -12,9 +12,15 @@ import java.util.Optional;
 
 import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.model.dao.AbstractDao;
+import by.zastr.cafe.model.dao.DishDao;
 import by.zastr.cafe.model.entity.Dish;
 
-public class DishDaoImpl extends AbstractDao<Dish>{
+/**
+ * class DishDaoImpl
+ * @author A.Zastrozhyn
+ *
+ */
+public class DishDaoImpl extends AbstractDao<Dish> implements DishDao{
 	private static final String SQL_FIND_ALL_DISH = "SELECT menu_id, type, name, description, price, weight, archive FROM menu "
 			+ "WHERE archive=? ORDER BY type";
 	private static final String SQL_FIND_DISH_BY_ID = "SELECT menu_id, type, name, description, price, weight, archive "
@@ -68,6 +74,7 @@ public class DishDaoImpl extends AbstractDao<Dish>{
 		return dish;
 	}
 	
+	@Override
 	public List<Dish> findByName(String name) throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_DISH_BY_NAME)) {
@@ -84,6 +91,7 @@ public class DishDaoImpl extends AbstractDao<Dish>{
 		}
 		return dishList;
 	}
+	@Override
 	public List<Dish> findByType(String type) throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_DISH_BY_TYPE)) {
@@ -165,6 +173,7 @@ public class DishDaoImpl extends AbstractDao<Dish>{
         }
 		return (result > 0);
 	}
+	@Override
 	public List<Dish> findDeleted() throws DaoException {
 		List<Dish> dishList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL_DISH)){
@@ -182,6 +191,7 @@ public class DishDaoImpl extends AbstractDao<Dish>{
 		return dishList;
 	}
 	
+	@Override
 	public boolean restore(int id) throws DaoException {
 		int result;
         try (PreparedStatement statement = connection.prepareStatement(SQL_DELETE_DISH)) {

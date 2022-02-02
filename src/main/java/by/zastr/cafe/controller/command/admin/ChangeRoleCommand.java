@@ -15,6 +15,11 @@ import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class ChangeRoleCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class ChangeRoleCommand implements Command{
 
 	@Override

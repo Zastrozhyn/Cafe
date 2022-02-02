@@ -2,6 +2,12 @@ package by.zastr.cafe.controller.command;
 
 import static by.zastr.cafe.controller.command.PagePath.*;
 
+/**
+ * class Router
+ * @author A.Zastrozhyn
+ * that are used with by controller to find out where and how
+ * request and response should be processed after the controller.
+ */
 public class Router {
     private String pagePath = INDEX;
     private RouterType type;
@@ -11,7 +17,6 @@ public class Router {
         REDIRECT;
     }
     
-
 	public Router() {
 		type = RouterType.FORWARD;
 		pagePath = MAIN_PAGE;

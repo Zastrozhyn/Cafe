@@ -16,6 +16,11 @@ import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class EditDishCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class EditDishCommand implements Command{
 
 	@Override

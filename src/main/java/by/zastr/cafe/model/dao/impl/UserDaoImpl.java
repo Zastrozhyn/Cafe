@@ -13,12 +13,17 @@ import org.apache.logging.log4j.Level;
 
 import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.model.dao.AbstractDao;
+import by.zastr.cafe.model.dao.UserDao;
 import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.entity.Account.AccountStatus;
 
-public class UserDaoImpl extends AbstractDao<User>{
-	
+/**
+ * class UserDaoImpl
+ * @author A.Zastrozhyn
+ *
+ */
+public class UserDaoImpl extends AbstractDao<User> implements UserDao{
 	private static final String SQL_FIND_ALL = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, status,"
 			+ " balance, active, role, order_history FROM users INNER JOIN accounts ON account_id = accounts.id WHERE archive=?";
 	private static final String SQL_FIND_BY_ID = "SELECT archive, user_id, name, last_name, phone, email, login, account_id, id, "
@@ -80,6 +85,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return user;
 	}
 	
+	@Override
 	public Optional<User> findByLogin(String login) throws DaoException {
 		Optional<User> user = Optional.empty();
         try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_LOGIN)) {
@@ -96,6 +102,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return user;
 	}
 	
+	@Override
 	public List<User> findByName(String name) throws DaoException {
 		List<User> userList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_NAME)) {
@@ -113,6 +120,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return userList;
 	}
 	
+	@Override
 	public List<User> findByLastName(String name) throws DaoException {
 		List<User> userList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_LASTNAME)) {
@@ -130,6 +138,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return userList;
 	}
 	
+	@Override
 	public List<User> findByRole(String name) throws DaoException {
 		List<User> userList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_BY_ROLE)) {
@@ -165,6 +174,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return (result > 0);
 	}
 	
+	@Override
 	public boolean create(User user, int accountId) throws DaoException {
 		int result;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_CREATE_USER)) {
@@ -202,6 +212,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return (result > 0);
 	}
 	
+	@Override
 	public boolean setPassword(String password, String login) throws DaoException {
 		int result;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_SET_PASSWORD)) {
@@ -215,6 +226,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return (result > 0);
 	}
 	
+	@Override
 	public String getPassword(int id) throws DaoException {
 		String password = "";
         try (PreparedStatement statement = connection.prepareStatement(SQL_GET_PASSWORD)) {
@@ -259,6 +271,7 @@ public class UserDaoImpl extends AbstractDao<User>{
 		return (result > 0);
 	}
 	
+	@Override
 	public List<User> findAllDeleted() throws DaoException {
 		List<User> userList = new ArrayList<>();
 		try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ALL)){

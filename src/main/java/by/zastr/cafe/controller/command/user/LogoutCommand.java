@@ -1,12 +1,16 @@
 package by.zastr.cafe.controller.command.user;
 
-
 import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * class LogoutCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class LogoutCommand implements Command {
 
 	@Override

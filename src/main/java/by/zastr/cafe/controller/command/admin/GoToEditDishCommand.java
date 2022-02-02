@@ -13,6 +13,11 @@ import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.service.impl.DishServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
+/**
+ * class GoToEditDishCommand
+ * @author A.Zastrozhyn
+ *
+ */
 public class GoToEditDishCommand implements Command {
 
 	@Override

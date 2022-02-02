@@ -13,9 +13,10 @@ import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.service.impl.DishServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 /**
- * 
- * @author Александр
+ * class AddDishCommand
+ * @author A.Zastrozhyn
  *
  */
 public class AddDishCommand implements Command{

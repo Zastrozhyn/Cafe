@@ -13,10 +13,16 @@ import org.apache.logging.log4j.Level;
 
 import by.zastr.cafe.exception.DaoException;
 import by.zastr.cafe.model.dao.AbstractDao;
+import by.zastr.cafe.model.dao.AccountDao;
 import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.entity.Account.AccountStatus;
 
-public class AccountDaoImpl extends AbstractDao<Account>{
+/**
+ * class AccountDaoImpl
+ * @author A.Zastrozhyn
+ *
+ */
+public class AccountDaoImpl extends AbstractDao<Account> implements AccountDao{
 	private static final String SQL_FIND_ALL_ACCOUNT = "SELECT id, status, balance, active, order_history FROM accounts";
 	private static final String SQL_FIND_ACCOUNT_BY_ID = "SELECT id, status, balance, active, order_history FROM accounts WHERE id=?";
 	private static final String SQL_FIND_ACCOUNT_BY_ACTIVE = "SELECT id, status, balance, active, order_history FROM accounts WHERE active=?";
@@ -120,6 +126,7 @@ public class AccountDaoImpl extends AbstractDao<Account>{
 		return (result > 0);
 	}
 	
+	@Override
 	public Optional<Account> findByActive(boolean active) throws DaoException {
 		Optional<Account> account = Optional.empty();
         try (PreparedStatement statement = connection.prepareStatement(SQL_FIND_ACCOUNT_BY_ACTIVE)) {
@@ -136,6 +143,7 @@ public class AccountDaoImpl extends AbstractDao<Account>{
 		return account;
 	}
 	
+	@Override
 	public Account createNewDefaultAccount() throws DaoException {
 		int id = 0;
 		try (PreparedStatement statement = connection.prepareStatement(SQL_CREATE_DEFAULT_ACCOUNT)) {

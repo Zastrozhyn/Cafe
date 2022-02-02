@@ -11,7 +11,11 @@ import by.zastr.cafe.model.dao.impl.AccountDaoImpl;
 import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.service.CafeService;
 
-
+/**
+ * class AccountServiceImpl
+ * @author A.Zastrozhyn
+ *
+ */
 public class AccountServiceImpl implements CafeService<Account> {
 	private static AccountServiceImpl instance = new AccountServiceImpl();;
 	private AccountDaoImpl accountDao;
@@ -23,20 +27,6 @@ public class AccountServiceImpl implements CafeService<Account> {
 
 	public static AccountServiceImpl getInstance() {
         return instance;
-	}
-		
-	public Account CreateNewDefaultAccount() throws ServiceException {
-		Account account = new Account();
-		try {
-			entityTransaction.beginTransaction(accountDao);
-			account = accountDao.createNewDefaultAccount();
-		} catch (DaoException e) {
-			throw new ServiceException("Service exception in method get id of new default account", e);
-		}
-		finally {
-			entityTransaction.end();
-		} 
-		return account;
 	}
 	
 	@Override
@@ -83,7 +73,31 @@ public class AccountServiceImpl implements CafeService<Account> {
 		}
 		return b;
 	}
+		
+	/**
+	 * 
+	 * @return default Account
+	 * @throws ServiceException
+	 */
+	public Account CreateNewDefaultAccount() throws ServiceException {
+		Account account = new Account();
+		try {
+			entityTransaction.beginTransaction(accountDao);
+			account = accountDao.createNewDefaultAccount();
+		} catch (DaoException e) {
+			throw new ServiceException("Service exception in method get id of new default account", e);
+		}
+		finally {
+			entityTransaction.end();
+		} 
+		return account;
+	}
 	
+	/**
+	 * 
+	 * @param account
+	 * @throws ServiceException
+	 */
 	public boolean update(Account account) throws ServiceException {
 		boolean b = false;
 		try {
