@@ -11,6 +11,7 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
+import by.zastr.cafe.model.service.DishService;
 import by.zastr.cafe.model.service.impl.DishServiceImpl;
 import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ public class EditDishCommand implements Command{
 		String description = request.getParameter(DESCRIPTION);
 		String price = request.getParameter(DISH_PRICE);
 		String weight = request.getParameter(DISH_WEIGHT);
-		DishServiceImpl dishService = DishServiceImpl.getInstance();
+		DishService dishService = DishServiceImpl.getInstance();
 		try {
 			String result = dishService.update(id, name, weight, price, description, type, locale);
 			request.setAttribute(AttributeName.MESSAGE, result);

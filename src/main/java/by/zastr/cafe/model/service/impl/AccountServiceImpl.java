@@ -9,6 +9,7 @@ import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.dao.EntityTransaction;
 import by.zastr.cafe.model.dao.impl.AccountDaoImpl;
 import by.zastr.cafe.model.entity.Account;
+import by.zastr.cafe.model.service.AccountService;
 import by.zastr.cafe.model.service.CafeService;
 
 /**
@@ -16,7 +17,7 @@ import by.zastr.cafe.model.service.CafeService;
  *
  * @author A.Zastrozhyn
  */
-public class AccountServiceImpl implements CafeService<Account> {
+public class AccountServiceImpl implements CafeService<Account>, AccountService{
 	private static AccountServiceImpl instance = new AccountServiceImpl();;
 	private AccountDaoImpl accountDao;
 	private EntityTransaction entityTransaction;	
@@ -45,7 +46,7 @@ public class AccountServiceImpl implements CafeService<Account> {
 	public Optional<Account> findById(int id) throws ServiceException{
 		Optional<Account> account = Optional.empty();
 		try {
-			entityTransaction.beginTransaction(accountDao);
+			entityTransaction.begin(accountDao);
 			account = accountDao.findById(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding account by id", e);
@@ -65,7 +66,7 @@ public class AccountServiceImpl implements CafeService<Account> {
 	@Override
 	public List<Account> findAll() throws ServiceException {
 		List<Account> accountList = new ArrayList<Account>();
-		entityTransaction.beginTransaction(accountDao);
+		entityTransaction.begin(accountDao);
 		try {
 			accountList = accountDao.findAll();
 		} catch (DaoException e) {
@@ -86,17 +87,16 @@ public class AccountServiceImpl implements CafeService<Account> {
 	 */
 	@Override
 	public boolean delete(int id) throws ServiceException {
-		boolean b = false;
 		try {
-			entityTransaction.beginTransaction(accountDao);
-			b = accountDao.delete(id);
+			entityTransaction.begin(accountDao);
+			return accountDao.delete(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method delete order", e);
 		}
 		finally {
 			entityTransaction.end();
 		}
-		return b;
+
 	}
 		
 	/**
@@ -105,10 +105,11 @@ public class AccountServiceImpl implements CafeService<Account> {
 	 * @return default Account
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public Account CreateNewDefaultAccount() throws ServiceException {
 		Account account = new Account();
 		try {
-			entityTransaction.beginTransaction(accountDao);
+			entityTransaction.begin(accountDao);
 			account = accountDao.createNewDefaultAccount();
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method get id of new default account", e);
@@ -126,18 +127,17 @@ public class AccountServiceImpl implements CafeService<Account> {
 	 * @return true, if successful
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public boolean update(Account account) throws ServiceException {
-		boolean b = false;
 		try {
-			entityTransaction.beginTransaction(accountDao);
-			b = accountDao.update(account);
+			entityTransaction.begin(accountDao);
+			return accountDao.update(account);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method update account", e);
 		}
 		finally {
 			entityTransaction.end();
 		}
-		return b;	
 	}
 
 }

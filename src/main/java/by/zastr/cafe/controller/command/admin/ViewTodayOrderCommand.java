@@ -12,6 +12,7 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.CafeOrder;
+import by.zastr.cafe.model.service.OrderService;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -31,7 +32,7 @@ public class ViewTodayOrderCommand implements Command{
 	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
-		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
+		OrderService orderService = OrderServiceImpl.getInstance();
         Router router = new Router();
         try {
         	List<CafeOrder> orderList = new ArrayList<CafeOrder>();

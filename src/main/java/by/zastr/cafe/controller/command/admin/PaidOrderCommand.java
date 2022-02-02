@@ -11,6 +11,7 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
+import by.zastr.cafe.model.service.OrderService;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public class PaidOrderCommand implements Command{
 		MessageManager messageManager = MessageManager.defineLocale(locale);
 		router.setPagePath(PagePath.ADMIN_ORDERS);
 		int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
-		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
+		OrderService orderService = OrderServiceImpl.getInstance();
 		try {
 			orderService.paid(orderId);
 			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.SUCCESSFUL));

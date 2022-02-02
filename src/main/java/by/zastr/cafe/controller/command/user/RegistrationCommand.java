@@ -13,6 +13,7 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
+import by.zastr.cafe.model.service.UserService;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ import jakarta.servlet.http.HttpSession;
  * @author A.Zastrozhyn
  */
 public class RegistrationCommand implements Command {
-	 private static final UserServiceImpl userService = UserServiceImpl.getInstance();
+	 private static final UserService userService = UserServiceImpl.getInstance();
 
 	/**
 	 * Execute.

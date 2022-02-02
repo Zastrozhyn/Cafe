@@ -10,6 +10,7 @@ import by.zastr.cafe.controller.command.PagePath;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
+import by.zastr.cafe.model.service.DishService;
 import by.zastr.cafe.model.service.impl.DishServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -39,7 +40,7 @@ public class AddDishCommand implements Command{
 		String description = request.getParameter(DESCRIPTION);
 		String price = request.getParameter(DISH_PRICE);
 		String weight = request.getParameter(DISH_WEIGHT);
-		DishServiceImpl dishService = DishServiceImpl.getInstance();
+		DishService dishService = DishServiceImpl.getInstance();
 		try {
 			String result = dishService.create(name, weight, price, description, type, locale);
 			request.setAttribute(AttributeName.MESSAGE, result);

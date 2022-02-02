@@ -18,6 +18,7 @@ import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.Dish;
+import by.zastr.cafe.model.service.OrderService;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -52,7 +53,7 @@ public class ConfirmOrderCommand implements Command{
 		String description = request.getParameter(DESCRIPTION);
 		String payment = request.getParameter(PAYMENT_TYPE).toUpperCase();
 		BigDecimal totalCost = (BigDecimal) session.getAttribute(AttributeName.TOTAL_COST);
-		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
+		OrderService orderService = OrderServiceImpl.getInstance();
 		try {
 			String result = orderService.confirmOrder(userLogin, orderList, description, DEFAULT_COMMENT, date, time, payment, totalCost, locale);
 			request.setAttribute(AttributeName.MESSAGE, result);

@@ -14,6 +14,8 @@ import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.CafeOrder;
 import by.zastr.cafe.model.entity.User;
+import by.zastr.cafe.model.service.OrderService;
+import by.zastr.cafe.model.service.UserService;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -40,8 +42,8 @@ public class FindOrderHistoryCommand implements Command{
 		router.setPagePath(PagePath.PROFILE);
 		String login = request.getParameter(RequestParameter.NAME);
 		List<CafeOrder> orders = new ArrayList<CafeOrder>();
-		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
-		UserServiceImpl userService = UserServiceImpl.getInstance();
+		OrderService orderService = OrderServiceImpl.getInstance();
+		UserService userService = UserServiceImpl.getInstance();
  		try {
  			User user = userService.findByLogin(login).get();
  			orders.addAll(orderService.findByLogin(user.getLogin()));	

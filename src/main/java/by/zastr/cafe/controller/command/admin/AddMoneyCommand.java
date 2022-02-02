@@ -16,6 +16,7 @@ import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.entity.User;
+import by.zastr.cafe.model.service.AccountService;
 import by.zastr.cafe.model.service.impl.AccountServiceImpl;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
@@ -51,7 +52,7 @@ public class AddMoneyCommand implements Command{
 		BigDecimal addMoney = BigDecimal.valueOf(money);
 		
 		UserServiceImpl userService = UserServiceImpl.getInstance();
-		AccountServiceImpl accountService = AccountServiceImpl.getInstance();
+		AccountService accountService = AccountServiceImpl.getInstance();
 		try {
 			User user = userService.findById(userId).get();
 			Account account = user.getAccount();

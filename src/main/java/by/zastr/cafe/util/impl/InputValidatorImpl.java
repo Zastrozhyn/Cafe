@@ -12,8 +12,9 @@ import by.zastr.cafe.util.InputValidator;
 public final class InputValidatorImpl implements InputValidator {
     private static InputValidatorImpl instance = new InputValidatorImpl();
     private static final String CHECK_EMAIL = "^([a-z0-9_-]+\\.)*[a-z0-9_-]+@[a-z0-9_-]+(\\.[a-z0-9_-]+)*\\.[a-z]{2,6}$";
-    private static final String CHECK_PASSWORD = "[\\d\\D]{1,25}";
+    private static final String CHECK_PASSWORD = "[\\d\\D]{4,25}";
     private static final int MAX_LENGTH_NAME = 25;
+    private static final int MIN_LENGTH_NAME = 2;
     private static final int MAX_LENGTH_DESCRIPTION = 255;
     private static final String CHECK_PRICE = "^[^-]\\d*.?\\d+$";
     private static final String CHECK_WEIGHT = "\\d{1,5}";
@@ -75,7 +76,7 @@ public final class InputValidatorImpl implements InputValidator {
      */
     @Override
 	public boolean isCorrectName(String userName) {
-        return userName.length() <= MAX_LENGTH_NAME;
+        return userName.length() <= MAX_LENGTH_NAME && userName.length() > MIN_LENGTH_NAME;
     }
     
     /**

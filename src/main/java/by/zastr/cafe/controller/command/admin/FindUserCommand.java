@@ -13,6 +13,7 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.User;
+import by.zastr.cafe.model.service.UserService;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -36,7 +37,7 @@ public class FindUserCommand implements Command{
 		router.setPagePath(PagePath.USERS);
 		String name = request.getParameter(RequestParameter.NAME);
 		List<User> users = new ArrayList<User>();
-		UserServiceImpl userService = UserServiceImpl.getInstance();
+		UserService userService = UserServiceImpl.getInstance();
 		try {
 			users.addAll(userService.findByName(name));
 			users.addAll(userService.findByLastName(name));

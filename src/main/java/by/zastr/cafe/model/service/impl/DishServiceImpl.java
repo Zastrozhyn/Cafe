@@ -12,6 +12,7 @@ import by.zastr.cafe.model.dao.EntityTransaction;
 import by.zastr.cafe.model.dao.impl.DishDaoImpl;
 import by.zastr.cafe.model.entity.Dish;
 import by.zastr.cafe.model.service.CafeService;
+import by.zastr.cafe.model.service.DishService;
 import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 
@@ -20,7 +21,7 @@ import by.zastr.cafe.util.impl.InputValidatorImpl;
  *
  * @author A.Zastrozhyn
  */
-public class DishServiceImpl implements CafeService<Dish> {
+public class DishServiceImpl implements CafeService<Dish>, DishService {
 	private static DishServiceImpl instance = new DishServiceImpl();
 	private DishDaoImpl dishDao;
 	private EntityTransaction entityTransaction;
@@ -48,7 +49,7 @@ public class DishServiceImpl implements CafeService<Dish> {
 	@Override
 	public List<Dish> findAll() throws ServiceException{
 		List<Dish> dishList = new ArrayList<Dish>();
-		entityTransaction.beginTransaction(dishDao);
+		entityTransaction.begin(dishDao);
 		try {
 			dishList = dishDao.findAll();
 		} catch (DaoException e) {
@@ -71,7 +72,7 @@ public class DishServiceImpl implements CafeService<Dish> {
 	public Optional<Dish> findById(int id) throws ServiceException{
 		Optional<Dish> dish = Optional.empty();
 		try {
-			entityTransaction.beginTransaction(dishDao);
+			entityTransaction.begin(dishDao);
 			dish = dishDao.findById(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding dish by id", e);
@@ -91,17 +92,15 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 */
 	@Override
 	public boolean delete(int id) throws ServiceException {
-		boolean b = false;
 		try {
-			entityTransaction.beginTransaction(dishDao);
-			b = dishDao.delete(id);
+			entityTransaction.begin(dishDao);
+			return dishDao.delete(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method delete dish", e);
 		}
 		finally {
 			entityTransaction.end();
-		}
-		return b;	
+		}	
 	}
 	
 	/**
@@ -111,10 +110,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 * @return List<Dish>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public List<Dish> findByName(String name) throws ServiceException{
 		List<Dish> userList = new ArrayList<Dish>();
 		try {
-			entityTransaction.beginTransaction(dishDao);;
+			entityTransaction.begin(dishDao);;
 			userList = dishDao.findByName(name);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding dish", e);
@@ -132,10 +132,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 * @return List<Dish>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public List<Dish> findByType(String type) throws ServiceException{
 		List<Dish> userList = new ArrayList<Dish>();
 		try {
-			entityTransaction.beginTransaction(dishDao);
+			entityTransaction.begin(dishDao);
 			userList = dishDao.findByType(type);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding dish", e);
@@ -152,10 +153,11 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 * @return List<Dish>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public List<Dish> findDeleted() throws ServiceException{
 		List<Dish> userList = new ArrayList<Dish>();
 		try {
-			entityTransaction.beginTransaction(dishDao);
+			entityTransaction.begin(dishDao);
 			userList = dishDao.findDeleted();
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding dish", e);
@@ -173,18 +175,17 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 * @return true, if successful
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public boolean restore(int id) throws ServiceException {
-		boolean b = false;
 		try {
-			entityTransaction.beginTransaction(dishDao);
-			b = dishDao.restore(id);
+			entityTransaction.begin(dishDao);
+			return dishDao.restore(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method restore dish", e);
 		}
 		finally {
 			entityTransaction.end();
 		}
-		return b;	
 	}
 	
 	/**
@@ -194,18 +195,17 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 * @return true, if successful
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public boolean update(Dish dish) throws ServiceException {
-		boolean b = false;
 		try {
-			entityTransaction.beginTransaction(dishDao);
-			b = dishDao.update(dish);
+			entityTransaction.begin(dishDao);
+			return dishDao.update(dish);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method update dish", e);
 		}
 		finally {
 			entityTransaction.end();
-		}
-		return b;	
+		}	
 	}
 
 	/**
@@ -220,6 +220,7 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 * @return the string
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public String create(String name, String weight, String price, String description, String type, String locale) throws ServiceException {
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);
@@ -237,7 +238,7 @@ public class DishServiceImpl implements CafeService<Dish> {
 		int weightInt = Integer.parseInt(weight);
 		var dish = new Dish(name, weightInt, cost, description, type);
 		try {
-			entityTransaction.beginTransaction(dishDao);
+			entityTransaction.begin(dishDao);
 			dishDao.create(dish);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method add dish", e);
@@ -261,6 +262,7 @@ public class DishServiceImpl implements CafeService<Dish> {
 	 * @return the string
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public String update(int id, String name, String weight, String price, String description, String type, String locale) throws ServiceException {
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);
@@ -282,7 +284,7 @@ public class DishServiceImpl implements CafeService<Dish> {
 		var dish = new Dish(name, weightInt, cost, description, type);
 		dish.setId(id);
 		try {
-			entityTransaction.beginTransaction(dishDao);
+			entityTransaction.begin(dishDao);
 			dishDao.update(dish);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method add dish", e);

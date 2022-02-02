@@ -14,6 +14,8 @@ import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.CafeOrder;
 import by.zastr.cafe.model.entity.User;
+import by.zastr.cafe.model.service.OrderService;
+import by.zastr.cafe.model.service.UserService;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -39,8 +41,8 @@ public class FindOrderCommand implements Command{
 		String name = request.getParameter(RequestParameter.NAME);
 		List<User> users = new ArrayList<User>();
 		List<CafeOrder> orders = new ArrayList<CafeOrder>();
-		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
-		UserServiceImpl userService = UserServiceImpl.getInstance();
+		OrderService orderService = OrderServiceImpl.getInstance();
+		UserService userService = UserServiceImpl.getInstance();
  		try {
 			users.addAll(userService.findByName(name));
 			users.addAll(userService.findByLastName(name));

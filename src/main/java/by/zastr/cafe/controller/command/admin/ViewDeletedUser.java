@@ -11,6 +11,7 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.User;
+import by.zastr.cafe.model.service.UserService;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -30,7 +31,7 @@ public class ViewDeletedUser implements Command{
 	 */
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
-		UserServiceImpl userService = UserServiceImpl.getInstance();
+		UserService userService = UserServiceImpl.getInstance();
         Router router = new Router();
         try {
         	List<User> userList;

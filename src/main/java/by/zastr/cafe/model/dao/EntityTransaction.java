@@ -52,11 +52,11 @@ public class EntityTransaction {
     }
     
 	/**
-	 * Begin transaction.
+	 * Begin
 	 *
 	 * @param dao the dao
 	 */
-    public void beginTransaction(AbstractDao dao){
+    public void begin(AbstractDao dao){
         if (connection == null) {
         	ConnectionPool connectionPool = ConnectionPool.getInstance();
             connection = connectionPool.takeConnection();

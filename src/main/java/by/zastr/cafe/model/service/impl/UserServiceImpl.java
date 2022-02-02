@@ -14,6 +14,7 @@ import by.zastr.cafe.model.dao.impl.UserDaoImpl;
 import by.zastr.cafe.model.entity.Account;
 import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.CafeService;
+import by.zastr.cafe.model.service.UserService;
 import by.zastr.cafe.util.InputValidator;
 import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.PasswordEncryptor;
@@ -24,7 +25,7 @@ import by.zastr.cafe.util.impl.InputValidatorImpl;
  *
  * @author A.Zastrozhyn
  */
-public class UserServiceImpl implements CafeService<User> {
+public class UserServiceImpl implements CafeService<User>, UserService {
 	private static UserServiceImpl instance = new UserServiceImpl();;
 	private UserDaoImpl userDao;
 	private EntityTransaction entityTransaction;
@@ -53,7 +54,7 @@ public class UserServiceImpl implements CafeService<User> {
 	@Override
 	public List<User> findAll() throws ServiceException{
 		List<User> userList = new ArrayList<User>();
-		entityTransaction.beginTransaction(userDao);
+		entityTransaction.begin(userDao);
 		try {
 			userList = userDao.findAll();
 		} catch (DaoException e) {
@@ -76,7 +77,7 @@ public class UserServiceImpl implements CafeService<User> {
 	public Optional<User> findById(int id) throws ServiceException{
 		Optional<User> user = Optional.empty();
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			user = userDao.findById(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding users by id", e);
@@ -96,17 +97,15 @@ public class UserServiceImpl implements CafeService<User> {
 	 */
 	@Override
 	public boolean delete(int id) throws ServiceException {
-		boolean b = false;
 		try {
-			entityTransaction.beginTransaction(userDao);
-			b = userDao.delete(id);
+			entityTransaction.begin(userDao);
+			return userDao.delete(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method delete user", e);
 		}
 		finally {
 			entityTransaction.end();
-		}
-		return b;	
+		}	
 	}
 	
 	/**
@@ -115,9 +114,10 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return List<User>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public List<User> findAllDeleted() throws ServiceException{
 		List<User> userList = new ArrayList<User>();
-		entityTransaction.beginTransaction(userDao);
+		entityTransaction.begin(userDao);
 		try {
 			userList = userDao.findAllDeleted();
 		} catch (DaoException e) {
@@ -136,10 +136,11 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return Optional<User>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public Optional<User> findByLogin(String login) throws ServiceException{
 		Optional<User> user = Optional.empty();
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			user = userDao.findByLogin(login);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding users by login", e);
@@ -157,10 +158,11 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return List<User>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public List<User> findByName(String name) throws ServiceException{
 		List<User> userList = new ArrayList<User>();
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			userList = userDao.findByName(name);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding users", e);
@@ -178,10 +180,11 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return List<User>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public List<User> findByLastName(String name) throws ServiceException{
 		List<User> userList = new ArrayList<User>();
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			userList = userDao.findByLastName(name);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding users", e);
@@ -199,10 +202,11 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return List<User>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public List<User> findByRole(String role) throws ServiceException{
 		List<User> userList = new ArrayList<User>();
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			userList = userDao.findByRole(role);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method finding users", e);
@@ -220,18 +224,18 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return true, if successful
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public boolean update(User user) throws ServiceException {
-		boolean b = false;
 		try {
-			entityTransaction.beginTransaction(userDao);
-			b = userDao.update(user);
+			entityTransaction.begin(userDao);
+			return userDao.update(user);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method delete user", e);
 		}
 		finally {
 			entityTransaction.end();
 		}
-		return b;	
+	
 	}
 	
 	
@@ -247,6 +251,7 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return the string
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public String edit( int userId, String name, String lastName, String phone, String email, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);
@@ -263,7 +268,7 @@ public class UserServiceImpl implements CafeService<User> {
 		
 		User user;
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			user = userDao.findById(userId).get();
 			user.setEmail(email);
 			user.setLastName(lastName);
@@ -293,6 +298,7 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return the string
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public String registration(String name, String lastName, String phone, String login, 
 			String password, String confirmPassword, String email, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
@@ -330,7 +336,7 @@ public class UserServiceImpl implements CafeService<User> {
 		user.setPhone(phone);
 		user.setRole(DEFAULT_USER_ROLE);
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			userDao.create(user, accountId);
 			userDao.setPassword(password,login);
 		} catch (DaoException e) {
@@ -350,6 +356,7 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return Optional<User>
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public Optional<User> login (String login, String password) throws ServiceException {
 		Optional<User> optionalUser = Optional.empty();
     	List<User> userList = findAll();
@@ -373,6 +380,7 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return String result
 	 * @throws ServiceException the service exception
 	 */
+	@Override
 	public String changePassword (int userId, String login, String password, String newPassword, String confirmPassword, String locale) throws ServiceException {
 		InputValidator validator = InputValidatorImpl.getInstance();
 		MessageManager messageManager = MessageManager.defineLocale(locale);
@@ -386,7 +394,7 @@ public class UserServiceImpl implements CafeService<User> {
 			return messageManager.getMessage(UserMessage.WRONG_CONFIRM_PASSWORD);
 		}
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			newPassword = PasswordEncryptor.encrypt(newPassword);
 			userDao.setPassword(newPassword, login);
 		} catch (DaoException e) {
@@ -405,15 +413,15 @@ public class UserServiceImpl implements CafeService<User> {
 	 * @return boolean is Unique Login
 	 * @throws ServiceException the service exception
 	 */
-    public boolean isUniqueLogin (String login) throws ServiceException {
-    	boolean b = true;
+    @Override
+	public boolean isUniqueLogin (String login) throws ServiceException {
     	List<User> userList = findAll();
     	for (User user : userList) {
     		if (user.getLogin().equals(login)) {
-    			b=false;
+    			return false;
     		}
     	}
-    	return b;
+    	return true;
     }
     
     /**
@@ -423,15 +431,15 @@ public class UserServiceImpl implements CafeService<User> {
      * @return boolean is Unique Phone
      * @throws ServiceException the service exception
      */
-    public boolean isUniquePhone (String phone) throws ServiceException {
-    	boolean b = true;
+    @Override
+	public boolean isUniquePhone (String phone) throws ServiceException {
     	List<User> userList = findAll();
     	for (User user : userList) {
     		if (user.getPhone().equals(phone)) {
-    			b=false;
+    			return false;
     		}
     	}
-    	return b;
+    	return true;
     }
     
     /**
@@ -443,7 +451,7 @@ public class UserServiceImpl implements CafeService<User> {
     private String getPassword(int id) throws ServiceException {
     	String password;
 		try {
-			entityTransaction.beginTransaction(userDao);
+			entityTransaction.begin(userDao);
 			password = userDao.getPassword(id);
 		} catch (DaoException e) {
 			throw new ServiceException("Service exception in method create user", e);

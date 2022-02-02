@@ -13,6 +13,7 @@ import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.User;
+import by.zastr.cafe.model.service.AccountService;
 import by.zastr.cafe.model.service.impl.AccountServiceImpl;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import by.zastr.cafe.util.MessageManager;
@@ -42,7 +43,7 @@ public class BlockUserCommand implements Command{
 		MessageManager messageManager = MessageManager.defineLocale(locale);
 		int userId = Integer.parseInt(request.getParameter(USER_ID));
 		UserServiceImpl userService = UserServiceImpl.getInstance();
-		AccountServiceImpl accountService = AccountServiceImpl.getInstance();
+		AccountService accountService = AccountServiceImpl.getInstance();
 		try {
 			User user = userService.findById(userId).get();
 			if (user.getAccount().isActive()){

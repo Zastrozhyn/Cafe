@@ -8,6 +8,7 @@ import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.entity.User;
+import by.zastr.cafe.model.service.UserService;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
 import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
@@ -44,7 +45,7 @@ public class LoginCommand implements Command{
 		router.setRedirect();
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
-		UserServiceImpl userService = UserServiceImpl.getInstance();
+		UserService userService = UserServiceImpl.getInstance();
 		try {
 			Optional<User> user = userService.login(login, password);
 			if (user.isPresent()) {

@@ -11,6 +11,7 @@ import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
+import by.zastr.cafe.model.service.OrderService;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -35,7 +36,7 @@ public class AddCommentCommand implements Command{
 		router.setRedirect();
 		int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
 		String comment = request.getParameter(COMMENT);
-		OrderServiceImpl orderService = OrderServiceImpl.getInstance();
+		OrderService orderService = OrderServiceImpl.getInstance();
 		try {
 			if(orderService.addComment(comment, orderId)) {
 				request.setAttribute(AttributeName.MESSAGE, UserMessage.SUCCESSFUL);
