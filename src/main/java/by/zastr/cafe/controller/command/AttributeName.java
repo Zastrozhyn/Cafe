@@ -65,6 +65,19 @@ public class AttributeName {
     
     /** The Constant CURRENT_PAGE. */
     public static final String CURRENT_PAGE = "current_page";
+    
+    /** The Constant NAME. */
+    public static final String NAME = "name";
+    
+    /** The Constant LAST NAME. */
+    public static final String LAST_NAME = "lastName";
+    
+    /** The Constant EMAIL. */
+    public static final String EMAIL = "email";
+    
+    /** The Constant PHONE. */
+    public static final String PHONE = "phone";
+    
 	
     private AttributeName() {
     }

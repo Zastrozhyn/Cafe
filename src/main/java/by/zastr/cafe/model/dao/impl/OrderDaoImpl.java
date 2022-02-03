@@ -47,8 +47,8 @@ public class OrderDaoImpl extends AbstractDao<CafeOrder> implements OrderDao{
 			+ "payment_type=?, paid=? WHERE order_id = ?"; 
 	private static final String SQL_DELETE_ORDER = "DELETE FROM orders WHERE order_id = ?";
 	private static final String SQL_DELETE_ORDER_DISHES = "DELETE FROM order_dishes WHERE order_id = ?";
-	private static final String SQL_TOTAL_COST = "SELECT SUM(price) FROM menu WHERE menu_id IN "
-			+ "(SELECT menu_id FROM order_dishes WHERE order_id =?) ";
+	private static final String SQL_TOTAL_COST = "SELECT SUM(total.price) FROM (SELECT price FROM order_dishes "
+			+ "INNER JOIN menu ON order_dishes.menu_id=menu.menu_id WHERE order_id =?) AS total ";
 	private static final String SQL_LAST_INSERT_ID = "SELECT LAST_INSERT_ID() AS lastid";
 	
 	/**

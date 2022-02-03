@@ -11,7 +11,10 @@
 <title><fmt:message key="Main_page" /></title>
 </head>
 <body>
-<h2><fmt:message key="Hello" /> ${user.name}</h2>
+	<h3><fmt:message key="Hello" /> </h3>
+	<h3>100BYN - 5%</h3>
+	<h3>500BYN - 10%</h3>
+	<h3>1000BYN - 20%</h3>
 	<h3>${message}</h3>
 </body>
 <c:import url="../includes/footer.jsp" />

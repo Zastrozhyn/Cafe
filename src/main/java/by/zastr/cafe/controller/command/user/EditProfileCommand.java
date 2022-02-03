@@ -1,13 +1,13 @@
 package by.zastr.cafe.controller.command.user;
 
 import static by.zastr.cafe.controller.command.AttributeName.*;
-import static by.zastr.cafe.controller.command.RequestParameter.*;
 
 import org.apache.logging.log4j.Level;
 
 import by.zastr.cafe.controller.command.AttributeName;
 import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.PagePath;
+import by.zastr.cafe.controller.command.RequestParameter;
 import by.zastr.cafe.controller.command.Router;
 import by.zastr.cafe.controller.command.UserMessage;
 import by.zastr.cafe.exception.CommandException;
@@ -37,7 +37,7 @@ public class EditProfileCommand implements Command{
 		Router router = new Router();
 		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);
-		int userId = Integer.parseInt(request.getParameter(USER_ID));
+		int userId = Integer.parseInt(request.getParameter(RequestParameter.USER_ID));
 		String name = request.getParameter(NAME);
 		String lastName = request.getParameter(LAST_NAME);
 		String email = request.getParameter(EMAIL);

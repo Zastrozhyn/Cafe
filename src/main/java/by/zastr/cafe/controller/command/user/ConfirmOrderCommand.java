@@ -45,7 +45,6 @@ public class ConfirmOrderCommand implements Command{
 		HttpSession session = request.getSession();
 		String locale = (String) session.getAttribute(SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);
-		router.setRedirect();
 		List<Dish> orderList = (List<Dish>) session.getAttribute(AttributeName.LIST_DISH);
 		String userLogin = request.getParameter(USER_ID);
 		LocalDate date = LocalDate.now();

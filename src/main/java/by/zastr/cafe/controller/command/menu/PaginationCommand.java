@@ -43,7 +43,7 @@ public class PaginationCommand implements Command{
  			return router;
 		}
 		session.setAttribute(AttributeName.BEGIN_LIST, (DisplayMenuCommand.DEFAULT_BEGIN + (currentPage-1)*DisplayMenuCommand.DEFAULT_END));
-		session.setAttribute(AttributeName.END_LIST, currentPage*DisplayMenuCommand.DEFAULT_END);
+		session.setAttribute(AttributeName.END_LIST, currentPage*DisplayMenuCommand.DEFAULT_END-1);
 		session.setAttribute(CURRENT_PAGE, currentPage);
 
 		return router;

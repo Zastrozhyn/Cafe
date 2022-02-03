@@ -8,7 +8,7 @@ body{
     background:url(../images/mainPage.jpg);
     background-size: cover;
     color: #FFEBCD;
-    font-size:medium;
+    font-size:large;
     font-family: Helvetica;
    }
 footer{
@@ -20,11 +20,20 @@ footer{
     height: 40px;
 }
 
+table{
+	width: 100%;
+    border-collapse: collapse;
+}
+.mini_table{
+		width: 30%;
+}
+th, td {
+      border: 1px solid black;
+}
 .header{
 	display: flex;
 	justify-content: space-between;
 	padding: 10px;
-	background: #282825;
 	color:#FFEBCD;
 	font-family: Helvetica;
 }
@@ -39,9 +48,13 @@ footer{
 	margin-left: 5px; 
 }
 .header_item:hover{
-	border-radius: 4px;	
+	border-radius: 4px;
+	background:black;	
 }
 .header_logo{
 	font-size: 25px;
 	font-weight :bold;
+}
+.bd-hide {
+    border: none;
 }

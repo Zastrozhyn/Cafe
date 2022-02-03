@@ -25,7 +25,7 @@ public class DisplayMenuCommand implements Command{
 	private static final String DELETED_TYPE = "deleted";
 	
 	/** The Constant DEFAULT_BEGIN. */
-	public static final int DEFAULT_BEGIN = 1;
+	public static final int DEFAULT_BEGIN = 0;
 	
 	/** The Constant DEFAULT_END. */
 	public static final int DEFAULT_END = 7;
@@ -61,13 +61,12 @@ public class DisplayMenuCommand implements Command{
  			session.setAttribute(CURRENT_PAGE, DEFAULT_CURRENT_PAGE);
 
  			session.setAttribute(BEGIN_LIST, DEFAULT_BEGIN);
- 			session.setAttribute(END_LIST, DEFAULT_END);
+ 			session.setAttribute(END_LIST, DEFAULT_END-1);
  			router.setPagePath(PagePath.MENU);
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "cannot display menu:", e);
             throw new CommandException("cannot display menu:", e);
 		}
-        
 		return router;
 	}
 

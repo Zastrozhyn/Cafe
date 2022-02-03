@@ -12,16 +12,16 @@
 <body>
 	<form method="POST" action="<c:url value="/controller"/>">
 		<input type="hidden" name="command" value="registration">
-		<fmt:message key="Name" /><input name="name" required pattern="[A-Za-z]{2,25}">
+		<fmt:message key="Name" /><input name="name" required value="${name}"pattern="[A-Za-z]{2,25}">
 		<br/>
 		<br/>
-		<fmt:message key="Last_name" /> <input name="last_name" value=""required pattern="[A-Za-z]{2,25}">
+		<fmt:message key="Last_name" /> <input name="last_name" value="${lastName}"required pattern="[A-Za-z]{2,25}">
 		<br/>
 		<br/>
-		<fmt:message key="Phone" /> <input name="phone" value=""required pattern="^(\+)?((\d{2,3}) ?\d|\d)(([ -]?\d)|( ?(\d{2,3}) ?)){5,12}\d$">
+		<fmt:message key="Phone" /> <input name="phone" value="${phone}"required pattern="^(\+)?((\d{2,3}) ?\d|\d)(([ -]?\d)|( ?(\d{2,3}) ?)){5,12}\d$">
 		<br/>
 		<br/> 
-		<fmt:message key="Email" /> <input type="email" name="email" value=""required>
+		<fmt:message key="Email" /> <input type="email" name="email" value="${email}"required>
 		<br/>
 		<br/>  
 		<fmt:message key="Login" /> <input name="login" required pattern="[\d\D]{1,25}">

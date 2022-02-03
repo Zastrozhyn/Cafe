@@ -1,11 +1,11 @@
 package by.zastr.cafe.controller.command.user;
 
+import by.zastr.cafe.controller.command.AttributeName;
 import by.zastr.cafe.controller.command.Command;
 import by.zastr.cafe.controller.command.PagePath;
 
 import static by.zastr.cafe.controller.command.RequestParameter.*;
 import static by.zastr.cafe.controller.command.RequestParameter.SESSION_LOCALE;
-import static by.zastr.cafe.controller.command.AttributeName.*;
 
 import org.apache.logging.log4j.Level;
 
@@ -54,8 +54,12 @@ public class RegistrationCommand implements Command {
 			}
 			else {
 				router.setPagePath(PagePath.REGISTRATION);
+				request.setAttribute(AttributeName.NAME, name);
+				request.setAttribute(AttributeName.LAST_NAME, lastName);
+				request.setAttribute(AttributeName.PHONE, phone);
+				request.setAttribute(AttributeName.EMAIL, email);
 			}
-			request.setAttribute(REGISTRATION_RESULT, result);
+			request.setAttribute(AttributeName.REGISTRATION_RESULT, result);
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "User cannot be registered:", e);
             throw new CommandException("User cannot be registered:", e);
