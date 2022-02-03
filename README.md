@@ -29,6 +29,7 @@ The web system gives an opportunity to order different dishes make online paymen
 - can add, edit and archive new dishes
 - can process orders made by customer
 - can register payments that customers made in cash
+- can register transferring money to a balance
 - can block and unblock users
 - can log out
 ![БД](https://user-images.githubusercontent.com/78814383/152406605-28ef8608-a681-4d7a-9838-7fdb99f7a965.jpg)
