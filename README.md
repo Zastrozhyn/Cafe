@@ -1,5 +1,5 @@
 # EPAM-Cafe
-The web system gives an opportunity to order different dishes of cafe make online payments as well. There are several types of menu available for customer users. The menu are moderated by the admin. Admin processes the order made be the customer.
+The web system gives an opportunity to order different dishes make online payments as well. There are several types of menu available for customer. Bonus points are awarded for each paid order. Also, upon reaching a certain purchase history, the client is automatically provided with a permanent discount. The menu are moderated by admin. Admin processes the order made by the customer.
 
 ## User roles
 
