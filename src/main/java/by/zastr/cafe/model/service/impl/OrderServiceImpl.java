@@ -249,7 +249,7 @@ public class OrderServiceImpl implements CafeService<CafeOrder>, OrderService {
 		finally {
 			entityTransaction.end();
 		}	
-		return messageManager.getMessage(UserMessage.SUCCESSFUL);	
+		return messageManager.getMessage(UserMessage.SUCCESSFUL_ORDER);	
 	}
 	
 	/**

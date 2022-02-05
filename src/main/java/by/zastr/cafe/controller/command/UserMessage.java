@@ -43,6 +43,9 @@ public final class UserMessage {
 	/** The Constant SUCCESSFUL. */
 	public static final String SUCCESSFUL = "SUCCESSFUL";
 	
+	/** The Constant SUCCESSFUL. */
+	public static final String SUCCESSFUL_ORDER = "SUCCESSFUL_ORDER";
+	
 	/** The Constant UNSUCCESSFUL. */
 	public static final String UNSUCCESSFUL = "UNSUCCESSFUL";
 	

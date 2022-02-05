@@ -56,11 +56,11 @@ public class ConfirmOrderCommand implements Command{
 		try {
 			String result = orderService.confirmOrder(userLogin, orderList, description, DEFAULT_COMMENT, date, time, payment, totalCost, locale);
 			request.setAttribute(AttributeName.MESSAGE, result);
-			if (!result.equals(messageManager.getMessage(UserMessage.SUCCESSFUL))) {
+			if (!result.equals(messageManager.getMessage(UserMessage.SUCCESSFUL_ORDER))) {
 				router.setPagePath(PagePath.ORDER);
 				router.setForward();
 			}
-			if (result.equals(messageManager.getMessage(UserMessage.SUCCESSFUL))) {
+			if (result.equals(messageManager.getMessage(UserMessage.SUCCESSFUL_ORDER))) {
 				session.removeAttribute(AttributeName.LIST_DISH);
 				session.removeAttribute(AttributeName.TOTAL_COST);
 			}
