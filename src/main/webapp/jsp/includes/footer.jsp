@@ -6,6 +6,6 @@
 <body>
 </body>
 <footer>
-	<ctg:footerTag/>
+	<p style="float: right;"><ctg:footerTag/></p>
 </footer>
 

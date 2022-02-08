@@ -270,6 +270,9 @@ public class UserServiceImpl implements CafeService<User>, UserService {
 		try {
 			entityTransaction.begin(userDao);
 			user = userDao.findById(userId).get();
+			if(!isUniquePhone(phone)&&!phone.equals(user.getPhone())) {
+				return messageManager.getMessage(UserMessage.WRONG_PHONE);
+			}
 			user.setEmail(email);
 			user.setLastName(lastName);
 			user.setName(name);

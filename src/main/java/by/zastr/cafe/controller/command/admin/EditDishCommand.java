@@ -34,7 +34,7 @@ public class EditDishCommand implements Command{
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
-		router.setPagePath(PagePath.MENU);
+		router.setPagePath(PagePath.MENU_ADMIN);
 		HttpSession session = request.getSession();
 		String locale = (String) session.getAttribute(SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);

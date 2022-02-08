@@ -34,6 +34,7 @@ public class ChangePasswordCommand implements Command{
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
+		router.setPagePath(PagePath.PROFILE);
 		HttpSession session = request.getSession();
 		String locale = (String) session.getAttribute(SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);

@@ -28,6 +28,9 @@ public final class PagePath {
     /** The Constant MENU. */
     public static final String MENU = "/jsp/user/menu.jsp";
     
+    /** The Constant MENU. */
+    public static final String MENU_ADMIN = "/controller?command=menu&type=";
+    
     /** The Constant ORDER. */
     public static final String ORDER = "/jsp/user/order.jsp";
     
@@ -48,9 +51,12 @@ public final class PagePath {
     
     /** The Constant ADMIN_ORDERS. */
     public static final String ADMIN_ORDERS = "/jsp/admin/admin_orders.jsp";
+    /** The Constant ADMIN_ORDERS. */
+    
+    public static final String ORDERS = "/controller?command=today_order";
     
     /** The Constant ADMIN_USERS. */
-    public static final String ADMIN_USERS = "/jsp/admin/admin_users.jsp";
+    public static final String ADMIN_USERS = "/controller?command=view_user";
     
     /** The Constant EDIT_DISH. */
     public static final String EDIT_DISH = "/jsp/admin/editdish.jsp";

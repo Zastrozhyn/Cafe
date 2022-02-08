@@ -12,7 +12,7 @@
 <body>
 	  <a href="${abs}/jsp/admin/newdish.jsp"><fmt:message key="Add_dish" /></a>
 	  <br>
-	  <a href="${abs}/jsp/admin/admin_users.jsp"><fmt:message key="Users" /></a>
+	  <a href="${abs}/controller?command=view_user"><fmt:message key="Users" /></a>
 	  <br>
 	  <a href="${abs}/jsp/admin/admin_orders.jsp"><fmt:message key="Orders" /></a>
 	  <br>	  

@@ -38,7 +38,7 @@ public class PaidOrderCommand implements Command{
 		Router router = new Router();
 		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);
-		router.setPagePath(PagePath.ADMIN_ORDERS);
+		router.setPagePath(PagePath.ORDERS);
 		int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
 		OrderService orderService = OrderServiceImpl.getInstance();
 		try {

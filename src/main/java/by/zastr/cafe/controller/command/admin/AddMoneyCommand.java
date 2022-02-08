@@ -19,8 +19,10 @@ import by.zastr.cafe.model.entity.User;
 import by.zastr.cafe.model.service.AccountService;
 import by.zastr.cafe.model.service.impl.AccountServiceImpl;
 import by.zastr.cafe.model.service.impl.UserServiceImpl;
+import by.zastr.cafe.util.MessageManager;
 import by.zastr.cafe.util.impl.InputValidatorImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * class AddMoneyCommand.
@@ -39,18 +41,19 @@ public class AddMoneyCommand implements Command{
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
-		router.setPagePath(PagePath.USERS);
+		router.setPagePath(PagePath.ADMIN_USERS);
+		HttpSession session = request.getSession();
+		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		int userId = Integer.parseInt(request.getParameter(USER_ID));
 		String moneyString = request.getParameter(RequestParameter.MONEY);
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
 		if(!validator.isCorrectPrice(moneyString)) {
-			request.setAttribute(AttributeName.MESSAGE, UserMessage.UNSUCCESSFUL);
-			router.setPagePath(PagePath.ADMIN_USERS);
+			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.SUCCESSFUL));
 			return router;
 		}
 		long money = Long.parseLong(moneyString);
 		BigDecimal addMoney = BigDecimal.valueOf(money);
-		
 		UserServiceImpl userService = UserServiceImpl.getInstance();
 		AccountService accountService = AccountServiceImpl.getInstance();
 		try {
@@ -58,7 +61,7 @@ public class AddMoneyCommand implements Command{
 			Account account = user.getAccount();
 			account.setBalance(account.getBalance().add(addMoney));
 			accountService.update(account);
-			request.setAttribute(AttributeName.MESSAGE, UserMessage.SUCCESSFUL);
+			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.SUCCESSFUL));
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "cannot add money:", e);
             throw new CommandException("cannot add money:", e);

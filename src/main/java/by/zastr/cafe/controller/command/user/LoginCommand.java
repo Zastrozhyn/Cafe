@@ -42,7 +42,6 @@ public class LoginCommand implements Command{
 		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);
 		Router router = new Router();
-		router.setRedirect();
 		String login = request.getParameter(LOGIN);
 		String password = request.getParameter(PASSWORD);
 		UserService userService = UserServiceImpl.getInstance();

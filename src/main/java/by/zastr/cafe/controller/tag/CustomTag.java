@@ -13,7 +13,7 @@ import jakarta.servlet.jsp.tagext.TagSupport;
  */
 @SuppressWarnings("serial")
 public class CustomTag extends TagSupport{
-	private static final String AUTHOR = "made by A.Zastrozhyn";
+	private static final String AUTHOR = "made by A.Zastrozhyn   ";
 	
 	/**
 	 * Do start tag.

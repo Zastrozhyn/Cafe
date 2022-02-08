@@ -35,7 +35,7 @@ public class DeleteRestoreDishCommand implements Command{
 	public Router execute(HttpServletRequest request) throws CommandException {
 		HttpSession session = request.getSession();
 		Router router = new Router();
-		router.setPagePath(PagePath.EDIT_DISH);
+		router.setPagePath(PagePath.MENU_ADMIN);
 		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);
 		int dishId = Integer.parseInt(request.getParameter(DISH_ID));

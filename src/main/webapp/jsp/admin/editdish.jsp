@@ -14,16 +14,13 @@
     	  <input type="hidden" name="command" value="edit_dish">
  		  <fmt:message key="Id" /> "${dish.id}"
  		  <fmt:message key="Deleted" />:"${dish.archive}" 
-		  <input type="hidden" name="dishId" value="${dish.id}"required>
+		  <input type="hidden" name="dishId" value="${dish.id}">
 	      <br/>
 		  <br/>
 		  <fmt:message key="Name" /><input name="name" value="${dish.name}"required pattern="[\d\D]{1,255}">
 		  <br/>
 		  <br/>
-		  <fmt:message key="Type" />
-		  <input type="radio" name="type" value="drink" required> <fmt:message key="Drink" /> <br>  
-		  <input type="radio" name="type" value="snack"> <fmt:message key="Snack" /> <br>  
-		  <input type="radio" name="type" value="desert"> <fmt:message key="Desert" /> <br> 
+		  <input type="hidden" name="type" value="${dish.type}">
 		  <br/>
 		  <br/>
 		  <fmt:message key="Description" /><input name="description" value="${dish.description}">

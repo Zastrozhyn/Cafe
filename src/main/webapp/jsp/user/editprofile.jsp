@@ -16,7 +16,7 @@
 		  <fmt:message key="Name" /> <input name="name" value="${user.name}" required pattern="[A-Za-z]{2,25}">
 		  <br/>
 		  <br/>
-		  <fmt:message key="Last_name" /><input name="last_name" value="${user.lastName}" required pattern="[A-Za-z]{2,25}">
+		  <fmt:message key="Last_name" /><input name="lastName" value="${user.lastName}" required pattern="[A-Za-z]{2,25}">
 		  <br/>
 		  <br/>
 		  <fmt:message key="Phone" /><input name="phone" value="${user.phone}" required pattern="^(\+)?((\d{2,3}) ?\d|\d)(([ -]?\d)|( ?(\d{2,3}) ?)){5,12}\d$">

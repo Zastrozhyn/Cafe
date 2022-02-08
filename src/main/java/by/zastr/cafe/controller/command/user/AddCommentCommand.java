@@ -13,7 +13,9 @@ import by.zastr.cafe.exception.CommandException;
 import by.zastr.cafe.exception.ServiceException;
 import by.zastr.cafe.model.service.OrderService;
 import by.zastr.cafe.model.service.impl.OrderServiceImpl;
+import by.zastr.cafe.util.MessageManager;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * class AddCommentCommand.
@@ -33,14 +35,16 @@ public class AddCommentCommand implements Command{
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
 		router.setPagePath(PagePath.PROFILE);
-		router.setRedirect();
+		HttpSession session = request.getSession();
+		String locale = (String) session.getAttribute(SESSION_LOCALE);
+		MessageManager messageManager = MessageManager.defineLocale(locale);
 		int orderId = Integer.parseInt(request.getParameter(ORDER_ID));
 		String comment = request.getParameter(COMMENT);
 		OrderService orderService = OrderServiceImpl.getInstance();
 		try {
-			if(orderService.addComment(comment, orderId)) {
-				request.setAttribute(AttributeName.MESSAGE, UserMessage.SUCCESSFUL);
-			}
+			orderService.addComment(comment, orderId);
+			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.SUCCESSFUL));
+			
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "cannot add comment:", e);
             throw new CommandException("cannot add comment:", e);

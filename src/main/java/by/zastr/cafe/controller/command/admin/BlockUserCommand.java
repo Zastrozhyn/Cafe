@@ -37,7 +37,7 @@ public class BlockUserCommand implements Command{
 	@Override
 	public Router execute(HttpServletRequest request) throws CommandException {
 		Router router = new Router();
-		router.setPagePath(PagePath.USERS);
+		router.setPagePath(PagePath.ADMIN_USERS);
 		HttpSession session = request.getSession();
 		String locale = (String) session.getAttribute(AttributeName.SESSION_LOCALE);
 		MessageManager messageManager = MessageManager.defineLocale(locale);
@@ -46,6 +46,7 @@ public class BlockUserCommand implements Command{
 		AccountService accountService = AccountServiceImpl.getInstance();
 		try {
 			User user = userService.findById(userId).get();
+			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.SUCCESSFUL));
 			if (user.getAccount().isActive()){
 				user.getAccount().setActive(false);
 				accountService.update(user.getAccount());
@@ -56,7 +57,6 @@ public class BlockUserCommand implements Command{
 				accountService.update(user.getAccount());
 				return router;
 			}
-			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.SUCCESSFUL));
 		} catch (ServiceException e) {
 			logger.log(Level.ERROR, "User cannot be blocked:", e);
             throw new CommandException("User cannot be blocked:", e);
