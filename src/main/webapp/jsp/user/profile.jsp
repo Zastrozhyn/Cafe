@@ -8,15 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <title><fmt:message key="Profile" /></title>
-<style>
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      border: 1px solid black;
-    }
-</style>
 </head>
 <body>
 	<fmt:message key="Name" />: ${user.name}

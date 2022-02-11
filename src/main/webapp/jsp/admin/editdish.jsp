@@ -10,7 +10,7 @@
 <title><fmt:message key="Edit_dish" /></title>
 </head>
 <body>
- 	<form method="GET" action="<c:url value="/controller"/>">
+ 	<form method="POST" action="<c:url value="/controller"/>">
     	  <input type="hidden" name="command" value="edit_dish">
  		  <fmt:message key="Id" /> "${dish.id}"
  		  <fmt:message key="Deleted" />:"${dish.archive}" 

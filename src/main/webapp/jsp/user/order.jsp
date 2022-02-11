@@ -18,7 +18,7 @@
 		<c:out value="${elem.name}" />
 		<c:out value="${elem.price}" />
 		<br>
-	<form method="GET" action="<c:url value="/controller"/>">
+	<form method="POST" action="<c:url value="/controller"/>">
 		 	<input type="hidden" name="command" value="delete_from_order">
 		 	<input type="hidden" name="dishId" value="${elem.id}">
 		 	<p><input type="submit" value="<fmt:message key="Delete" />" ></p>
@@ -27,7 +27,7 @@
 	<fmt:message key="Total" /> ${total_cost}
 	<br>
 	<fmt:message key="Discount" /> ${user.account.status.discount} %
-	<form method="GET" action="<c:url value="/controller"/>">
+	<form method="POST" action="<c:url value="/controller"/>">
 		<input type="hidden" name="command" value="confirm_order">
 		<input type="hidden" name="userId" value="${sessionScope.user.login}">
 		<br/>

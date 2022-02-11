@@ -57,17 +57,17 @@
 			<td><c:out value="${elem.role}" /></td>
 			<td><c:out value="${elem.account.active}" /></td>		
 			<td>
-			<form method="GET" action="<c:url value="/controller"/>">
+			<form method="POST" action="<c:url value="/controller"/>">
 				<input type="hidden" name="command" value="block_user">
 				<input type="hidden" name="userId" value="${elem.userId}">
 				<p><input type="submit" value="<fmt:message key="block/unblock" />"></p>
 			</form>
-			<form method="GET" action="<c:url value="/controller"/>">
+			<form method="POST" action="<c:url value="/controller"/>">
 				<input type="hidden" name="command" value="change_role">
 				<input type="hidden" name="userId" value="${elem.userId}">
 				<p><input type="submit" value="<fmt:message key="admin/client" />"></p>
 			</form>
-			<form method="GET" action="<c:url value="/controller"/>">
+			<form method="POST" action="<c:url value="/controller"/>">
 		        <input type="hidden" name="command" value="add_money">
 		        <input type="hidden" name="userId" value="${elem.userId}">
 				<input name="money" size="3" required>

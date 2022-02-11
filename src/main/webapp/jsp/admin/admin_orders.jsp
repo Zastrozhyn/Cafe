@@ -60,12 +60,12 @@
 				<input name="admin_page" type="hidden" value="true">
 				<input type="submit" value="<fmt:message key="View_dishes" />">
 			</form>
-			<form method="GET" action="<c:url value="/controller"/>">
+			<form method="POST" action="<c:url value="/controller"/>">
 				<input type="hidden" name="command" value="paid_order">
 				<input type="hidden" name="orderId" value="${elem.id}">
 			    <input type="submit" value="<fmt:message key="Paid" />">
 			</form>
-			<form method="GET" action="<c:url value="/controller"/>">
+			<form method="POST" action="<c:url value="/controller"/>">
 				<input type="hidden" name="command" value="delete_order">
 				<input type="hidden" name="orderId" value="${elem.id}">
 				<input type="submit" value="<fmt:message key="Delete_order" />">

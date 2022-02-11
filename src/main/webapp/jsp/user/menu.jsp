@@ -74,7 +74,7 @@
 			 	</form>
 			 </c:if>
 			 <c:if test="${admin}">
-			 	<form name="edit_dish" method="POST" action="<c:url value="/controller"/>">
+			 	<form name="edit_dish" method="GET" action="<c:url value="/controller"/>">
 				 	<input type="hidden" name="command" value="go_to_edit_dish">
 				 	<input type="hidden" name="dishId" value="${elem.id}">	
 				 	<input type="submit" value="<fmt:message key="Edit_dish" />" >
