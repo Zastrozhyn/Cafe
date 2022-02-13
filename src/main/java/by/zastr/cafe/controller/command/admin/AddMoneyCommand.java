@@ -48,8 +48,9 @@ public class AddMoneyCommand implements Command{
 		int userId = Integer.parseInt(request.getParameter(USER_ID));
 		String moneyString = request.getParameter(RequestParameter.MONEY);
 		InputValidatorImpl validator = InputValidatorImpl.getInstance();
+		System.out.println(validator.isCorrectPrice(moneyString));
 		if(!validator.isCorrectPrice(moneyString)) {
-			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.SUCCESSFUL));
+			request.setAttribute(AttributeName.MESSAGE, messageManager.getMessage(UserMessage.UNSUCCESSFUL));
 			return router;
 		}
 		long money = Long.parseLong(moneyString);

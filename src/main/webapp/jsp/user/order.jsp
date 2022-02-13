@@ -37,7 +37,7 @@
 		<br/>
 		<fmt:message key="Payment_type" />
 		<br>
-		<input type="radio" name="type" value="cash" required> <fmt:message key="Cash" /> <br>  
+		<input type="radio" name="type" value="cash" checked> <fmt:message key="Cash" /> <br>  
 		<input type="radio" name="type" value="credit_card"> <fmt:message key="Credit_card" /> <br>  
 		<input type="radio" name="type" value="account"> <fmt:message key="Account" /> <br> 
 		<br/>

@@ -70,7 +70,7 @@
 			<form method="POST" action="<c:url value="/controller"/>">
 		        <input type="hidden" name="command" value="add_money">
 		        <input type="hidden" name="userId" value="${elem.userId}">
-				<input name="money" size="3" required>
+				<input name="money" size="3" required pattern="^[^-]\d*.?\d+$">
 				<input type="submit" value="<fmt:message key="Add_money" />">
 				<br>
 			</form>

@@ -16,7 +16,7 @@ public final class InputValidatorImpl implements InputValidator {
     private static final int MAX_LENGTH_NAME = 25;
     private static final int MIN_LENGTH_NAME = 2;
     private static final int MAX_LENGTH_DESCRIPTION = 255;
-    private static final String CHECK_PRICE = "^[^-]\\d*.?\\d*$";
+    private static final String CHECK_PRICE = "^[^-]\\d*\\.?\\d*$";
     private static final String CHECK_WEIGHT = "^[^-]\\d{1,5}";
     private static final LocalTime OPEN_TIME = LocalTime.of(8, 00);
     private static final LocalTime CLOSE_TIME = LocalTime.of(21, 00);
