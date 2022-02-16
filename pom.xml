@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>by.zastr</groupId>
+  <artifactId>EPAM-Cafe</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>JWD-Cafe</name>
+<dependencies>
+	<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+		<artifactId>log4j-web</artifactId>
+		<version>2.17.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+		<artifactId>log4j-api</artifactId>
+		<version>2.17.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.mindrot</groupId>
+		<artifactId>jbcrypt</artifactId>
+		<version>0.4</version>
+	</dependency>
+	<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+		<artifactId>log4j-core</artifactId>
+		<version>2.17.1</version>
+	</dependency>
+	<dependency>
+		<groupId>org.testng</groupId>
+		<artifactId>testng</artifactId>
+		<version>6.14.3</version>
+		<scope>test</scope>
+	</dependency>
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>8.0.27</version>
+	</dependency>
+	<dependency>
+		<groupId>jakarta.servlet</groupId>
+		<artifactId>jakarta.servlet-api</artifactId>
+		<version>5.0.0</version>
+		<scope>provided</scope>
+	</dependency>
+    <dependency>
+         <groupId>org.glassfish.web</groupId>
+          <artifactId>jakarta.servlet.jsp.jstl</artifactId>
+          <version>2.0.0</version>
+    </dependency>
+	  
+</dependencies>
+</project>
